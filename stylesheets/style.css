@@ -1,0 +1,20 @@
+form {
+    display: block;
+    border: 5px solid groove;
+    border-radius: 20px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 50px;
+    width: 350px;
+    background-color: black;
+}
+
+body{
+    background-color: #fefff0;
+    background-image: url(http://www.transparenttextures.com/patterns/brick-wall-dark.png);
+}
+
+.btn-success {
+    background-color: black;
+    border: 2px solid black;
+}

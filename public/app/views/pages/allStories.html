@@ -1,0 +1,106 @@
+<div class="row">
+
+    <div class="col-md-12">
+        <h1>Making a new survey</h1>
+
+        <div class="col-sm-4">
+            <div class="row">
+
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">Survey</div>
+                    <div class="panel-body">
+                        <label for="Name">What is the name of your survey?</label>
+                        <input type="text" name="Name" id="Name"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-7 pull-right">
+            <div class="row">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">Questions</div>
+                    <div class="panel-body">
+                        <div class="well well-sm">
+                            <ul>
+                                <li ng-repeat="question in Questions">
+
+                                    {{ question.Title }} - {{ question.Type }}
+
+                                </li>
+                            </ul>
+
+
+                        </div>
+                        <div class="panel panel-default">
+                            <!-- Default panel contents -->
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <label for="Title">Question Title:</label>
+                                        <input type="text" name="Title" id="Title"
+                                               placeholder="Type question title here..." ng-model="NewQuestion.Title"/>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="Type">Answer Type:</label>
+                                        <select id="Type" ng-model="NewQuestion.Type">
+                                            <option value="volvo">Single</option>
+                                            <option value="saab">Multiple</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-success pull-right" data-toggle="collapse" data-target="#answers" aria-expanded="false"
+                                                aria-controls="answers"><span
+                                                class="glyphicon glyphicon-plus"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel collapse" id="answers">
+
+                            <!-- List group -->
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="answer in Answers">
+
+                                    {{ answer.Text }}
+
+                                </li>
+
+                            </ul>
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <label for="Text">Answer:</label>
+                                    <input type="text" name="Text" id="Text"
+                                           placeholder="Type answer here..." ng-model="NewAnswer.Text"/>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-success pull-right" ng-click="AddAnswer(NewAnswer.Text)"><span
+                                            class="glyphicon glyphicon-plus"></span></button>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <button type="button" class="btn btn-success pull-right" ng-click="AddQuestion(NewQuestion)"><span
+                                            class="glyphicon glyphicon-plus"></span>Save Question
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-3">
+
+
+    </div>
+
+
+</div>
