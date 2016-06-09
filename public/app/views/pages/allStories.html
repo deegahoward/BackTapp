@@ -11,10 +11,19 @@
                     <div class="panel-heading">Survey</div>
                     <div class="panel-body">
                         <label for="Name">What is the name of your survey?</label>
-                        <input type="text" name="Name" id="Name"/>
+                        <input type="text" name="Name" id="Name" ng-model="Survey.Title"/> <!-- JAY - Added ng-model -->
                     </div>
                 </div>
 
+            </div>
+
+            <div class="row">
+                <div class="row">
+                    <!-- JAY - Added ng-click -->
+                    <button type="button" class="btn btn-success pull-right" ng-click="SaveSurvey()">
+                        <span class="glyphicon glyphicon-plus"></span>Save Survey
+                    </button>
+                </div>
             </div>
         </div>
         <div class="col-sm-7 pull-right">
@@ -54,12 +63,15 @@
                                     <div class="col-sm-3">
                                         <label for="Type">Answer Type:</label>
                                         <select id="Type" ng-model="NewQuestion.Type">
-                                            <option value="Single">Single</option>   <!-- Jay - Changed Value. -->
-                                            <option value="Multiple">Multiple</option>  <!-- Jay Changed Value -->
+                                            <option value="Single">Single</option>
+                                            <!-- Jay - Changed Value. -->
+                                            <option value="Multiple">Multiple</option>
+                                            <!-- Jay Changed Value -->
                                         </select>
                                     </div>
                                     <div class="col-sm-2">
-                                        <button type="button" class="btn btn-success pull-right" data-toggle="collapse" data-target="#answers" aria-expanded="false"
+                                        <button type="button" class="btn btn-success pull-right" data-toggle="collapse"
+                                                data-target="#answers" aria-expanded="false"
                                                 aria-controls="answers"><span
                                                 class="glyphicon glyphicon-plus"></span></button>
                                     </div>
@@ -68,48 +80,50 @@
 
                             <div class="panel collapse" id="answers" data-toggle="collapse">
 
-                            <!-- List group -->
-                            <ul class="list-group">
-                                <li class="list-group-item" ng-repeat="answer in Answers">
+                                <!-- List group -->
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="answer in Answers">
 
-                                    {{ answer.Text }}
+                                        {{ answer.Text }}
 
-                                </li>
+                                    </li>
 
-                            </ul>
-                            <div class="row">
-                                <div class="col-sm-5">
-                                    <label for="Text">Answer:</label>
-                                    <input type="text" name="Text" id="Text"
-                                           placeholder="Type answer here..." ng-model="NewAnswer.Text"/>
-                                </div>
-                                <div class="col-sm-2">
-                                    <button type="button" class="btn btn-success pull-right" ng-click="AddAnswer(NewAnswer.Text)"><span
-                                            class="glyphicon glyphicon-plus"></span></button>
-                                </div>
-                            </div>
-                            <div class="panel-footer">
+                                </ul>
                                 <div class="row">
-                                    <button type="button" class="btn btn-success pull-right" ng-click="AddQuestion(NewQuestion)"><span
-                                            class="glyphicon glyphicon-plus"></span>Save Question
-                                    </button>
+                                    <div class="col-sm-5">
+                                        <label for="Text">Answer:</label>
+                                        <input type="text" name="Text" id="Text"
+                                               placeholder="Type answer here..." ng-model="NewAnswer.Text"/>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-success pull-right"
+                                                ng-click="AddAnswer(NewAnswer.Text)"><span
+                                                class="glyphicon glyphicon-plus"></span></button>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <button type="button" class="btn btn-success pull-right"
+                                                ng-click="AddQuestion(NewQuestion)"><span
+                                                class="glyphicon glyphicon-plus"></span>Save Question
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
-                        </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
+
+
+        <div class="col-md-3">
+
+
+        </div>
+
+
     </div>
-
-
-    <div class="col-md-3">
-
-
-    </div>
-
-
-</div>

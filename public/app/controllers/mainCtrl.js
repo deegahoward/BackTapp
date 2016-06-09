@@ -87,8 +87,16 @@ angular.module('mainCtrl', [])
             answer.Text = answerText;
             $scope.Answers.push(answer);
             $scope.NewAnswer = {};
-            console.log(answer);
 
-        }
+        };
+
+        /* JAY  - Function to concate everything into one object we can then send to backend controller to save*/
+        $scope.SaveSurvey = function () {
+            survey = {};
+            survey.Data = $scope.Survey;
+            survey.Questions = $scope.Questions;
+            console.log(survey);
+        };
+        /* End Jay */
 
     });
