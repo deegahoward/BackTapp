@@ -27,6 +27,15 @@
                                 <li ng-repeat="question in Questions">
 
                                     {{ question.Title }} - {{ question.Type }}
+                                    <!-- JAY - We'll just spit the Answers for that question out somewhere.-->
+                                    <div class="well">
+                                        <ul>
+                                            <li ng-repeat="Answer in question.Answers">
+                                                {{Answer.Text}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- end jay -->
 
                                 </li>
                             </ul>
@@ -45,8 +54,8 @@
                                     <div class="col-sm-3">
                                         <label for="Type">Answer Type:</label>
                                         <select id="Type" ng-model="NewQuestion.Type">
-                                            <option value="volvo">Single</option>
-                                            <option value="saab">Multiple</option>
+                                            <option value="Single">Single</option>   <!-- Jay - Changed Value. -->
+                                            <option value="Multiple">Multiple</option>           <!-- Jay Changed Value -- >
                                         </select>
                                     </div>
                                     <div class="col-sm-2">
@@ -57,7 +66,7 @@
                                 </div>
                             </div>
 
-                            <div class="panel collapse" id="answers">
+                            <div class="panel collapse" id="answers" data-toggle="collapse">
 
                             <!-- List group -->
                             <ul class="list-group">

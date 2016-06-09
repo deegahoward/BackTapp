@@ -66,10 +66,18 @@ angular.module('mainCtrl', [])
             tempQuestion = {};
             tempQuestion.Title = question.Title;
             tempQuestion.Type = question.Type;
+
+            /* JAY  - For this Question, Lets give it an array of answers we just made for it.*/
+            tempQuestion.Answers = $scope.Answers;
+            /* end_JAY */
+
             $scope.Questions.push(tempQuestion);
             $scope.NewQuestion = {};
             $scope.Answers = [];
-            console.log(question);
+
+            /* JAY */
+            $('.collapse').collapse('hide');
+            /* end Jay */
 
         };
 
