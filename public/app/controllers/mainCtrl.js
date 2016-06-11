@@ -1,10 +1,15 @@
-angular.module('mainCtrl', [])
+angular.module('mainCtrl', ['surveyService'])
+
+    //surveyService added to enable get info and post info on new or existing surveys
 
 
-    .controller('MainController', function ($rootScope, $location, Auth, $scope, User, $window) {
+    .controller('MainController', function ($rootScope, $location, Auth, $scope, Survey) {
 
 
         $scope.title = "BackTapp";
+
+
+        //methods for logging in, logging out and setting user to current user
 
         var vm = this;
 
@@ -91,14 +96,18 @@ angular.module('mainCtrl', [])
         };
 
         /* JAY  - Function to concate everything into one object we can then send to backend controller to save*/
-        $scope.SaveSurvey = function (Survey) {
-            survey = {};
+        $scope.SaveSurvey = function () {
+            surveyData = {};
             survey.Data = $scope.Survey;
             survey.Questions = $scope.Questions;
-            console.log(survey);
+            console.log(surveyData);
             /* End Jay */
 
 
         };
+
+        $scope.existingSurveys = Survey.all();
+
+        console.log($scope.existingSurveys);
 
     });

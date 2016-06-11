@@ -26,6 +26,10 @@ module.exports = function(app, express, io) {
 
 	var api = express.Router();
 
+
+
+   //method to get all stories from the database
+
 	api.get('/all_stories', function(req, res) {
 		
 		Story.find({}, function(err, stories) {
@@ -36,6 +40,8 @@ module.exports = function(app, express, io) {
 			res.json(stories);
 		});
 	});
+
+    //method to post new user data on sign up to the database
 
 	api.post('/signup', function(req, res) {
 
@@ -60,6 +66,8 @@ module.exports = function(app, express, io) {
 	});
 
 
+    //method to get all existing users from the database
+
 	api.get('/users', function(req, res) {
 
 		User.find({}, function(err, users) {
@@ -72,6 +80,8 @@ module.exports = function(app, express, io) {
 
 		});
 	});
+
+    //method to post information entered by user to verify against existing user in database
 
 	api.post('/login', function(req, res) {
 
@@ -105,6 +115,8 @@ module.exports = function(app, express, io) {
 		});
 	});
 
+    //method to create token for time logged in and for users visiting pages without access provided
+
 	api.use(function(req, res, next) {
 
 
@@ -135,9 +147,11 @@ module.exports = function(app, express, io) {
 
 	
 
-	// Destination B // provide a legitimate token
+	// this was the methods used for displaying and creating stories on the home page
 
 	api.route('/')
+
+        //creating a story
 
 		.post(function(req, res) {
 
@@ -157,6 +171,8 @@ module.exports = function(app, express, io) {
 			});
 		})
 
+        //getting existing stories based on the user logged in
+
 
 		.get(function(req, res) {
 
@@ -175,7 +191,20 @@ module.exports = function(app, express, io) {
 		res.send(req.decoded);
 	});
 
+    //method to get existing surveys from the databse
 
+    api.get('/surveys', function(req, res) {
+
+        Survey.find({}, function(err, surveys) {
+            if(err) {
+                res.send(err);
+                return;
+            }
+
+            res.json(surveys);
+
+        });
+    });
 
 
 	return api;
