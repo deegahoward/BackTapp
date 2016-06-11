@@ -17,8 +17,8 @@ angular.module('appRoutes', ['ngRoute'])
 			templateUrl: 'app/views/pages/signup.html'
 		})
 
-		.when('/allStories', {
-			templateUrl: 'app/views/pages/allStories.html',
+		.when('/createSurvey', {
+			templateUrl: 'app/views/pages/createSurvey.html',
 			controller: 'AllStoriesController',
 			controllerAs: 'story',
 			resolve: {
@@ -28,6 +28,13 @@ angular.module('appRoutes', ['ngRoute'])
 			}
 
 		})
+
+        .when('/existingSurveys', {
+            templateUrl: 'app/views/pages/existingSurveys.html',
+            controller: 'MainController',
+            controllerAs: 'main'
+
+        });
 
 	$locationProvider.html5Mode(true);
 

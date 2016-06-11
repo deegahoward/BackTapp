@@ -33,4 +33,4 @@ angular.module('userCtrl', ['userService'])
 			})
 	}
 
-})
+});

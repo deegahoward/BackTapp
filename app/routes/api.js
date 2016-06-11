@@ -13,7 +13,7 @@ function createToken(user) {
 		name: user.name,
 		username: user.username
 	}, secretKey, {
-		expirtesInMinute: 1440
+		expiresInMinute: 1440
 	});
 
 

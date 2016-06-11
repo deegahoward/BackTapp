@@ -1,7 +1,7 @@
 angular.module('mainCtrl', [])
 
 
-    .controller('MainController', function ($rootScope, $location, Auth, $scope) {
+    .controller('MainController', function ($rootScope, $location, Auth, $scope, User, $window) {
 
 
         $scope.title = "BackTapp";
@@ -91,12 +91,14 @@ angular.module('mainCtrl', [])
         };
 
         /* JAY  - Function to concate everything into one object we can then send to backend controller to save*/
-        $scope.SaveSurvey = function () {
+        $scope.SaveSurvey = function (Survey) {
             survey = {};
             survey.Data = $scope.Survey;
             survey.Questions = $scope.Questions;
             console.log(survey);
+            /* End Jay */
+
+
         };
-        /* End Jay */
 
     });
