@@ -98,6 +98,37 @@ module.exports = function(app, express, io) {
         });
     });
 
+    //method to post new survey to the database
+
+    api.post('/newSurvey', function(req, res) {
+
+        var answers = [req.body.answer.text];
+
+        var questions = {
+            question: {
+                title: req.body.title,
+                type: req.body.type,
+                answers: [answers]
+
+        }};
+
+        var survey = new Survey({
+            title: req.body.title,
+            questions: questions
+        });
+
+        survey.save(function(err) {
+            if(err) {
+                res.send(err);
+                return;
+            }
+
+            res.json({
+                success: true,
+                message: 'Survey has been created!',
+            });
+        });
+    });
 
 
     //method to post information entered by user to verify against existing user in database

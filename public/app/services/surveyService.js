@@ -9,6 +9,7 @@ angular.module('surveyService', [])
 
         surveyFactory.create = function(survey) {
             return $http.post('/api/newSurvey', survey);
+
         };
 
         //making a get method to return existing surveys from the database
@@ -16,8 +17,6 @@ angular.module('surveyService', [])
         surveyFactory.all = function() {
             return $http.get('/api/surveys');
         };
-
-
 
         return surveyFactory;
 

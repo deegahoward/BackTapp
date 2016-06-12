@@ -15,7 +15,6 @@ angular.module('userCtrl', ['userService'])
 
 })
 
-
 .controller('UserCreateController', function(User, $location, $window) {
 
 	var vm = this;
@@ -25,12 +24,14 @@ angular.module('userCtrl', ['userService'])
 
 		User.create(vm.userData)
 			.then(function(response) {
-				vm.userData = {};
+                vm.userData = {};
 				vm.message = response.data.message;
 
-				$window.localStorage.setItem('token', response.data.token);
+
+                $window.localStorage.setItem('token', response.data.token);
 				$location.path('/');
 			})
-	}
+	};
+
 
 });
