@@ -66,7 +66,7 @@ angular.module('mainCtrl', ['surveyService'])
 
         //================ New Survey Page Stuff =====================
 
-    .controller('SurveyController', function ($scope) {
+    .controller('SurveyController', function ($scope, Survey) {
 
                 var vm = this;
 
@@ -113,13 +113,27 @@ angular.module('mainCtrl', ['surveyService'])
 
                 /* JAY  - Function to concate everything into one object we can then send to backend controller to save*/
                 $scope.SaveSurvey = function () {
-                    surveyData = {};
+                    survey = {};
                     survey.Data = $scope.Survey;
                     survey.Questions = $scope.Questions;
-                    console.log(surveyData);
+                    console.log(survey);
                     /* End Jay */
 
+                    vm.createSurvey = function() {
+                        vm.message = '';
+
+                        Survey.create(vm.survey)
+                            .then(function(response) {
+                                vm.survey = {};
+                                vm.message = response.data.message;
+
+                            })
+                    };
+
                 }
+
+
+
 
             });
 

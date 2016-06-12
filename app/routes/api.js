@@ -102,19 +102,10 @@ module.exports = function(app, express, io) {
 
     api.post('/newSurvey', function(req, res) {
 
-        var answers = [req.body.answer.text];
-
-        var questions = {
-            question: {
-                title: req.body.title,
-                type: req.body.type,
-                answers: [answers]
-
-        }};
 
         var survey = new Survey({
             title: req.body.title,
-            questions: questions
+            questions: req.body.questions
         });
 
         survey.save(function(err) {
@@ -125,7 +116,7 @@ module.exports = function(app, express, io) {
 
             res.json({
                 success: true,
-                message: 'Survey has been created!',
+                message: 'Survey has been created!'
             });
         });
     });
