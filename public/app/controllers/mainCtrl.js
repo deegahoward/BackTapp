@@ -13,6 +13,10 @@ angular.module('mainCtrl', ['surveyService'])
 
         var vm = this;
 
+        vm.user = null;
+
+        vm.survey = null;
+
 
         vm.loggedIn = Auth.isLoggedIn();
 
@@ -108,6 +112,5 @@ angular.module('mainCtrl', ['surveyService'])
 
         $scope.existingSurveys = Survey.all();
 
-        console.log($scope.existingSurveys);
 
     });

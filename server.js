@@ -40,8 +40,3 @@ http.listen(config.port, function (err) {
     }
 });
 
-/*
-app.get('/polls/polls', routes.list);
-app.get('/polls/:id', routes.poll);
-app.post('/polls', routes.create);
-app.post('/vote', routes.vote);*/

@@ -19,21 +19,13 @@ angular.module('appRoutes', ['ngRoute'])
 
 		.when('/createSurvey', {
 			templateUrl: 'app/views/pages/createSurvey.html',
-			controller: 'AllStoriesController',
-			controllerAs: 'story',
-			resolve: {
-				stories: function(Story) {
-					return Story.allStories();
-				}
-			}
-
+			controller: 'MainController',
+			controllerAs: 'main',
 		})
-
         .when('/existingSurveys', {
             templateUrl: 'app/views/pages/existingSurveys.html',
             controller: 'MainController',
             controllerAs: 'main'
-
         });
 
 	$locationProvider.html5Mode(true);

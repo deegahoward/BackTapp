@@ -1,5 +1,7 @@
 var User = require('../models/user');
 var Story = require('../models/story');
+var Survey = require('../models/survey');
+
 var config = require('../../config');
 
 var secretKey = config.secretKey;
@@ -80,6 +82,23 @@ module.exports = function(app, express, io) {
 
 		});
 	});
+
+    //method to get all existing surveys from the database
+
+    api.get('/surveys', function(req, res) {
+
+        Survey.find({}, function(err, surveys) {
+            if(err) {
+                res.send(err);
+                return;
+            }
+
+            res.json(surveys);
+
+        });
+    });
+
+
 
     //method to post information entered by user to verify against existing user in database
 
