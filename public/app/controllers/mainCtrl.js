@@ -1,4 +1,4 @@
-angular.module('mainCtrl', ['surveyService'])
+angular.module('mainCtrl', ['surveyService', 'userService'])
 
     //surveyService added to enable get info and post info on new or existing surveys
 
@@ -12,8 +12,6 @@ angular.module('mainCtrl', ['surveyService'])
         //methods for logging in, logging out and setting user to current user
 
         var vm = this;
-
-        console.log(vm);
 
         vm.user = null;
 
@@ -66,14 +64,10 @@ angular.module('mainCtrl', ['surveyService'])
 
         //================ New Survey Page Stuff =====================
 
-    .controller('SurveyController', function ($scope, Survey) {
+    .controller('SurveyController', function ($scope, Survey, User) {
 
                 var vm = this;
 
-                console.log(vm);
-
-
-                vm.survey = null;
 
                 $scope.Survey = {};
                 $scope.NewQuestion = {};
@@ -114,23 +108,19 @@ angular.module('mainCtrl', ['surveyService'])
                 /* JAY  - Function to concate everything into one object we can then send to backend controller to save*/
                 $scope.SaveSurvey = function () {
                     survey = {};
-                    survey.Data = $scope.Survey;
+                    survey.Title = $scope.Survey.Title;
                     survey.Questions = $scope.Questions;
                     console.log(survey);
                     /* End Jay */
 
-                    vm.createSurvey = function() {
-                        vm.message = '';
+                    Survey.create(survey);
 
-                        Survey.create(vm.survey)
-                            .then(function(response) {
-                                vm.survey = {};
-                                vm.message = response.data.message;
+                };
 
-                            })
-                    };
+                console.log(Survey.all());
+                console.log(User.all());
 
-                }
+
 
 
 
