@@ -10,8 +10,12 @@
                 Password: <input type="password" name="password" class="form-control"
                                  ng-model="login.loginData.password">
                 <br>
+                <p class="error">{{ error }}</p>
                 <br>
                 <button type="submit" class="btn btn-success">Login</button>
+                <button type="submit" class="btn btn-success" ng-if="error">Reset Password</button>
+
+
             </form>
         </div>
 

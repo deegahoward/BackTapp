@@ -134,12 +134,17 @@ module.exports = function(app, express, io) {
 
 			if(!user) {
 
-				res.send({ message: "User doenst exist"});
+				res.send({ message: "User doesn't exist"});
+                console.log("User doesn't exist mate!")
+
+
 			} else if(user){ 
 
 				var validPassword = user.comparePassword(req.body.password);
+                console.log("THIS WORKED OK!");
 
-				if(!validPassword) {
+
+                if(!validPassword) {
 					res.send({ message: "Invalid Password"});
 				} else {
 
@@ -148,7 +153,7 @@ module.exports = function(app, express, io) {
 
 					res.json({
 						success: true,
-						message: "Successfuly login!",
+						message: "Successfully logged in!",
 						token: token
 					});
 				}
@@ -163,7 +168,8 @@ module.exports = function(app, express, io) {
 
 		console.log("Somebody just came to our app!");
 
-		var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+		var token = req.body.token || req.params('token') || req.headers['x-access-token'];
+
 
 		// check if token exist
 		if(token) {

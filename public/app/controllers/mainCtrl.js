@@ -8,7 +8,6 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
 
         $scope.title = "BackTapp";
 
-
         //methods for logging in, logging out and setting user to current user
 
         var vm = this;
@@ -24,9 +23,12 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
 
             vm.loggedIn = Auth.isLoggedIn();
 
+
             Auth.getUser()
                 .then(function (data) {
                     vm.user = data.data;
+                    console.log("THIS WORKED OK!");
+
                 });
         });
 
@@ -41,23 +43,29 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
                 .success(function (data) {
                     vm.processing = false;
 
+
                     Auth.getUser()
                         .then(function (data) {
                             vm.user = data.data;
                         });
 
-                    if (data.success)
+                    if (data.success) {
                         $location.path('/');
+                        console.log(data);
+                    }
                     else
                         vm.error = data.message;
+                        $scope.error = vm.error;
 
                 });
-        }
+        };
 
 
         vm.doLogout = function () {
             Auth.logout();
-            $location.path('/logout');
+            $location.path('/login');
+            console.log("THIS WORKED OK!");
+
         }
     })
 

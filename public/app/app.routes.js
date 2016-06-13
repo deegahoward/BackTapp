@@ -19,8 +19,8 @@ angular.module('appRoutes', ['ngRoute'])
 
 		.when('/createSurvey', {
 			templateUrl: 'app/views/pages/createSurvey.html',
-			controller: 'MainController',
-			controllerAs: 'main',
+			controller: 'SurveyController',
+			controllerAs: 'survey'
 		})
         .when('/existingSurveys', {
             templateUrl: 'app/views/pages/existingSurveys.html',

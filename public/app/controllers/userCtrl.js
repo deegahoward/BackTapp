@@ -1,7 +1,7 @@
 angular.module('userCtrl', ['userService'])
 
 
-.controller('UserController', function(User) {
+.controller('UserController', function(User, $scope) {
 
 
 	var vm = this;
@@ -11,6 +11,9 @@ angular.module('userCtrl', ['userService'])
 		.success(function(data) {
 			vm.users = data;
 		})
+
+
+
 
 
 })
