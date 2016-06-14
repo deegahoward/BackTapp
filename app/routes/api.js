@@ -92,7 +92,7 @@ module.exports = function(app, express, io) {
                 res.send(err);
                 return;
             }
-
+            console.log(surveys);
             res.json(surveys);
 
         });
@@ -104,9 +104,15 @@ module.exports = function(app, express, io) {
 
 
         var survey = new Survey({
-            title: req.body.title,
-            questions: req.body.questions
+
+            Title: req.body.Title,
+            Questions: req.body.Questions
+
         });
+
+
+
+
 
         survey.save(function(err) {
             if(err) {
@@ -168,7 +174,7 @@ module.exports = function(app, express, io) {
 
 		console.log("Somebody just came to our app!");
 
-		var token = req.body.token || req.params('token') || req.headers['x-access-token'];
+		var token = req.body.token || req.param('token') || req.headers['x-access-token'];
 
 
 		// check if token exist

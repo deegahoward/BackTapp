@@ -5,23 +5,24 @@ var Schema = mongoose.Schema;
 
 var AnswerSchema = new Schema({
 
-    text: String
+    Text: String
 
 });
 
 var QuestionSchema = new Schema({
 
-    title: String,
-    type: String,
-    answers: [AnswerSchema]
+    Title: String,
+    Type: String,
+    Answers: [AnswerSchema]
 
 });
 
 
 var SurveySchema = new Schema({
 
-    title: String,
-    questions: [QuestionSchema]
+    //UserID : [userSchema],//store user ID current logged in here and use this mongoose ref
+    Title: String,
+    Questions: [QuestionSchema]
 
 });
 

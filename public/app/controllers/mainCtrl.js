@@ -74,8 +74,6 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
 
     .controller('SurveyController', function ($scope, Survey, User) {
 
-                var vm = this;
-
 
                 $scope.Survey = {};
                 $scope.NewQuestion = {};
@@ -121,16 +119,15 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
                     console.log(survey);
                     /* End Jay */
 
-                    Survey.create(survey);
+                    console.log(survey);
+
+                    Survey.create(JSON.stringify(survey));
 
                 };
 
-                console.log(Survey.all());
-                console.log(User.all());
 
 
-
-
+                $scope.mySurveys =Survey.all();
 
 
             });

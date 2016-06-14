@@ -17,9 +17,7 @@ angular.module('authService', [])
                     AuthToken.setToken(data.token);
                     return data;
                 })
-                .error(function (res, err) {
-                    console.error("The error was: " + err + res.message);
-                })
+                
         };
 
         authFactory.logout = function () {

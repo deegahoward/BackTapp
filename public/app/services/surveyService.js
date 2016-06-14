@@ -8,6 +8,7 @@ angular.module('surveyService', [])
         //making a post method to send a new survey to the database
 
         surveyFactory.create = function(survey) {
+            console.log(survey);
             return $http.post('/api/newSurvey', survey);
 
         };
