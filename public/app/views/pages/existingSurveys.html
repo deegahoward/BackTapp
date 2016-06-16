@@ -13,9 +13,24 @@
                         <ul>
                             <li ng-repeat="survey in mySurveys">
 
-                                {{ survey.title }}
-                                {{ survey.questions.question.title }}
-                                {{ survey.questions.question.answers.text}}
+                                {{ survey.Title }}
+
+                                <ul>
+                                    <li ng-repeat="question in survey.Questions">
+
+                                        {{ question.Title }}
+
+                                        <ul>
+                                            <li ng-repeat="answer in question.Answers">
+
+                                                {{ answer.Text }}
+
+                                            </li>
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
 
 
                             </li>

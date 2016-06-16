@@ -27,7 +27,6 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
             Auth.getUser()
                 .then(function (data) {
                     vm.user = data.data;
-                    console.log("THIS WORKED OK!");
 
                 });
         });
@@ -121,7 +120,7 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
 
 
 
-            //Survey.create(JSON.stringify(survey));
+            Survey.create(JSON.stringify(survey));
 
         };
 
