@@ -75,60 +75,72 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
     .controller('SurveyController', function ($scope, Survey, User) {
 
 
-                $scope.Survey = {};
-                $scope.NewQuestion = {};
-                $scope.NewAnswer = {};
-                $scope.Answers = [];
-                $scope.Questions = [];
+        $scope.Survey = {};
+        $scope.NewQuestion = {};
+        $scope.NewAnswer = {};
+        $scope.Answers = [];
+        $scope.Questions = [];
 
 
-                $scope.AddQuestion = function (question) {
+        $scope.AddQuestion = function (question) {
 
-                    tempQuestion = {};
-                    tempQuestion.Title = question.Title;
-                    tempQuestion.Type = question.Type;
+            tempQuestion = {};
+            tempQuestion.Title = question.Title;
+            tempQuestion.Type = question.Type;
 
-                    /* JAY  - For this Question, Lets give it an array of answers we just made for it.*/
-                    tempQuestion.Answers = $scope.Answers;
-                    /* end_JAY */
+            /* JAY  - For this Question, Lets give it an array of answers we just made for it.*/
+            tempQuestion.Answers = $scope.Answers;
+            /* end_JAY */
 
-                    $scope.Questions.push(tempQuestion);
-                    $scope.NewQuestion = {};
-                    $scope.Answers = [];
+            $scope.Questions.push(tempQuestion);
+            $scope.NewQuestion = {};
+            $scope.Answers = [];
 
-                    /* JAY */
-                    $('.collapse').collapse('hide');
-                    /* end Jay */
+            /* JAY */
+            $('.collapse').collapse('hide');
+            /* end Jay */
 
-                };
+        };
 
-                $scope.AddAnswer = function (answerText) {
+        $scope.AddAnswer = function (answerText) {
 
-                    answer = {};
-                    answer.Text = answerText;
-                    $scope.Answers.push(answer);
-                    $scope.NewAnswer = {};
+            answer = {};
+            answer.Text = answerText;
+            $scope.Answers.push(answer);
+            $scope.NewAnswer = {};
 
-                };
+        };
 
-                /* JAY  - Function to concate everything into one object we can then send to backend controller to save*/
-                $scope.SaveSurvey = function () {
-                    survey = {};
-                    survey.Title = $scope.Survey.Title;
-                    survey.Questions = $scope.Questions;
-                    console.log(survey);
-                    /* End Jay */
-
-                    console.log(survey);
-
-                    Survey.create(JSON.stringify(survey));
-
-                };
+        /* JAY  - Function to concate everything into one object we can then send to backend controller to save*/
+        $scope.SaveSurvey = function () {
+            survey = {};
+            survey.Title = $scope.Survey.Title;
+            survey.Questions = $scope.Questions;
+            console.log(survey);
+            /* End Jay */
 
 
 
-                $scope.mySurveys =Survey.all();
+            //Survey.create(JSON.stringify(survey));
+
+        };
+
+        var vm = this;
 
 
+
+
+        Survey.all()
+            .success(function (data) {
+                vm.surveys = data;
+                $scope.mySurveys = vm.surveys;
+                console.log($scope.mySurveys);
             });
+
+
+
+    });
+
+
+
 

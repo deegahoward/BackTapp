@@ -92,7 +92,7 @@ module.exports = function(app, express, io) {
                 res.send(err);
                 return;
             }
-            console.log(surveys);
+
             res.json(surveys);
 
         });
@@ -106,11 +106,15 @@ module.exports = function(app, express, io) {
         var survey = new Survey({
 
             Title: req.body.Title,
-            Questions: req.body.Questions
+            Questions: req.body.Questions,
+            Answers: req.body.Answers
 
         });
 
+        console.log(req.body.Title);
+        console.log(req.body.Questions);
 
+        console.log(survey);
 
 
 

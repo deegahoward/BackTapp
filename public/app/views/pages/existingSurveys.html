@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-controller="SurveyController as survey">
 
     <div class="col-md-12">
         <h1>Existing Surveys</h1>
@@ -10,6 +10,16 @@
                 <div class="panel panel-success">
                     <div class="panel-heading">Survey</div>
                     <div class="panel-body">
+                        <ul>
+                            <li ng-repeat="survey in mySurveys">
+
+                                {{ survey.title }}
+                                {{ survey.questions.question.title }}
+                                {{ survey.questions.question.answers.text}}
+
+
+                            </li>
+                        </ul>
 
                     </div>
                 </div>

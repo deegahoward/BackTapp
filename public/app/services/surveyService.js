@@ -11,12 +11,14 @@ angular.module('surveyService', [])
             console.log(survey);
             return $http.post('/api/newSurvey', survey);
 
+
         };
 
         //making a get method to return existing surveys from the database
 
         surveyFactory.all = function() {
             return $http.get('/api/surveys');
+
         };
 
         return surveyFactory;

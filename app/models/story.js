@@ -7,7 +7,7 @@ var StorySchema = new Schema({
 
 	creator: { type: Schema.Types.ObjectId, ref: 'User' },
 	content: String,
-	created: { type: Date, defauly: Date.now}
+	created: { type: Date, default: Date.now}
 
 });
 

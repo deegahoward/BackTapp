@@ -21,6 +21,7 @@ var QuestionSchema = new Schema({
 var SurveySchema = new Schema({
 
     //UserID : [userSchema],//store user ID current logged in here and use this mongoose ref
+    Creator: { type: Schema.Types.ObjectId, ref: 'User' },
     Title: String,
     Questions: [QuestionSchema]
 
