@@ -26,10 +26,13 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
 
             Auth.getUser()
                 .then(function (data) {
+
                     vm.user = data.data;
 
                 });
         });
+
+
 
 
         vm.doLogin = function () {
@@ -71,8 +74,9 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
 
         //================ New Survey Page Stuff =====================
 
-    .controller('SurveyController', function ($scope, Survey, User) {
+    .controller('SurveyController', function ($scope, Survey, Auth, $rootScope) {
 
+        var vm = this;
 
         $scope.Survey = {};
         $scope.NewQuestion = {};
@@ -115,7 +119,9 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
             survey = {};
             survey.Title = $scope.Survey.Title;
             survey.Questions = $scope.Questions;
+            survey.Creator = $scope.main.user.id;
             console.log(survey);
+            console.log(survey.Creator);
             /* End Jay */
 
 
@@ -124,17 +130,32 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
 
         };
 
-        var vm = this;
 
 
 
 
-        Survey.all()
-            .success(function (data) {
-                vm.surveys = data;
-                $scope.mySurveys = vm.surveys;
-                console.log($scope.mySurveys);
-            });
+            Auth.getUser()
+                .then(function (data) {
+                    console.log(data);
+                    vm.user = data.data;
+                    console.log(data.data);
+
+                    console.log(vm.user);
+
+                    Survey.all(vm.user)
+                        .success(function (data) {
+                            vm.surveys = data;
+                            $scope.mySurveys = vm.surveys;
+                            console.log($scope.mySurveys);
+                        });
+
+                });
+
+
+
+
+
+
 
 
 

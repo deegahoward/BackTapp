@@ -83,53 +83,10 @@ module.exports = function(app, express, io) {
 		});
 	});
 
-    //method to get all existing surveys from the database
-
-    api.get('/surveys', function(req, res) {
-
-        Survey.find({}, function(err, surveys) {
-            if(err) {
-                res.send(err);
-                return;
-            }
-
-            res.json(surveys);
-
-        });
-    });
-
-    //method to post new survey to the database
-
-    api.post('/newSurvey', function(req, res) {
-
-
-        var survey = new Survey({
-
-            Title: req.body.Title,
-            Questions: req.body.Questions,
-            Answers: req.body.Answers
-
-        });
-
-        console.log(req.body.Title);
-        console.log(req.body.Questions);
-
-        console.log(survey);
 
 
 
-        survey.save(function(err) {
-            if(err) {
-                res.send(err);
-                return;
-            }
 
-            res.json({
-                success: true,
-                message: 'Survey has been created!'
-            });
-        });
-    });
 
 
     //method to post information entered by user to verify against existing user in database
@@ -191,8 +148,9 @@ module.exports = function(app, express, io) {
 
 				} else {
 
-					//
+
 					req.decoded = decoded;
+
 					next();
 				}
 			});
@@ -233,6 +191,8 @@ module.exports = function(app, express, io) {
 
 		.get(function(req, res) {
 
+            console.log("output");
+
 			Story.find({ creator: req.decoded.id }, function(err, stories) {
 
 				if(err) {
@@ -248,11 +208,13 @@ module.exports = function(app, express, io) {
 		res.send(req.decoded);
 	});
 
-    //method to get existing surveys from the databse
+    //method to get all existing surveys from the database
 
     api.get('/surveys', function(req, res) {
 
-        Survey.find({}, function(err, surveys) {
+        console.log(req.decoded);
+
+        Survey.find({ creator: req.decoded.id }, function(err, surveys) {
             if(err) {
                 res.send(err);
                 return;
@@ -263,8 +225,37 @@ module.exports = function(app, express, io) {
         });
     });
 
+//method to post new survey to the database
 
-	return api;
+    api.post('/newSurvey', function(req, res) {
 
 
-}
+        var survey = new Survey({
+
+            creator: req.decoded.id,
+            Title: req.body.Title,
+            Questions: req.body.Questions,
+            Answers: req.body.Answers
+
+        });
+
+
+
+        survey.save(function(err) {
+            if(err) {
+                res.send(err);
+                return;
+            }
+
+            res.json({
+                success: true,
+                message: 'Survey has been created!'
+            });
+        });
+    });
+
+
+    app.use('/api', api);
+
+
+};
