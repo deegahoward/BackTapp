@@ -1,9 +1,26 @@
-angular.module('mainCtrl', ['surveyService', 'userService'])
+tD = "/BackTapp/public/app/views/partials";
 
-    //surveyService added to enable get info and post info on new or existing surveys
+var mainApp = angular.module('mainCtrl', ['surveyService', 'userService', 'ui.router']);
+
+    //surveyService added to enable get info and post infos on new or existing surveys
+
+mainApp.config(function ($stateProvider, $urlRouterProvider) {
+
+    $stateProvider
+    // route to the main page (/create)
+        .state('single', {
+            url: '/single',
+            templateUrl: 'singleChoice.html'
+        })
+
+        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+        .state('about', {
+            // we'll get to this in a bit
+        });
+});
 
 
-    .controller('MainController', function ($rootScope, $location, Auth, $scope) {
+mainApp.controller('MainController', function ($rootScope, $location, Auth, $scope) {
 
 
         $scope.title = "BackTapp";
@@ -74,7 +91,7 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
 
         //================ New Survey Page Stuff =====================
 
-    .controller('SurveyController', function ($scope, Survey, Auth, $rootScope) {
+    .controller('SurveyController', function ($scope, Survey, Auth, $state) {
 
         var vm = this;
 
@@ -91,17 +108,14 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
             tempQuestion.Title = question.Title;
             tempQuestion.Type = question.Type;
 
-            /* JAY  - For this Question, Lets give it an array of answers we just made for it.*/
+            /* For this Question, Lets give it an array of answers we just made for it.*/
             tempQuestion.Answers = $scope.Answers;
-            /* end_JAY */
 
             $scope.Questions.push(tempQuestion);
             $scope.NewQuestion = {};
             $scope.Answers = [];
 
-            /* JAY */
             $('.collapse').collapse('hide');
-            /* end Jay */
 
         };
 
@@ -114,7 +128,7 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
 
         };
 
-        /* JAY  - Function to concate everything into one object we can then send to backend controller to save*/
+        /* Function to concate everything into one object we can then send to backend controller to save*/
         $scope.SaveSurvey = function () {
             survey = {};
             survey.Title = $scope.Survey.Title;
@@ -122,13 +136,40 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
             survey.Creator = $scope.main.user.id;
             console.log(survey);
             console.log(survey.Creator);
-            /* End Jay */
 
 
 
             Survey.create(JSON.stringify(survey));
 
         };
+
+        $scope.clickedSurvey = {};
+        $scope.clickedQuestions = [];
+        $scope.selectedQuestion = {};
+        $scope.selectedQType = "";
+        $scope.template = "";
+
+        $scope.surveyClicked = function (survey) {
+            $scope.clickedSurvey = survey;
+            $scope.clickedQuestions = survey.Questions;
+            console.log($scope.clickedQuestions);
+
+
+        };
+
+        $scope.questionClicked = function (question) {
+            $scope.selectedQuestion = question;
+            $scope.selectedQType = question.Type;
+            console.log($scope.selectedQType);
+            if($scope.selectedQType == "Single"){
+
+                console.log("yes");
+
+
+            }
+
+        };
+
 
 
 
@@ -146,20 +187,28 @@ angular.module('mainCtrl', ['surveyService', 'userService'])
                         .success(function (data) {
                             vm.surveys = data;
                             $scope.mySurveys = vm.surveys;
-                            console.log($scope.mySurveys);
+                            angular.forEach($scope.mySurveys, function(survey){
+
+                                $scope.myQuestions = [];
+
+                                angular.forEach(survey.Questions, function(question){
+
+                                    $scope.myQuestions.push(question);
+
+
+                                });
+                                console.log($scope.myQuestions);
+
+
+                            });
+
                         });
 
                 });
 
 
-
-
-
-
-
-
-
     });
+
 
 
 

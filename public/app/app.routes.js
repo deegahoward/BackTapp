@@ -26,6 +26,7 @@ angular.module('appRoutes', ['ngRoute'])
             templateUrl: 'app/views/pages/existingSurveys.html',
             controller: 'MainController',
             controllerAs: 'main'
+
         });
 
 	$locationProvider.html5Mode(true);
