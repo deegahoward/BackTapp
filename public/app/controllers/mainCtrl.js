@@ -1,23 +1,8 @@
-tD = "/BackTapp/public/app/views/partials";
 
 var mainApp = angular.module('mainCtrl', ['surveyService', 'userService', 'ui.router']);
 
     //surveyService added to enable get info and post infos on new or existing surveys
 
-mainApp.config(function ($stateProvider, $urlRouterProvider) {
-
-    $stateProvider
-    // route to the main page (/create)
-        .state('single', {
-            url: '/single',
-            templateUrl: 'singleChoice.html'
-        })
-
-        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-        .state('about', {
-            // we'll get to this in a bit
-        });
-});
 
 
 mainApp.controller('MainController', function ($rootScope, $location, Auth, $scope) {

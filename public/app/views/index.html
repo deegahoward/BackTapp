@@ -76,6 +76,13 @@
         margin-bottom: 10px !important;
     }
 
+    .preview {
+
+        background-color: white;
+        width: 40%;
+
+    }
+
 
 
 
@@ -89,8 +96,8 @@
     <div class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <a href="/" class="navbar-brand" ng-if="main.loggedIn"><span class="glyphicon glyphicon-send"> {{ title }}</span></a>
-                <a href="/login" class="navbar-brand" ng-if="!main.loggedIn"><span class="glyphicon glyphicon-send"> {{ title }}</span></a>
+                <a ui-sref="home" class="navbar-brand" ng-if="main.loggedIn"><span class="glyphicon glyphicon-send"> {{ title }}</span></a>
+                <a ui-sref="login" class="navbar-brand" ng-if="!main.loggedIn"><span class="glyphicon glyphicon-send"> {{ title }}</span></a>
 
             </div>
 
@@ -99,8 +106,8 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li ng-if="!main.loggedIn"><a href="/login">Login</a></li>
-                <li ng-if="!main.loggedIn"><a href="/signup">Signup</a></li>
+                <li ng-if="!main.loggedIn"><a ui-sref="login">Login</a></li>
+                <li ng-if="!main.loggedIn"><a ui-sref="signup">Signup</a></li>
                 <li ng-if="main.loggedIn"><a href="#">Hello {{ main.user.username }}</a></li>
                 <li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
             </ul>
@@ -112,7 +119,7 @@
 
 <main class="container">
 
-    <div ng-view></div>
+    <div ui-view></div>
 
 </main>
 
