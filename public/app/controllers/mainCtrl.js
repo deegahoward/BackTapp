@@ -35,8 +35,6 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
         });
 
 
-
-
         vm.doLogin = function () {
 
             vm.processing = true;
@@ -134,9 +132,13 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
         $scope.selectedQType = "";
         $scope.template = "";
 
+
+        $scope.hello = "congrats!";
+
         $scope.surveyClicked = function (survey) {
             $scope.clickedSurvey = survey;
             $scope.clickedQuestions = survey.Questions;
+            localStorage.setItem("clickedSurvey", angular.toJson($scope.clickedSurvey));
             console.log($scope.clickedQuestions);
 
 
@@ -148,7 +150,7 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
             console.log($scope.selectedQType);
             if($scope.selectedQType == "Single"){
 
-                console.log("yes");
+               // console.log("yes");
 
 
             }
@@ -156,17 +158,21 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
         };
 
 
+        console.log(localStorage.getItem("clickedSurvey"));
 
+
+        /*  $scope.state = $state;
+          console.log($scope.state);*/
 
 
 
             Auth.getUser()
                 .then(function (data) {
-                    console.log(data);
+                    //console.log(data);
                     vm.user = data.data;
-                    console.log(data.data);
+                   // console.log(data.data);
 
-                    console.log(vm.user);
+                    //console.log(vm.user);
 
                     Survey.all(vm.user)
                         .success(function (data) {
@@ -182,7 +188,7 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
 
 
                                 });
-                                console.log($scope.myQuestions);
+                                //console.log($scope.myQuestions);
 
 
                             });
@@ -192,7 +198,14 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
                 });
 
 
-    });
+    })
+
+.controller('exampleController', function($state, $scope){
+
+   //$scope.clickedSurvey = localStorage.getItem('clickedSurvey');
+
+
+});
 
 
 
