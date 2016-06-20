@@ -64,8 +64,8 @@ angular.module('appRoutes', ['ui.router'])
             controllerAs: 'main'
 
         })
-        .state('existingSurveys.example', {
-            templateUrl: 'app/views/pages/example.html',
+        .state('existingSurveys.Single', {
+            templateUrl: 'app/views/pages/single.html',
             parent: 'existingSurveys',
             controller: 'exampleController'
 

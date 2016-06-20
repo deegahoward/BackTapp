@@ -130,10 +130,10 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
         $scope.clickedQuestions = [];
         $scope.selectedQuestion = {};
         $scope.selectedQType = "";
-        $scope.template = "";
+        $scope.isSingle = false;
+        $scope.isMultiple = false;
 
 
-        $scope.hello = "congrats!";
 
         $scope.surveyClicked = function (survey) {
             $scope.clickedSurvey = survey;
@@ -150,15 +150,24 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
             console.log($scope.selectedQType);
             if($scope.selectedQType == "Single"){
 
-               // console.log("yes");
+               console.log("single");
+                $scope.isSingle = true;
+                $scope.isMultiple = false;
 
+
+
+            }
+            else if($scope.selectedQType == "Multiple"){
+
+                console.log("multiple");
+                $scope.isMultiple = true;
+                $scope.isSingle = false;
 
             }
 
         };
 
 
-        console.log(localStorage.getItem("clickedSurvey"));
 
 
         /*  $scope.state = $state;
@@ -201,9 +210,6 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
     })
 
 .controller('exampleController', function($state, $scope){
-
-   //$scope.clickedSurvey = localStorage.getItem('clickedSurvey');
-
 
 });
 

@@ -27,9 +27,9 @@
     <script type="text/javascript" src="app/controllers/mainCtrl.js"></script>
     <script type="text/javascript" src="app/controllers/userCtrl.js"></script>
     <script type="text/javascript" src="app/controllers/storyCtrl.js"></script>
-<!--
-    <script type="text/javascript" src="app/controllers/surveyCtrl.js"></script>
--->
+    <!--
+        <script type="text/javascript" src="app/controllers/surveyCtrl.js"></script>
+    -->
 
     <!-- Directives -->
     <script type="text/javascript" src="app/directives/reverse.js"></script>
@@ -78,7 +78,7 @@
 
     .preview {
 
-        //background-color: white;
+    / / background-color: white;
         width: 200px;
         float: left;
 
@@ -86,32 +86,26 @@
 
     label span {
 
-        font-size: 20px;
-        color: white;
-
     }
 
     input {
 
-        display: inline;
+        display: none;
 
     }
 
-    label {
+    label.active {
 
-        background-color: salmon;
-
-    }
-
-    form input {
-
-        display: block;
+        background-color: mediumpurple;
+        color: black;
 
     }
 
-    form label {
+    form {
 
-        display: block;
+        background-color: white;
+        border: 2px dotted black;
+        padding: 3%;
     }
 
     .input-group-btn {
@@ -120,13 +114,25 @@
         width: 100px;
         padding: 10px;
         margin-bottom: 8px;
+        background-color: salmon;
 
     }
 
+    .input-group-btn span {
 
+        font-size: 20px;
+        color: white;
 
+    }
 
+    .dropdown-toggle {
 
+        margin: 5%
+    }
+
+    input:checked {
+        background-color: #000;
+    }
 
 
 </style>

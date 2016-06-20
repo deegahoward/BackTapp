@@ -41,20 +41,16 @@
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
-                                        Select a question: <span class="caret"></span>
+                                        Select a question: <span class="caret"></span>{{ question.Type }}
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li ng-repeat="question in clickedSurvey.Questions"
-                                            ng-click="questionClicked(question)">{{ question.Title }}
+                                            ng-click="questionClicked(question)" ui-sref=".Single">{{ question.Title }}
                                         </li>
                                     </ul>
                                 </div>
-                                <span class="label label-info" ng-show="selectedQuestion">Selected Question = {{ selectedQuestion.Title }}</span>
-                                {{ selectedQuestion.Type }}
 
                             </div>
-                            <a ui-sref=".example({ cat: 'category-name' })" class="btn btn-danger">Paragraph</a>
-
                             <div class="well">
 
                                 <div class="container">
