@@ -18,12 +18,18 @@
                     <span class="title">{{ answer.Text }}</span>
 
                 </label>
+                <label class="btn input-group-btn" name="{{ selectedQuestion._id }}"
+                       ng-repeat="answer in selectedQuestion.Answers" onchange="checked()" ng-show="isMultiple">
+                    <input class="answers" type="checkbox" name="{{ selectedQuestion._id }}">
+                    <span class="title">{{ answer.Text }}</span>
+
+                </label>
 
             </div>
 
             <div class="col-sm-3">
 
-                <span class="glyphicon glyphicon-chevron-right" ></span>
+                <span class="glyphicon glyphicon-chevron-right" ng-repeat="star in starRating"></span>
 
             </div>
 

@@ -5,7 +5,7 @@ var mainApp = angular.module('mainCtrl', ['surveyService', 'userService', 'ui.ro
 
 
 
-mainApp.controller('MainController', function ($rootScope, $location, Auth, $scope) {
+mainApp.controller('MainController', function ($rootScope, $location, Auth, $scope, $state) {
 
 
         $scope.title = "BackTapp";
@@ -19,9 +19,10 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
         vm.survey = null;
 
 
+
         vm.loggedIn = Auth.isLoggedIn();
 
-        $rootScope.$on('$routeChangeStart', function () {
+        $rootScope.$on('$stateChangeStart', function () {
 
             vm.loggedIn = Auth.isLoggedIn();
 
@@ -49,11 +50,12 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
                     Auth.getUser()
                         .then(function (data) {
                             vm.user = data.data;
+                            console.log(vm.user.username);
+
                         });
 
                     if (data.success) {
                         $location.path('/');
-                        console.log(data);
                     }
                     else
                         vm.error = data.message;
@@ -68,13 +70,16 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
             $location.path('/login');
             console.log("THIS WORKED OK!");
 
-        }
+        };
+
+
+
     })
 
 
         //================ New Survey Page Stuff =====================
 
-    .controller('SurveyController', function ($scope, Survey, Auth, $state) {
+    .controller('SurveyController', function ($scope, Survey, Auth, $stateParams, $rootScope) {
 
         var vm = this;
 
@@ -126,13 +131,15 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
 
         };
 
+ //=============== EXISTING SURVEYS CONTROLLER =============================================
+
         $scope.clickedSurvey = {};
         $scope.clickedQuestions = [];
         $scope.selectedQuestion = {};
         $scope.selectedQType = "";
         $scope.isSingle = false;
         $scope.isMultiple = false;
-
+        $scope.starRating = 5;
 
 
         $scope.surveyClicked = function (survey) {
@@ -165,46 +172,32 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
 
             }
 
+            else if($scope.selectedQType == "Star"){
+
+                console.log("star");
+
+            }
+
         };
-
-
-
-
-        /*  $scope.state = $state;
-          console.log($scope.state);*/
-
-
 
             Auth.getUser()
                 .then(function (data) {
-                    //console.log(data);
                     vm.user = data.data;
-                   // console.log(data.data);
-
-                    //console.log(vm.user);
-
                     Survey.all(vm.user)
                         .success(function (data) {
                             vm.surveys = data;
                             $scope.mySurveys = vm.surveys;
                             angular.forEach($scope.mySurveys, function(survey){
-
                                 $scope.myQuestions = [];
-
                                 angular.forEach(survey.Questions, function(question){
-
                                     $scope.myQuestions.push(question);
 
-
                                 });
-                                //console.log($scope.myQuestions);
-
-
                             });
-
                         });
-
                 });
+
+
 
 
     })
