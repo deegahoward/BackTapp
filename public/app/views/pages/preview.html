@@ -4,7 +4,7 @@
 
         <fieldset>
 
-            <div class="col-sm-4">
+            <div class="col-md-6">
 
                 <label class="btn input-group-btn" name="{{ selectedQuestion._id }}"
                        ng-repeat="answer in selectedQuestion.Answers" onchange="checked()" ng-show="isSingle">
@@ -22,29 +22,16 @@
                        ng-repeat="answer in selectedQuestion.Answers" onchange="checked()" ng-show="isMultiple">
                     <input class="answers" type="checkbox" name="{{ selectedQuestion._id }}">
                     <span class="title">{{ answer.Text }}</span>
-
                 </label>
-
+                <span class="glyphicon glyphicon-star" ng-repeat="answer in selectedQuestion.Answers" ng-show="isStar"></span>
+                <input class="answers" type="radio" name="{{ selectedQuestion._id }}">
             </div>
-
-            <div class="col-sm-3">
-
-                <span class="glyphicon glyphicon-chevron-right" ng-repeat="star in starRating"></span>
-
-            </div>
-
-
         </fieldset>
-
-
     </form>
-
-
 </div>
 <script>
     var checked = function () {
         $("input:not(:checked)").parent().closest("label").css("background-color", "salmon").css("color", "white");
         $("input:checked").parent().closest("label").css("background-color", "mediumpurple").css("color", "white");
-
     }
 </script>

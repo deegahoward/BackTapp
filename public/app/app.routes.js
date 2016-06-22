@@ -33,7 +33,8 @@ angular.module('appRoutes', ['ui.router'])
 
 })*/
 
-.config(function ($stateProvider, $locationProvider) {
+.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
+
 
     $stateProvider
 
@@ -64,8 +65,8 @@ angular.module('appRoutes', ['ui.router'])
             controllerAs: 'main'
 
         })
-        .state('existingSurveys.Single', {
-            templateUrl: 'app/views/pages/single.html',
+        .state('existingSurveys.Preview', {
+            templateUrl: 'app/views/pages/preview.html',
             parent: 'existingSurveys',
             controller: 'exampleController'
 

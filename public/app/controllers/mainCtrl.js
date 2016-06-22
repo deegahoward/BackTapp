@@ -8,6 +8,7 @@ var mainApp = angular.module('mainCtrl', ['surveyService', 'userService', 'ui.ro
 mainApp.controller('MainController', function ($rootScope, $location, Auth, $scope, $state) {
 
 
+
         $scope.title = "BackTapp";
 
         //methods for logging in, logging out and setting user to current user
@@ -139,7 +140,8 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
         $scope.selectedQType = "";
         $scope.isSingle = false;
         $scope.isMultiple = false;
-        $scope.starRating = 5;
+        $scope.isStar = false;
+        $scope.starRating = [1,2,3,4,5];
 
 
         $scope.surveyClicked = function (survey) {
@@ -175,9 +177,19 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
             else if($scope.selectedQType == "Star"){
 
                 console.log("star");
+                $scope.isStar = true;
+                $scope.isMultiple = false;
+                $scope.isSingle = false;
 
             }
 
+        };
+
+        $scope.starSelected = function(){
+
+            if($scope.NewQuestion.Type == "Star"){
+
+            }
         };
 
             Auth.getUser()

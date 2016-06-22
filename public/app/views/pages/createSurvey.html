@@ -22,17 +22,13 @@
 
         <div class="col-sm-4">
             <div class="row">
-
                 <div class="panel panel-success">
                     <div class="panel-heading">Survey</div>
                     <div class="panel-body">
                         <label for="Name">What is the name of your survey?</label>
                         <input type="text" name="Name" id="Name" ng-model="Survey.Title"/>
                     </div>
-                    <label for="input-1" class="control-label">Rate This</label>
-                    <input id="input-1" name="input-1" class="rating" data-min="0" data-max="5" data-step="1">
                 </div>
-
             </div>
         </div>
         <div class="col-sm-7 pull-right">
@@ -76,7 +72,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-2">
-                                        <button type="button" class="btn btn-success pull-right" data-toggle="collapse"
+                                        <button type="button" class="btn btn-success pull-right" ng-click="starSelected()" data-toggle="collapse"
                                                 data-target="#answers" aria-expanded="false"
                                                 aria-controls="answers"><span
                                                 class="glyphicon glyphicon-plus"></span></button>
@@ -111,7 +107,7 @@
                                     <div class="row">
                                         <button type="button" class="btn btn-success pull-right"
                                                 ng-click="AddQuestion(NewQuestion)"><span
-                                                class="glyphicon glyphicon-plus"></span>Save Question
+                                                class="glyphicon glyphicon-plus" id="QSubmit"></span>Save Question
                                         </button>
                                     </div>
                                 </div>
