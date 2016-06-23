@@ -7,7 +7,7 @@ var mainApp = angular.module('mainCtrl', ['surveyService', 'userService', 'ui.ro
 
 mainApp.controller('MainController', function ($rootScope, $location, Auth, $scope, $state) {
 
-
+    console.log("1");
 
         $scope.title = "BackTapp";
 
@@ -80,9 +80,11 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
 
         //================ New Survey Page Stuff =====================
 
-    .controller('SurveyController', function ($scope, Survey, Auth, $stateParams, $rootScope) {
+    .controller('SurveyController', function ($scope, Survey, Auth, $stateParams, $rootScope, $state) {
 
         var vm = this;
+
+        console.log("2");
 
         $scope.Survey = {};
         $scope.NewQuestion = {};
@@ -184,13 +186,16 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
             }
 
         };
+/*
 
         $scope.starSelected = function(){
 
             if($scope.NewQuestion.Type == "Star"){
-
+                angular.element('#QSubmit').trigger('click');
+                console.log($scope.NewQuestion);
             }
         };
+*/
 
             Auth.getUser()
                 .then(function (data) {

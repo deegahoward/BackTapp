@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+        extend = require('mongoose-schema-extend');
 
 var Schema = mongoose.Schema;
 
@@ -7,6 +8,10 @@ var AnswerSchema = new Schema({
 
     Text: String
 
+});
+
+var AnswerTextSchema = AnswerSchema.extend({
+    OtherField : String
 });
 
 var QuestionSchema = new Schema({
@@ -30,3 +35,4 @@ var SurveySchema = new Schema({
 
 
 module.exports = mongoose.model('Survey', SurveySchema);
+//do I need to export each model to be used?

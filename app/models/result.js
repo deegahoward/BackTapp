@@ -1,3 +1,23 @@
-/**
- * Created by Dee on 22/06/2016.
- */
+/*
+var mongoose = require('mongoose');
+
+var Schema = mongoose.Schema;
+
+var ResultSetSchema = new Schema({
+
+    SurveyID: {type: Schema.Types.ObjectId, ref: 'Survey'},
+    Responses: [ResponseSchema]
+
+
+});
+
+var ResponseSchema = new Schema({
+
+    QuestionID: {type: Schema.Types.ObjectId, ref: 'Question'},
+    Response: String
+
+
+
+})
+
+module.exports = mongoose.model('Results', ResultSetSchema);*/

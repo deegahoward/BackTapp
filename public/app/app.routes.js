@@ -59,10 +59,10 @@ angular.module('appRoutes', ['ui.router'])
             controllerAs: 'survey'
         })
         .state('existingSurveys', {
-            url: 'existingSurveys',
+            url: '/existingSurveys',
             templateUrl: 'app/views/pages/existingSurveys.html',
-            controller: 'MainController',
-            controllerAs: 'main'
+            controller: 'SurveyController',
+            controllerAs: 'survey'
 
         })
         .state('existingSurveys.Preview', {
