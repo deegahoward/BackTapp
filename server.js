@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var config = require('./config');
 var mongoose = require('mongoose');
+var router = express.Router();
 var app = express();
 
 var http = require('http').Server(app);
@@ -25,12 +26,17 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 
 var api = require('./app/routes/api')(app, express, io);
-//app.use('/api', api);
 
+app.get('/example/*', function(req, res) {
+    res.sendFile(__dirname + '/public/app/views/example.html');
 
-app.get('*', function (req, res) {
+});
+
+app.get('/*', function (req, res) {
     res.sendFile(__dirname + '/public/app/views/index.html');
 });
+
+
 
 http.listen(config.port, function (err) {
     if (err) {
@@ -39,4 +45,6 @@ http.listen(config.port, function (err) {
         console.log("Listening on port 3000");
     }
 });
+
+//============ SECOND APP --
 

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="MobileApp">
+<head>
+    <title ng-model="title">BackTapp</title>
+    <base href='/example'>
+
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.1/css/star-rating.min.css" type="text/css">
+
+
+    <!-- Javascript libraries -->
+    <script src="https://code.jquery.com/jquery-2.2.4.js"
+            integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-route.min.js"></script>
+    <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+
+    <!-- Controllers -->
+    <script type="text/javascript" src="app/controllers/mobileCtrl.js"></script>
+
+
+    <!-- Directives -->
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+
+<body ng-controller="MobileController as mobile">
+
+<header>
+    <div class="navbar navbar-default">
+        <div class="container">
+
+            <ul class="nav navbar-nav navbar-right">
+                <button class="btn btn-primary" ng-click="close()"><span class="glyphicon glyphicon-remove"></span></button>
+
+            </ul>
+
+        </div>
+    </div>
+</header>
+
+
+<main class="container">
+
+    <div ui-view></div>
+
+</main>
+
+</body>
+</html>

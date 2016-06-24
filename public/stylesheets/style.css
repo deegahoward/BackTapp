@@ -1,0 +1,107 @@
+form {
+    display: block;
+    border: 5px solid groove;
+    border-radius: 20px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 50px;
+    width: 350px;
+}
+
+body {
+    background-color: white;
+    font-size: 18px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+#menubuttons {
+
+    margin: auto;
+    text-align: center;
+    padding-top: 1.5em;
+}
+
+.error {
+
+    color: red;
+    font-size: 18px;
+}
+
+li {
+    display: block !important;
+    margin-bottom: 10px !important;
+}
+
+.preview {
+
+/ / background-color: white;
+    width: 200px;
+    float: left;
+
+}
+
+label span {
+
+}
+
+input[type=radio] {
+
+    display: none;
+
+}
+
+label.active {
+
+    background-color: mediumpurple;
+    color: black;
+
+}
+
+form {
+
+    background-color: white;
+    border: 2px dotted black;
+    padding: 3%;
+}
+
+.input-group-btn {
+
+    display: block;
+    width: 100px;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: salmon;
+
+}
+
+.input-group-btn span {
+
+    font-size: 20px;
+    color: white;
+
+}
+
+.dropdown-toggle {
+
+    margin: 5%
+}
+
+input:checked {
+    background-color: #000;
+}
+
+.glyphicon-star {
+
+    font-size: 3em;
+    cursor: pointer;
+
+}
+
+.glyphicon-star:hover {
+
+    color: salmon;
+
+}

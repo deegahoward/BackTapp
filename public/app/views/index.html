@@ -6,7 +6,7 @@
 
 
     <!-- Stylesheets -->
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.1/css/star-rating.min.css" type="text/css">
 
@@ -29,131 +29,18 @@
     <script type="text/javascript" src="app/controllers/mainCtrl.js"></script>
     <script type="text/javascript" src="app/controllers/userCtrl.js"></script>
     <script type="text/javascript" src="app/controllers/storyCtrl.js"></script>
-    <!--
-        <script type="text/javascript" src="app/controllers/surveyCtrl.js"></script>
-    -->
+    <script type="text/javascript" src="app/controllers/surveyCtrl.js"></script>
+
+
 
     <!-- Directives -->
-    <script type="text/javascript" src="app/directives/reverse.js"></script>
     <script type="text/javascript" src="app/app.routes.js"></script>
     <script type="text/javascript" src="app/app.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.1/js/star-rating.min.js"></script>
 
 </head>
-<style>
-    form {
-        display: block;
-        border: 5px solid groove;
-        border-radius: 20px;
-        padding: 20px;
-        margin: auto;
-        margin-top: 50px;
-        width: 350px;
-    }
 
-    body {
-        background-color: white;
-        font-size: 18px;
-    }
-
-    h1, h2 {
-        text-align: center;
-    }
-
-    #menubuttons {
-
-        margin: auto;
-        text-align: center;
-        padding-top: 1.5em;
-    }
-
-    .error {
-
-        color: red;
-        font-size: 18px;
-    }
-
-    li {
-        display: block !important;
-        margin-bottom: 10px !important;
-    }
-
-    .preview {
-
-    / / background-color: white;
-        width: 200px;
-        float: left;
-
-    }
-
-    label span {
-
-    }
-
-    input[type=radio] {
-
-        display: none;
-
-    }
-
-    label.active {
-
-        background-color: mediumpurple;
-        color: black;
-
-    }
-
-    form {
-
-        background-color: white;
-        border: 2px dotted black;
-        padding: 3%;
-    }
-
-    .input-group-btn {
-
-        display: block;
-        width: 100px;
-        padding: 10px;
-        margin-bottom: 8px;
-        background-color: salmon;
-
-    }
-
-    .input-group-btn span {
-
-        font-size: 20px;
-        color: white;
-
-    }
-
-    .dropdown-toggle {
-
-        margin: 5%
-    }
-
-    input:checked {
-        background-color: #000;
-    }
-
-    .glyphicon-star {
-
-        font-size: 3em;
-        cursor: pointer;
-
-    }
-
-    .glyphicon-star:hover {
-
-        color: salmon;
-
-    }
-
-
-
-
-</style>
 <body ng-controller="MainController as main">
 
 <header>
@@ -164,10 +51,6 @@
                 <a ui-sref="login" class="navbar-brand" ng-if="!main.loggedIn"><span class="glyphicon glyphicon-send"> {{ title }}</span></a>
 
             </div>
-
-            <ul class="nav navbar-nav">
-                <li><a href="/users"></a></li>
-            </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li ng-if="!main.loggedIn"><a ui-sref="login">Login</a></li>
