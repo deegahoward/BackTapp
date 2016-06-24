@@ -15,16 +15,22 @@ angular.module('MobileApp', ['mobileCtrl', 'ui.router'])
 
     $stateProvider
 
-        .state('home', {
-            url: '/example/home',
-            templateUrl: 'app/views/pages/home.html',
-            controller: 'MobileController',
-            controllerAs: 'mobile'
-        })
         .state('mobile', {
             url: '/example/mobile',
-            templateUrl: 'app/views/pages/mobilePage.html',
+            templateUrl: 'app/mobile/pages/mobilePage.html'
+        })
+        .state('takeSurvey', {
+            url: '/example/takeSurvey/{surveyID:5763ca8ac713cdcc0291d1f7}',
+            templateUrl: 'app/mobile/pages/takeSurvey.html'
+
+        })
+        .state('sorry', {
+            url: '/example/sorry',
+            templateUrl: 'app/mobile/pages/sorry.html'
+
         });
+
+
 
 
     $locationProvider.html5Mode(true);

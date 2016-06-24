@@ -78,7 +78,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
             $scope.clickedSurvey = survey;
             $scope.clickedQuestions = survey.Questions;
             localStorage.setItem("clickedSurvey", angular.toJson($scope.clickedSurvey));
-            console.log($scope.clickedQuestions);
+            console.log($scope.clickedSurvey);
 
 
         };

@@ -28,12 +28,12 @@ app.use(express.static(__dirname + '/public'));
 var api = require('./app/routes/api')(app, express, io);
 
 app.get('/example/*', function(req, res) {
-    res.sendFile(__dirname + '/public/app/views/example.html');
+    res.sendFile(__dirname + '/public/app/mobile/example.html');
 
 });
 
 app.get('/*', function (req, res) {
-    res.sendFile(__dirname + '/public/app/views/index.html');
+    res.sendFile(__dirname + '/public/app/mainApp/views/index.html');
 });
 
 

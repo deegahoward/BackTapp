@@ -19,9 +19,12 @@
     <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
+    <!-- Services -->
+    <script type="text/javascript" src="app/mobile/mobileService.js"></script>
+
 
     <!-- Controllers -->
-    <script type="text/javascript" src="app/controllers/mobileCtrl.js"></script>
+    <script type="text/javascript" src="app/mobile/mobileCtrl.js"></script>
 
 
     <!-- Directives -->
@@ -37,6 +40,7 @@
         <div class="container">
 
             <ul class="nav navbar-nav navbar-right">
+                {{Title}}
                 <button class="btn btn-primary" ng-click="close()"><span class="glyphicon glyphicon-remove"></span></button>
 
             </ul>

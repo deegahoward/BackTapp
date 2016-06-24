@@ -8,45 +8,36 @@ angular.module('appRoutes', ['ui.router'])
 
         .state('home', {
             url: '/',
-            templateUrl: 'app/views/pages/home.html',
+            templateUrl: 'app/mainApp/views/pages/home.html',
             controller: 'MainController',
             controllerAs: 'main'
         })
         .state('login', {
             url: '/login',
-            templateUrl: 'app/views/pages/login.html'
+            templateUrl: 'app/mainApp/views/pages/login.html'
         })
         .state('signup', {
             url: '/signup',
-            templateUrl: 'app/views/pages/signup.html'
+            templateUrl: 'app/mainApp/views/pages/signup.html'
         })
         .state('createSurvey', {
             url: '/createSurvey',
-            templateUrl: 'app/views/pages/createSurvey.html',
+            templateUrl: 'app/mainApp/views/pages/createSurvey.html',
             controller: 'CreateSurveyController',
             controllerAs: 'survey'
         })
         .state('existingSurveys', {
             url: '/existingSurveys',
-            templateUrl: 'app/views/pages/existingSurveys.html',
+            templateUrl: 'app/mainApp/views/pages/existingSurveys.html',
             controller: 'ExistingSurveyController',
             controllerAs: 'survey'
 
         })
         .state('existingSurveys.Preview', {
-            templateUrl: 'app/views/pages/preview.html',
+            templateUrl: 'app/mainApp/views/pages/preview.html',
             parent: 'existingSurveys',
             controller: 'exampleController'
 
-        })
-        .state('mobile', {
-            url: '/mobile',
-            templateUrl: 'app/mobile/mobileSite.html',
-            action: 'MobileApp.mobileCtrl'
-        })
-        .state('mobile.survey', {
-            templateUrl: 'app/mobile/mobilePages/mobilePage.html',
-            parent: 'mobile'
         });
 
     $locationProvider.html5Mode(true);

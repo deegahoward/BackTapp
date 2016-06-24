@@ -7,12 +7,12 @@ angular.module('mobileCtrl', ['ui.router'])
 
     $scope.Title = "Welcome to the other side!";
 
-    $state.go("home");
+    $state.go("mobile");
 
 
     $scope.close = function(){
 
-        $window.close();
+        //$window.close();
 
     }
 

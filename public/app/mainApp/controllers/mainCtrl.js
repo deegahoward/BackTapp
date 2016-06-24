@@ -78,9 +78,6 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
     });
 
 
-        //================ New Survey Page Stuff =====================
-
-
 
 
 
