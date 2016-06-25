@@ -8,7 +8,7 @@ angular.module('MyApp', ['appRoutes', 'mainCtrl', 'authService', 'userCtrl', 'us
 
 });
 
-angular.module('MobileApp', ['mobileCtrl', 'ui.router'])
+angular.module('MobileApp', ['mobileCtrl', 'ui.router', 'surveyService'])
 
 .config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
 
@@ -20,8 +20,9 @@ angular.module('MobileApp', ['mobileCtrl', 'ui.router'])
             templateUrl: 'app/mobile/pages/mobilePage.html'
         })
         .state('takeSurvey', {
-            url: '/example/takeSurvey/{surveyID:5763ca8ac713cdcc0291d1f7}',
-            templateUrl: 'app/mobile/pages/takeSurvey.html'
+            url: '/example/takeSurvey/:id',
+            templateUrl: 'app/mobile/pages/takeSurvey.html',
+            controller: 'MobileController',
 
         })
         .state('sorry', {
@@ -29,8 +30,6 @@ angular.module('MobileApp', ['mobileCtrl', 'ui.router'])
             templateUrl: 'app/mobile/pages/sorry.html'
 
         });
-
-
 
 
     $locationProvider.html5Mode(true);

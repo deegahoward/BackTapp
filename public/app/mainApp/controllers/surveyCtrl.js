@@ -57,7 +57,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
 
     })
 
-        //=============== EXISTING SURVEYS CONTROLLER =============================================
+//=============================== EXISTING SURVEYS CONTROLLER =============================================
 
      .controller('ExistingSurveyController', function ($scope, Survey, Auth, $stateParams, $rootScope, $state) {
 

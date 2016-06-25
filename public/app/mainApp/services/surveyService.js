@@ -14,6 +14,13 @@ angular.module('surveyService', [])
 
         };
 
+       surveyFactory.getThisSurvey = function(surveyID) {
+
+           console.log(surveyID);
+
+            return $http.post('/api/thisSurvey', surveyID);
+        };
+
         //making a post method to send survey id and delete from database
 
         /*surveyFactory.delete = function() {

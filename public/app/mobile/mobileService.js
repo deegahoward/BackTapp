@@ -1,3 +1,4 @@
+/*
 angular.module('mobileService', [])
 
 
@@ -15,4 +16,4 @@ angular.module('mobileService', [])
 
         return mobileFactory;
 
-    });
+    });*/
