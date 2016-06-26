@@ -12,8 +12,11 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
 
     console.log(surveyID);
 
+
+
     $scope.surveyName = "";
     $scope.thisSurvey = {};
+    $scope.noSlides = [0,1,2];
 
     Survey.all()
         .success(function (data) {
@@ -24,7 +27,9 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
             if(survey._id == surveyID.id){
                 $scope.surveyName = survey.Title;
                 $scope.thisSurvey = survey;
-                console.log($scope.thisSurvey);
+                $scope.myQuestions = survey.Questions;
+                $scope.noSlidesWidth = survey.Questions.length * 300;
+
             }
 
         });
@@ -32,36 +37,27 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
 
 
 
-    angular.forEach($scope.mySurveys, function(survey){
 
-       if(survey.id == surveyID){
-           console.log("EQUAL!");
-       }
 
-        else {
 
-           console.log("not equal");
-           console.log(survey.id);
-       }
 
-    });
+    $scope.transit = function(no){
+
+        angular.element('#slide1_images').css('transform', 'translateX(' + no * -300 + 'px)');
+        console.log(no);
+
+
+    };
+
+
+
+
 
 
     //$state.go("mobile");
-
-    //console.log($stateParams);
-
-
     //console.log($scope.mySurvey);
-
-
-
-
-
     /*Survey.getThisSurvey();*/
-
     //console.log($scope.mySurvey);
-
     $scope.close = function(){
 
         //$window.close();

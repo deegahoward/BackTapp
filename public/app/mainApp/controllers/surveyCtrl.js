@@ -6,8 +6,6 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
 
         var vm = this;
 
-        console.log("2");
-
         $scope.Survey = {};
         $scope.NewQuestion = {};
         $scope.NewAnswer = {};
@@ -68,8 +66,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
         $scope.clickedQuestions = [];
         $scope.selectedQuestion = {};
         $scope.selectedQType = "";
-        $scope.isSingle = false;
-        $scope.isMultiple = false;
+        $scope.isRadio = false;
+        $scope.isCheckbox = false;
         $scope.isStar = false;
         $scope.starRating = [1,2,3,4,5];
 
@@ -87,20 +85,20 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
             $scope.selectedQuestion = question;
             $scope.selectedQType = question.Type;
             console.log($scope.selectedQType);
-            if($scope.selectedQType == "Single"){
+            if($scope.selectedQType == "radio"){
 
-                console.log("single");
-                $scope.isSingle = true;
-                $scope.isMultiple = false;
+                console.log("radio");
+                $scope.isRadio = true;
+                $scope.isCheckbox = false;
 
 
 
             }
-            else if($scope.selectedQType == "Multiple"){
+            else if($scope.selectedQType == "checkbox"){
 
-                console.log("multiple");
-                $scope.isMultiple = true;
-                $scope.isSingle = false;
+                console.log("checkbox");
+                $scope.isRadio = true;
+                $scope.isCheckbox = false;
 
             }
 

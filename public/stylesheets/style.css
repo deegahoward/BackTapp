@@ -47,11 +47,13 @@ label span {
 
 }
 
-input[type=radio] {
+input[type=radio], input[type=checkbox] {
 
     display: none;
 
 }
+
+
 
 label.active {
 
@@ -65,23 +67,6 @@ form {
     background-color: white;
     border: 2px dotted black;
     padding: 3%;
-}
-
-.input-group-btn {
-
-    display: block;
-    width: 100px;
-    padding: 10px;
-    margin-bottom: 8px;
-    background-color: salmon;
-
-}
-
-.input-group-btn span {
-
-    font-size: 20px;
-    color: white;
-
 }
 
 .dropdown-toggle {
@@ -146,7 +131,7 @@ input:checked {
 }
 
 #slide1_container {
-    width:450px;
+    width:300px;
     height:281px;
     overflow:hidden; /* So the sliding bit doesn't stick out. */
     margin:0 auto;
@@ -154,16 +139,42 @@ input:checked {
 #slide1_images {
     /* This is the bit that moves. It has 4 images, so 4 * 450 = 1800. You could use javascript
     to work this out instead by counting images. */
-    width:1350px;
-
+    width:900px;
     -webkit-transition:all 1.0s ease-in-out;
     -moz-transition:all 1.0s ease-in-out;
     -o-transition:all 1.0s ease-in-out;
     transition:all 1.0s ease-in-out;
+
 }
-#slide1_images img {
+#slide1_images .question {
     padding:0;
     margin:0;
     float:left; /* All the images are in a row next to each other. */
+    width: 300px;
+}
+
+.input-group-btn {
+
+    display: block !important;
+    width: 100px !important;
+    width: 100px !important;
+    padding: 10px;
+    margin-bottom: 8px !important;
+    margin-top: 10px;
+    margin-left: 30%;
+    background-color: salmon;
+
+
+}
+
+.input-group-btn span {
+
+    font-size: 20px;
+    color: white;
+
+}
+
+.question h4 {
+    text-align: center;
 }
 
