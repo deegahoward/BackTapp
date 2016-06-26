@@ -106,8 +106,6 @@ input:checked {
 
 }
 
-
-
 .btn-circle {
     width: 30px;
     height: 30px;
@@ -144,5 +142,28 @@ input:checked {
     text-align:left;
     /* inline-block space fix */
     margin-right:-4px;
+
+}
+
+#slide1_container {
+    width:450px;
+    height:281px;
+    overflow:hidden; /* So the sliding bit doesn't stick out. */
+    margin:0 auto;
+}
+#slide1_images {
+    /* This is the bit that moves. It has 4 images, so 4 * 450 = 1800. You could use javascript
+    to work this out instead by counting images. */
+    width:1350px;
+
+    -webkit-transition:all 1.0s ease-in-out;
+    -moz-transition:all 1.0s ease-in-out;
+    -o-transition:all 1.0s ease-in-out;
+    transition:all 1.0s ease-in-out;
+}
+#slide1_images img {
+    padding:0;
+    margin:0;
+    float:left; /* All the images are in a row next to each other. */
 }
 

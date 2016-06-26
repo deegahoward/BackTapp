@@ -14,20 +14,14 @@ angular.module('surveyService', [])
 
         };
 
-       surveyFactory.getThisSurvey = function(surveyID) {
-
-           console.log(surveyID);
-
-            return $http.post('/api/thisSurvey', surveyID);
-        };
 
         //making a post method to send survey id and delete from database
 
-        /*surveyFactory.delete = function() {
+        surveyFactory.delete = function() {
 
-          return $http.post('/api/deleteSurveys');
+          return $http.post('/api/deleteSurvey');
 
-        };*/
+        };
 
         //making a get method to return existing surveys from the database
 

@@ -1,34 +1,41 @@
 <div class=".col-md-offset-3.col-md-6">
-
     <form name="questions">
-
         <fieldset>
-
             <div class=".col-md-offset-2.col-md-6">
-
                 <h1>{{surveyName}}</h1>
-
-                <!-- <label class="btn input-group-btn" name="{{ selectedQuestion._id }}"
-                        ng-repeat="answer in selectedQuestion.Answers" onchange="checked()" ng-show="isSingle">
-                     <input class="answers" type="radio" name="{{ selectedQuestion._id }}">
-                     <span class="title">{{ answer.Text }}</span>
-
-                 </label>
-                 <label class="btn input-group-btn" name="{{ selectedQuestion._id }}"
-                        ng-repeat="answer in selectedQuestion.Answers" onchange="checked()" ng-show="isMultiple">
-                     <input class="answers" type="checkbox" name="{{ selectedQuestion._id }}">
-                     <span class="title">{{ answer.Text }}</span>
-
-                 </label>
-                 <label class="btn input-group-btn" name="{{ selectedQuestion._id }}"
-                        ng-repeat="answer in selectedQuestion.Answers" onchange="checked()" ng-show="isMultiple">
-                     <input class="answers" type="checkbox" name="{{ selectedQuestion._id }}">
-                     <span class="title">{{ answer.Text }}</span>
-                 </label>
-                 <span class="glyphicon glyphicon-star" ng-repeat="answer in selectedQuestion.Answers" ng-show="isStar"></span>
-                 <input class="answers" type="radio" name="{{ selectedQuestion._id }}">-->
+                <div class="container .col-md-offset-2.col-md-5" ng-repeat="question in thisSurvey.Questions">
+                    {{ question.Title }}
+                    <ul>
+                        <li ng-repeat="answer in question.Answers">
+                            {{ answer.Text }}
+                        </li>
+                    </ul>
+                    </li>
+                </div>
             </div>
+            <div class="wrapper">
+                <img id="slide" src="http://lorempixel.com/output/cats-q-c-100-100-4.jpg"/>
+            </div>
+            <div id="slide1_container" class="shadow">
+                <div id="slide1_images">
+                    <img src="app/images/cake.jpg">
+                    <img src="app/images/cake2.jpg">
+                    <img src="app/images/cake3.jpg">
+                </div>
+            </div>
+            <p id="slide1_controls"><span class="selected">Image 1</span><span>Image 2</span><span>Image 3</span></p>
         </fieldset>
     </form>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#slide1_controls').on('click', 'span', function () {
+            console.log("clicked!");
+            $('#slide1_images').css('transform', 'translateX(' + $(this).index() * -450 + 'px)');
+            $('#slide1_controls span').removeClass('selected');
+            $(this).addClass('selected');
+        });
+    });
+
+</script>
 
