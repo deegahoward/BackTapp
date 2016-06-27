@@ -8,38 +8,52 @@
 
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-4" id="existingSurveys">
             <div class="row">
-
-
                 <div class="panel panel-success">
-                    <div class="panel-heading">Survey</div>
+                    <div class="panel-heading">Your Surveys</div>
                     <div class="panel-body">
                         <div class="col-sm-8 col-sm-offset-1">
-                            <ul>
-                                <li class="btn btn-primary" ng-click="surveyClicked(survey)"
-                                    ng-repeat="survey in mySurveys">
+                            <!--<ul>
+                                <li class="btn btn-success dropdown-toggle"
+                                    ng-repeat="survey in mySurveys" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
 
                                     {{ survey.Title }}
 
-                                </li>
-                            </ul>
-                        </div>
 
+                                </li>
+
+                            </ul>-->
+                            <div class="btn-group" ng-repeat="survey in mySurveys">
+                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   {{ survey.Title }} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" ng-click="surveyClicked(survey); showSurvey();">Preview/Edit</a></li>
+                                    <li><a href="#" ng-click="deleteSurvey(survey)">Delete</a></li>
+                                    <li><a href="#">Get URL</a></li>
+                                </ul>
+                                <div class="alert alert-warning" role="alert">
+                                    <strong>Warning!</strong> Better check yourself, you're <a href="#" class="alert-link">not looking too good</a>.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 pull-right">
+        <div class="col-sm-6 pull-right" id="thisSurvey">
             <div class="row">
                 <div class="panel panel-warning">
                     <div class="panel-heading">Preview Box</div>
                     <div class="panel-body">
 
-                        <div class="well">
                             <div class="row">
+                                <div class="col-md-5">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
                                         Select a question: <span class="caret"></span>{{ question.Type }}
                                     </button>
@@ -48,10 +62,16 @@
                                             ng-click="questionClicked(question)" ui-sref=".Preview">{{ question.Title }}
                                         </li>
                                     </ul>
+                                    <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash">Delete</span></button>
                                 </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-7">
+                                    <h3>{{ selectedQuestion.Title }}</h3>
 
+                                </div>
+                                </div>
                             </div>
-                            <div class="well">
 
                                 <div class="container">
 
@@ -62,9 +82,6 @@
 
 
                                 </div>
-                            </div>
-
-                        </div>
 
                     </div>
                 </div>

@@ -14,7 +14,7 @@ var ResultSetSchema = new Schema({
 var ResponseSchema = new Schema({
 
     QuestionID: {type: Schema.Types.ObjectId, ref: 'Question'},
-    Response: String
+    Value: String
 
 
 

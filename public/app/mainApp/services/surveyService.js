@@ -17,9 +17,10 @@ angular.module('surveyService', [])
 
         //making a post method to send survey id and delete from database
 
-        surveyFactory.delete = function() {
+        surveyFactory.delete = function(id) {
+            console.log(id);
 
-          return $http.post('/api/deleteSurvey');
+          return $http.post('/api/deleteSurvey', id);
 
         };
 
@@ -29,6 +30,8 @@ angular.module('surveyService', [])
             return $http.get('/api/surveys');
 
         };
+
+
 
         return surveyFactory;
 

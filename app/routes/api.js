@@ -30,45 +30,6 @@ module.exports = function (app, express, io) {
     var api = express.Router();
 
 
-
-    //method to get all stories from the database
-
-    api.get('/all_stories', function (req, res) {
-
-        Story.find({}, function (err, stories) {
-            if (err) {
-                res.send(err);
-                return;
-            }
-            res.json(stories);
-        });
-    });
-
-    //method to post new user data on sign up to the database
-
-    api.post('/signup', function (req, res) {
-
-        var user = new User({
-            name: req.body.name,
-            username: req.body.username,
-            password: req.body.password
-        });
-        var token = createToken(user);
-        user.save(function (err) {
-            if (err) {
-                res.send(err);
-                return;
-            }
-
-            res.json({
-                success: true,
-                message: 'User has been created!',
-                token: token
-            });
-        });
-    });
-
-
     //method to get all existing users from the database
 
     api.get('/users', function (req, res) {
@@ -83,7 +44,6 @@ module.exports = function (app, express, io) {
 
         });
     });
-
 
     //method to post information entered by user to verify against existing user in database
 
@@ -153,7 +113,7 @@ module.exports = function (app, express, io) {
                     next();
                 }
             });
-        } else if(req.url == "/thisSurvey" || "/surveys"){
+        } else if (req.url == "/thisSurvey") {
 
             next();
         } else {
@@ -170,49 +130,11 @@ module.exports = function (app, express, io) {
 
     // this was the methods used for displaying and creating stories on the home page
 
-    api.route('/')
-
-        //creating a story
-
-        .post(function (req, res) {
-
-            var story = new Story({
-                creator: req.decoded.id,
-                content: req.body.content,
-
-            });
-
-            story.save(function (err, newStory) {
-                if (err) {
-                    res.send(err);
-                    return
-                }
-                io.emit('story', newStory)
-                res.json({message: "New Story Created!"});
-            });
-        })
-
-        //getting existing stories based on the user logged in
-
-
-        .get(function (req, res) {
-
-            console.log("output");
-
-            Story.find({creator: req.decoded.id}, function (err, stories) {
-
-                if (err) {
-                    res.send(err);
-                    return;
-                }
-
-                res.send(stories);
-            });
-        });
 
     api.get('/me', function (req, res) {
         res.send(req.decoded);
     });
+
 
     //method to get all existing surveys from the database
 
@@ -231,23 +153,46 @@ module.exports = function (app, express, io) {
         });
     });
 
-    //method to get specific survey based on url params
 
-    api.get('/thisSurvey', function (req, res) {
+    api.get(function (req, res) {
 
-        console.log(req.param('id'));
-
-        Survey.find({id: req.body.surveyID}, function (err, survey) {
-            if (err) {
-                console.log(err);
+        Survey.findById(req.params.survey_id, function (err, survey) {
+            if (err)
                 res.send(err);
-                return;
-            }
-
             res.json(survey);
+
         });
 
     });
+
+    api.delete('/deleteSurvey/:id', function (req, res) {
+        try {
+            surveyFactory.remove(req.body.id);
+            res.send(200);
+        } catch (exeception) {
+            response.send(404);
+        }
+
+    });
+
+
+    //method to get specific survey based on url params
+
+    /*  api.get('/thisSurvey', function (req, res) {
+
+     console.log(req.param('id'));
+
+     Survey.find({id: req.body.surveyID}, function (err, survey) {
+     if (err) {
+     console.log(err);
+     res.send(err);
+     return;
+     }
+
+     res.json(survey);
+     });
+
+     });*/
 
 
 //method to post new survey to the database

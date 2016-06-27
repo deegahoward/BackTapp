@@ -27,6 +27,7 @@ app.use(express.static(__dirname + '/public'));
 
 var api = require('./app/routes/api')(app, express, io);
 
+
 app.get('/example/*', function(req, res) {
     res.sendFile(__dirname + '/public/app/mobile/example.html');
 

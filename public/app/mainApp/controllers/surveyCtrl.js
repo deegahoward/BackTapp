@@ -133,6 +133,22 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
             });
 
 
+         $scope.showSurvey = function(){
+
+            angular.element('#existingSurveys').css('left', '0');
+            angular.element('#thisSurvey').css({'top': '110px', 'opacity': '1'});
+
+
+
+         };
+
+         $scope.deleteSurvey = function(survey){
+
+             var surveyID = survey._id;
+
+             Survey.delete(surveyID);
+
+         }
 
 
     })

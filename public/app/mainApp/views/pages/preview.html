@@ -4,22 +4,20 @@
 
         <fieldset>
 
-            <div class="col-md-6">
+            <div class=".col-md-6-offset-2 .col-md-6">
 
                 <label class="btn input-group-btn" name="{{ selectedQuestion._id }}"
-                       ng-repeat="answer in selectedQuestion.Answers" onchange="checked()" ng-show="isSingle">
+                       ng-repeat="answer in selectedQuestion.Answers" onchange="checked()" ng-show="isRadio">
                     <input class="answers" type="radio" name="{{ selectedQuestion._id }}">
                     <span class="title">{{ answer.Text }}</span>
 
                 </label>
                 <label class="btn input-group-btn" name="{{ selectedQuestion._id }}"
-                       ng-repeat="answer in selectedQuestion.Answers" onchange="checked()" ng-show="isMultiple">
+                       ng-repeat="answer in selectedQuestion.Answers" onchange="checked()" ng-show="isCheckbox">
                     <input class="answers" type="checkbox" name="{{ selectedQuestion._id }}">
                     <span class="title">{{ answer.Text }}</span>
 
                 </label>
-                <span class="glyphicon glyphicon-star" ng-repeat="answer in selectedQuestion.Answers" ng-show="isStar"></span>
-                <input class="answers" type="radio" name="{{ selectedQuestion._id }}">
             </div>
         </fieldset>
     </form>
