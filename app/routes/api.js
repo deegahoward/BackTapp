@@ -45,6 +45,12 @@ module.exports = function (app, express, io) {
         });
     });
 
+    api.get('/', function(req, res){
+
+        res.json({message: "yo yo yo!"});
+
+    });
+
     //method to post information entered by user to verify against existing user in database
 
     api.post('/login', function (req, res) {
@@ -138,11 +144,11 @@ module.exports = function (app, express, io) {
 
     //method to get all existing surveys from the database
 
-    api.get('/surveys', function (req, res) {
+   /* api.get('/surveys', function (req, res) {
 
         console.log(req.decoded);
 
-        Survey.find({/*creator: req.decoded.id*/}, function (err, surveys) {
+        Survey.find({/!*creator: req.decoded.id*!/}, function (err, surveys) {
             if (err) {
                 res.send(err);
                 return;
@@ -151,10 +157,13 @@ module.exports = function (app, express, io) {
             res.json(surveys);
 
         });
-    });
+    });*/
 
 
-    api.get(function (req, res) {
+    api.route('/surveys/:survey_id')
+
+
+    .get(function (req, res) {
 
         Survey.findById(req.params.survey_id, function (err, survey) {
             if (err)
@@ -163,15 +172,38 @@ module.exports = function (app, express, io) {
 
         });
 
-    });
+    })
 
-    api.delete('/deleteSurvey/:id', function (req, res) {
-        try {
-            surveyFactory.remove(req.body.id);
-            res.send(200);
-        } catch (exeception) {
-            response.send(404);
-        }
+        .put(function(req, res){
+
+            Survey.findById(req.params.survey_id, function(err, survey){
+                if(err)
+                res.send(err);
+
+                survey.Title = req.body.Title;
+
+                survey.save(function(err){
+                    if(err)
+                    res.send(err);
+
+                    res.json({message: 'Survey updated!'})
+                })
+            })
+
+
+        })
+
+    .delete(function (req, res) {
+
+        Survey.remove({
+
+            _id: req.params.survey_id
+        }, function(err, survey){
+            if(err)
+            res.send(err);
+
+            res.json({message: 'Succesfully deleted!'});
+        });
 
     });
 
