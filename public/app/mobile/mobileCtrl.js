@@ -1,69 +1,67 @@
-
 angular.module('mobileCtrl', ['ui.router', 'surveyService'])
 
 
-.controller('MobileController', function ($rootScope, $location, $scope, $state, $stateParams, Survey) {
+    .controller('MobileController', function ($rootScope, $location, $scope, $state, $stateParams, Survey) {
 
-    var vm = this;
+            var vm = this;
 
-    $scope.Title = "Welcome to the other side!";
+            $scope.Title = "Welcome to the other side!";
 
-    var surveyID = $stateParams;
+            var surveyID = $stateParams;
 
-    console.log(surveyID);
-
-
-
-    $scope.surveyName = "";
-    $scope.thisSurvey = {};
-    $scope.noSlides = [0,1,2];
-
-    Survey.all()
-        .success(function (data) {
-        vm.surveys = data;
-        $scope.mySurveys = vm.surveys;
-        angular.forEach($scope.mySurveys, function(survey){
-
-            if(survey._id == surveyID.id){
-                $scope.surveyName = survey.Title;
-                $scope.thisSurvey = survey;
-                $scope.myQuestions = survey.Questions;
-                $scope.noSlidesWidth = survey.Questions.length * 300;
-
-            }
-
-        });
-    });
+            console.log(surveyID);
 
 
+            $scope.surveyName = "";
+            $scope.thisSurvey = {};
+            $scope.noSlidesWidth = "";
+            $scope.noSlides = [];
 
 
+            Survey.all()
+                .success(function (data) {
+                    vm.surveys = data;
+                    $scope.mySurveys = vm.surveys;
+                    angular.forEach($scope.mySurveys, function (survey) {
 
+                        if (survey._id == surveyID.id) {
+                            $scope.surveyName = survey.Title;
+                            $scope.thisSurvey = survey;
+                            $scope.myQuestions = survey.Questions;
+                            $scope.noSlidesWidth = survey.Questions.length * 300;
+                            angular.forEach($scope.myQuestions, function (value, index) {
 
+                                $scope.noSlides.push(index);
+                                $scope.no = 0;
 
-    $scope.transit = function(no){
+                                $scope.forward = function () {
+                                    if ($scope.no < $scope.noSlides.length - 1) {
+                                        $scope.no++;
+                                        angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -300 + 'px)');
+                                        console.log($scope.no);
+                                    }
+                                    else {
+                                    }
+                                };
+                                $scope.backward = function () {
+                                    if ($scope.no > 0) {
+                                        $scope.no--;
+                                        angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -300 + 'px)');
+                                        console.log($scope.no);
+                                    }
+                                    else {
+                                        console.log("nope");
+                                    }
+                                }
+                            })
+                        }
+                    });
+                });
 
-        angular.element('#slide1_images').css('transform', 'translateX(' + no * -300 + 'px)');
-        console.log(no);
+            $scope.close = function () {
 
+                //$window.close();
 
-    };
-
-
-
-
-
-
-    //$state.go("mobile");
-    //console.log($scope.mySurvey);
-    /*Survey.getThisSurvey();*/
-    //console.log($scope.mySurvey);
-    $scope.close = function(){
-
-        //$window.close();
-
-    };
-
-
-
-});
+            };
+        }
+    );
