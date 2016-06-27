@@ -1,7 +1,7 @@
 angular.module('mobileCtrl', ['ui.router', 'surveyService'])
 
 
-    .controller('MobileController', function ($rootScope, $location, $scope, $state, $stateParams, Survey) {
+    .controller('MobileController', function ($rootScope, $location, $scope, $state, $stateParams, Survey, $http) {
 
         var vm = this;
 
@@ -9,12 +9,18 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
 
         var surveyID = $stateParams;
 
-        console.log(surveyID);
+        console.log(surveyID.id);
+
+        console.log($state.params.id);
 
         $scope.surveyName = "";
         $scope.thisSurvey = {};
         $scope.noSlidesWidth = "";
         $scope.noSlides = [];
+
+        $scope.thisOne = Survey.getOne(surveyID.id);
+
+        console.log(surveyID.id);
 
 
         Survey.all()
@@ -22,7 +28,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
                 vm.surveys = data;
                 $scope.mySurveys = vm.surveys;
                 angular.forEach($scope.mySurveys, function (survey) {
-
+                        console.log(surveyID.id);
                     if (survey._id == surveyID.id) {
                         $scope.surveyName = survey.Title;
                         $scope.thisSurvey = survey;
@@ -37,6 +43,9 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
                     }
                 });
             });
+
+        console.log(surveyID.id);
+
 
         $scope.close = function () {
 
@@ -69,7 +78,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
 
         $scope.saveQuestion = function(){
 
-            //saving answers in localstorage as move through
+
 
         }
 

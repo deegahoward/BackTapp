@@ -119,12 +119,12 @@ module.exports = function (app, express, io) {
                     next();
                 }
             });
-        } else if (req.url == "/thisSurvey") {
+        } else if (req.url == "/surveys" || req.url == "/surveys/:survey_id") {
 
             next();
         } else {
             console.log("error two - no toke");
-            console.log(req.pathname);
+            console.log(req.url);
 
 
             res.status(403).send({success: false, message: "No Token Provided"});
@@ -144,11 +144,13 @@ module.exports = function (app, express, io) {
 
     //method to get all existing surveys from the database
 
-   /* api.get('/surveys', function (req, res) {
+   api.route('/surveys')
+
+    .get(function (req, res) {
 
         console.log(req.decoded);
 
-        Survey.find({/!*creator: req.decoded.id*!/}, function (err, surveys) {
+        Survey.find({/*creator: req.decoded.id*/}, function (err, surveys) {
             if (err) {
                 res.send(err);
                 return;
@@ -157,13 +159,41 @@ module.exports = function (app, express, io) {
             res.json(surveys);
 
         });
-    });*/
+    })
+
+       .post(function (req, res) {
+
+
+        var survey = new Survey({
+
+            creator: req.decoded.id,
+            Title: req.body.Title,
+            Questions: req.body.Questions,
+            Answers: req.body.Answers
+
+        });
+
+        survey.save(function (err) {
+            if (err) {
+                res.send(err);
+                return;
+            }
+
+            res.json({
+                success: true,
+                message: 'Survey has been created!'
+            });
+        });
+    });
+
 
 
     api.route('/surveys/:survey_id')
 
 
     .get(function (req, res) {
+
+        console.log(req.params);
 
         Survey.findById(req.params.survey_id, function (err, survey) {
             if (err)
@@ -202,57 +232,12 @@ module.exports = function (app, express, io) {
             if(err)
             res.send(err);
 
-            res.json({message: 'Succesfully deleted!'});
         });
 
     });
-
-
-    //method to get specific survey based on url params
-
-    /*  api.get('/thisSurvey', function (req, res) {
-
-     console.log(req.param('id'));
-
-     Survey.find({id: req.body.surveyID}, function (err, survey) {
-     if (err) {
-     console.log(err);
-     res.send(err);
-     return;
-     }
-
-     res.json(survey);
-     });
-
-     });*/
 
 
 //method to post new survey to the database
-
-    api.post('/newSurvey', function (req, res) {
-
-
-        var survey = new Survey({
-
-            creator: req.decoded.id,
-            Title: req.body.Title,
-            Questions: req.body.Questions,
-            Answers: req.body.Answers
-
-        });
-
-        survey.save(function (err) {
-            if (err) {
-                res.send(err);
-                return;
-            }
-
-            res.json({
-                success: true,
-                message: 'Survey has been created!'
-            });
-        });
-    });
 
 
     app.use('/api', api);

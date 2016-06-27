@@ -144,9 +144,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
 
          $scope.deleteSurvey = function(survey){
 
-             var surveyID = survey._id;
 
-             Survey.delete(surveyID);
+             Survey.delete(JSON.stringify(survey));
 
          }
 

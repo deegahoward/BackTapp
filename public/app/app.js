@@ -17,12 +17,11 @@ angular.module('MobileApp', ['mobileCtrl', 'ui.router', 'surveyService'])
 
         .state('mobile', {
             url: '/example/mobile',
-            templateUrl: 'app/mobile/pages/mobilePage.html'
+            templateUrl: 'app/mobile/pages/mobilePage.html',
         })
         .state('takeSurvey', {
             url: '/example/takeSurvey/:id',
             templateUrl: 'app/mobile/pages/takeSurvey.html',
-            controller: 'MobileController',
 
         })
         .state('sorry', {
