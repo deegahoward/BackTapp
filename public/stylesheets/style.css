@@ -1,14 +1,3 @@
-form {
-    display: block;
-    border: 5px solid groove;
-    border-radius: 20px;
-    padding: 20px;
-    margin: auto;
-    margin-top: 50px;
-    width: 40%;
-
-}
-
 body {
     background-color: white;
     font-size: 18px;
@@ -16,19 +5,20 @@ body {
 
 h1, h2 {
     text-align: center;
+    letter-spacing: 3px;
+    font-weight: 200;
+    padding-bottom: 2em;
 }
 
-#menubuttons {
-
+form {
+    display: block;
+    border-radius: 20px;
     margin: auto;
-    text-align: center;
-    padding-top: 1.5em;
-}
-
-.error {
-
-    color: red;
-    font-size: 18px;
+    margin-top: 50px;
+    width: 350px;
+    background-color: white;
+    border: 2px dotted black;
+    padding: 3%;
 }
 
 li {
@@ -36,60 +26,138 @@ li {
     margin-bottom: 10px !important;
 }
 
-.preview {
-
- background-color: white;
-    width: 40%;
-    float: left;
-
-}
-
-label span {
-
-}
-
 input[type=radio], input[type=checkbox] {
 
     display: none;
-
-}
-
-label.active {
-
-    background-color: mediumpurple;
-    color: black;
-
-}
-
-form {
-
-    background-color: white;
-    border: 2px dotted black;
-    padding: 3%;
-    width: 90%;
-
-}
-
-.dropdown-toggle {
-
-    margin: 5%
 }
 
 input:checked {
     background-color: #000;
 }
 
-.glyphicon-star {
+label {
+    font-weight: 200;
+}
 
-    font-size: 3em;
-    cursor: pointer;
+label.active {
+
+    background-color: mediumpurple;
+    color: black;
+}
+
+option {
+    color: blue;
+}
+
+.error {
+    color: red;
+    font-size: 18px;
+}
+
+.preview {
+    background-color: white;
+    width: 40%;
+    float: left;
+}
+
+.navbar a {
+
+    font-weight: 200;
+    text-transform: uppercase;
+}
+
+.navbar-default .navbar-brand {
+
+    color: inherit;
+}
+
+.panel  {
+    border: 1px solid black;
+    font-weight: 200;
 
 }
 
+.panel-success .panel-heading {
+
+    background-color:crimson ;
+    color: white;
+    letter-spacing: 2px;
+}
+
+.panel-default .panel-heading {
+
+    background-color: gainsboro;
+    color: black;
+}
+
+.panel-default {
+    border-color: white !important;
+
+}
+
+.dropdown-toggle {
+    margin: 5%
+}
+
+.dropdown-menu li {
+
+    margin: 15px !important;
+    border-bottom: 1px dotted black;
+}
+
+.alert {
+    display: none;
+}
+
+.input-group-btn {
+    display: block !important;
+    width: 40% !important;
+    padding: 10px;
+    margin-bottom: 8px !important;
+    margin-top: 10px;
+    margin-left: 30%;
+    background-color: salmon;
+}
+
+.input-group-btn span {
+    font-size: 20px;
+    color: white;
+}
+
+.radio {
+    padding-top: 30px !important;
+    height: 100px !important;
+    border-radius: 65px !important;
+}
+
+.checkbox {
+    height: 50px !important;
+    width: 150px !important;
+    border-radius: 20px !important;
+}
+
+.question h4 {
+    text-align: center;
+}
+
+.glyphicon-menu-left, .glyphicon-menu-right {
+    font-size: 50px;
+    color: grey;
+}
+
+.glyphicon-star {
+    font-size: 3em;
+    cursor: pointer;
+}
+
 .glyphicon-star:hover {
-
     color: salmon;
+}
 
+.btn-success {
+    background-color: aliceblue;
+    border: 1px solid royalblue;
+    color: black;
 }
 
 .btn-circle {
@@ -131,7 +199,38 @@ input:checked {
     text-align: left;
     /* inline-block space fix */
     margin-right: -4px;
+}
 
+#previewBox {
+    width: 80%;
+}
+
+ h3 {
+     text-align: center;
+ }
+
+#menubuttons {
+    margin: auto;
+    text-align: center;
+    padding-top: 2em;
+}
+
+#menubuttons .btn-success {
+    width: 220px;
+    height: 50px;
+    font-weight: 200;
+    font-size: 18px;
+    text-align: left;
+    background-color: crimson;
+    border: none;
+}
+
+#menubuttons .btn-success:hover {
+    background-color: grey;
+}
+
+#menubuttons .btn-success .glyphicon {
+    padding-right: 10px;
 }
 
 #slide1_container {
@@ -148,7 +247,6 @@ input:checked {
     -moz-transition: all 1.0s ease-in-out;
     -o-transition: all 1.0s ease-in-out;
     transition: all 1.0s ease-in-out;
-
 }
 
 #slide1_images .question {
@@ -158,50 +256,6 @@ input:checked {
     width: 300px;
 }
 
-.input-group-btn {
-
-    display: block !important;
-    width: 40% !important;
-    padding: 10px;
-    margin-bottom: 8px !important;
-    margin-top: 10px;
-    margin-left: 30%;
-    background-color: salmon;
-
-}
-
-.input-group-btn span {
-
-    font-size: 20px;
-    color: white;
-
-}
-
-.radio {
-
-    padding-top: 30px !important;
-    height: 100px !important;
-    border-radius: 65px !important;
-}
-
-.checkbox {
-
-    height: 50px !important;
-    width: 150px !important;
-    border-radius: 20px !important;
-
-}
-
-.question h4 {
-    text-align: center;
-}
-
-.glyphicon-menu-left, .glyphicon-menu-right {
-
-    font-size: 50px;
-    color: grey;
-
-}
 
 #existingSurveys {
     transition:2s;
@@ -211,50 +265,11 @@ input:checked {
     left:calc(100% - 750px);
 }
 
-.panel {
-    border: 2px dotted black !important;
-}
-
-.panel-heading {
-
-    background-color: white ;
-    color: black !important;
-    border-bottom: 2px dotted black !important;
-}
-
 #thisSurvey {
-
     transition:2s ease-in-out;
     -webkit-transition:2s;
     -moz-transition:2s;
-    position:absolute;
-    left: 500px;
-    top:calc(100% + 450px);
-    opacity: 0;
-
-}
-
-.dropdown-menu li {
-
-    margin: 15px !important;
-    border-bottom: 1px dotted black;
-}
-
-.row p {
-
+    top:calc(100% + 300px);
     opacity: 0;
 }
-
-.row .btn:hover + p {
-     opacity: 1;
-
-}
-
-.alert {
-    display: none;
-}
-
-
-
-
 

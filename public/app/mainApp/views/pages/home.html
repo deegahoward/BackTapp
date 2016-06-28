@@ -1,3 +1,4 @@
+
 <div class="jumbotron text-center" ng-if="!main.loggedIn">
 
     <div>
@@ -21,15 +22,15 @@
 
     </div>
     <div class="col-lg-12">
-        <div class="col-lg-12" ng-controller="MainController as main">
+        <div class="col-lg-12">
             <div class="row">
-                <h2>What do you wanna do today?</h2>
+                <h2>Hi {{ main.user.username }},<br> what would you like to do?</h2>
                 <div class="row" id="menubuttons">
                     <div class="col-sm-12">
-                        <a ui-sref="createSurvey" class="btn btn-success lg">Create New Survey</a><br><br>
-                        <a ui-sref="existingSurveys" class="btn btn-success lg">View Existing Survey</a><br><br>
-                        <a ui-sref="home" class="btn btn-success lg">View Results</a><br><br>
-                        <a ui-sref="home" class="btn btn-success lg">User Guide</a><br><br>
+                        <a ui-sref="createSurvey" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-tasks"></span>Create New Survey</a><br><br>
+                        <a ui-sref="existingSurveys" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-folder-open"></span>View Existing Survey</a><br><br>
+                        <a ui-sref="home" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-stats"></span>View Results</a><br><br>
+                        <a ui-sref="home" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-book"></span>User Guide</a><br><br>
                     </div>
                 </div>
             </div>

@@ -225,6 +225,8 @@ module.exports = function (app, express, io) {
 
     .delete(function (req, res) {
 
+        console.log("deleting...")
+
         Survey.remove({
 
             _id: req.params.survey_id

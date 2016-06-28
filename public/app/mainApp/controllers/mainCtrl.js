@@ -19,8 +19,6 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
 
         vm.survey = null;
 
-
-
         vm.loggedIn = Auth.isLoggedIn();
 
         $rootScope.$on('$stateChangeStart', function () {
@@ -72,6 +70,7 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
             console.log("THIS WORKED OK!");
 
         };
+
 
 
 

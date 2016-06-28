@@ -136,18 +136,24 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
          $scope.showSurvey = function(){
 
             angular.element('#existingSurveys').css('left', '0');
-            angular.element('#thisSurvey').css({'top': '110px', 'opacity': '1'});
-
-
+            angular.element('#thisSurvey').css({'top': '80px', 'opacity': '1'});
 
          };
 
          $scope.deleteSurvey = function(survey){
 
+             var id = survey._id;
 
-             Survey.delete(JSON.stringify(survey));
+             Survey.delete(id);
 
          }
+
+         $scope.showAlert = function(){
+
+             angular.element('#DeleteSurvey').css('display', 'inline-block');
+         }
+
+
 
 
     })
