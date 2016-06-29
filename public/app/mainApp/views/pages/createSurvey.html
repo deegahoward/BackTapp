@@ -59,7 +59,10 @@
                                 <ul class="list-group">
                                     <li class="list-group-item" ng-repeat="answer in Answers">
 
-                                        {{ answer.Text }}
+                                        {{ answer.Text }} <button type="button" class="btn btn-success"
+                                                                  ng-click="removeAnswer(answer)"><span
+                                            class="glyphicon glyphicon-minus"></span>
+                                    </button>
 
                                     </li>
 

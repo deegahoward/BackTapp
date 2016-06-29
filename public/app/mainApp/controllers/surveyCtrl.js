@@ -53,6 +53,18 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
 
         };
 
+        $scope.removeAnswer = function(answer){
+
+            angular.forEach($scope.Answers, function(ans){
+
+                if(ans == ans){
+                    console.log("this one");
+                }
+
+            })
+
+        }
+
     })
 
 //=============================== EXISTING SURVEYS CONTROLLER =============================================

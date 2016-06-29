@@ -74,13 +74,33 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
             else {
                 console.log("nope");
             }
-        }
+        };
 
         $scope.saveQuestion = function(){
 
 
 
-        }
+        };
+
+
+//================ RESULTS CONTROLLER =========================//
+
+
+        $scope.results = [];
+
+        $scope.result = {
+
+            question_id: $scope.questionID,
+            value: $scope.value
+        };
+
+        $scope.questionID = "";
+
+        $scope.value = "";
+
+
+        $scope.submitAnswers = function(){}
 
 
     });
+
