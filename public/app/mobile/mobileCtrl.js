@@ -9,18 +9,12 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
 
         var surveyID = $stateParams;
 
-        console.log(surveyID.id);
-
-        console.log($state.params.id);
-
         $scope.surveyName = "";
         $scope.thisSurvey = {};
         $scope.noSlidesWidth = "";
         $scope.noSlides = [];
 
         $scope.thisOne = Survey.getOne(surveyID.id);
-
-        console.log(surveyID.id);
 
 
         Survey.all()
@@ -44,7 +38,6 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
                 });
             });
 
-        console.log(surveyID.id);
 
 
         $scope.close = function () {
@@ -76,14 +69,11 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
             }
         };
 
-        $scope.saveQuestion = function(){
-
-
-
-        };
 
 
 //================ RESULTS CONTROLLER =========================//
+
+        $scope.myAnswer = { Text: '' };
 
 
         $scope.results = [];
@@ -96,10 +86,22 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
 
         $scope.questionID = "";
 
-        $scope.value = "";
+        $scope.thisAnswer = "";
 
 
-        $scope.submitAnswers = function(){}
+        $scope.submitAnswers = function(answerText){
+            answer = {};
+            answer.Text = answerText;
+            $scope.results.push(answer);
+            console.log($scope.results);
+        };
+
+        $scope.print = function(answer){
+
+            $scope.thisAnswer = answer;
+            console.log(answer);
+
+        }
 
 
     });

@@ -63,7 +63,16 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
 
             })
 
-        }
+        };
+
+        $scope.startCreate = function(){
+            console.log("click");
+
+            angular.element('#newSurvey').css('left', '-150px');
+            angular.element('#newQuestions').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
+
+
+        };
 
     })
 
@@ -158,7 +167,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
 
              Survey.delete(id);
 
-         }
+         };
 
          $scope.showAlert = function(){
 

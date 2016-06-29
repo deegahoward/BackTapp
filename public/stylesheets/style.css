@@ -66,14 +66,20 @@ option {
     text-transform: uppercase;
 }
 
+.navbar-header {
+    width: 400px;
+}
+
 .navbar-default .navbar-brand {
 
     color: inherit;
 }
 
 .panel  {
-    border: 1px solid black;
     font-weight: 200;
+    -webkit-box-shadow: -7px 7px 41px -2px rgba(0,0,0,0.44);
+    -moz-box-shadow: -7px 7px 41px -2px rgba(0,0,0,0.44);
+    box-shadow: -7px 7px 41px -2px rgba(0,0,0,0.44);
 
 }
 
@@ -103,6 +109,10 @@ option {
 
     margin: 15px !important;
     border-bottom: 1px dotted black;
+}
+
+.panel-success {
+    border-color: transparent;
 }
 
 .alert {
@@ -155,9 +165,14 @@ option {
 }
 
 .btn-success {
-    background-color: aliceblue;
-    border: 1px solid royalblue;
-    color: black;
+    background-color: cornflowerblue;
+    color: white;
+    border-color: white;
+}
+
+.btn-success:hover {
+    background-color: dimgray;
+    border-color: white;
 }
 
 .btn-circle {
@@ -223,6 +238,7 @@ option {
     text-align: left;
     background-color: crimson;
     border: none;
+    color: white;
 }
 
 #menubuttons .btn-success:hover {
@@ -273,3 +289,20 @@ option {
     opacity: 0;
 }
 
+#newSurvey {
+    transition:2s;
+    -webkit-transition:2s;
+    -moz-transition:2s;
+    position:absolute;
+    left:calc(100% - 850px);
+    z-index: 1000;
+}
+
+#newQuestions {
+    margin-top: 600px;
+    transition:2s ease-in-out;
+    -webkit-transition:2s;
+    -moz-transition:2s;
+    top:calc(100% + 700px);
+    opacity: 0;
+}

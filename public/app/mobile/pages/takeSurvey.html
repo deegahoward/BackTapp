@@ -10,18 +10,17 @@
             <div id="slide1_container" class="shadow">
                 <div id="slide1_images" ng-style="{width: noSlidesWidth}">
                     <div class="question" ng-repeat="question in thisSurvey.Questions">
-                        <h4>{{ question.Title}} + {{question.Type}}</h4>
-                        <label class="btn input-group-btn {{ question.Type }}" name="{{ question._id }}"
-                                   ng-repeat="answer in question.Answers" onchange="checked()">
-                                <input class="{{ question.Type }}" type="{{ question.Type }}" name="{{ question._id }}" ng-model="answer._id">
+                        <h2>{{ question.Title}}</h2>
+                        <label class="btn input-group-btn {{ question.Type }}" for="{{ answer._id }}" ng-repeat="answer in question.Answers" onchange="checked()">
+                                <input class="{{ question.Type }}" type="{{ question.Type }}" name="answer" id="{{ answer._id }}" ng-value="answer.Text" ng-model="myAnswer.Text">
                                 <span class="title">{{ answer.Text }}</span>
                             </label>
-                        </div>
+                        <h3>You chose: {{ myAnswer.Text }}</h3>
+                    </div>
                 </div>
             </div>
-            </div>
             <div class="col-sm-3 pull-right">
-                <span class="glyphicon glyphicon-menu-right" ng-click="forward()"></span>
+                <span class="glyphicon glyphicon-menu-right" ng-click="forward(); submitAnswers(myAnswer.Text)"></span>
             </div>
         </fieldset>
         </div>
