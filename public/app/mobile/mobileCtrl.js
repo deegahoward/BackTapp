@@ -13,8 +13,8 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
         $scope.thisSurvey = {};
         $scope.noSlidesWidth = "";
         $scope.noSlides = [];
-
-        $scope.thisOne = Survey.getOne(surveyID.id);
+        $scope.no = 0;
+        $scope.currentQuestion = {};
 
 
         Survey.all()
@@ -22,15 +22,18 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
                 vm.surveys = data;
                 $scope.mySurveys = vm.surveys;
                 angular.forEach($scope.mySurveys, function (survey) {
-                        console.log(surveyID.id);
                     if (survey._id == surveyID.id) {
                         $scope.surveyName = survey.Title;
                         $scope.thisSurvey = survey;
                         $scope.myQuestions = survey.Questions;
                         $scope.noSlidesWidth = survey.Questions.length * 300;
-                        angular.forEach($scope.myQuestions, function (value, index) {
+                        angular.forEach($scope.myQuestions, function (question, value, index) {
 
                             $scope.noSlides.push(index);
+
+                            if($scope.no == question.index){
+                                console.log("this is the one");
+                            }
 
 
                         })
@@ -46,13 +49,37 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
 
         };
 
-        $scope.no = 0;
+        setTimeout(function (){
+            angular.forEach($scope.myQuestions, function(question, index){
+                if($scope.no == index){
+                    $scope.currentQuestion = question;
+                }
+            })
+
+        }, 500);
 
         $scope.forward = function () {
+            console.log("forward");
             if ($scope.no < $scope.noSlides.length - 1) {
+                if($scope.currentQuestion.Type == "checkbox"){
+                    index = _.findLastIndex($scope.results, {questionID: $scope.result.questionID});
+                    if (index == -1) {
+                        console.log("first");
+                        $scope.results.push($scope.result);
+                    }
+                    else {
+                        console.log("second");
+                        $scope.results[index] = $scope.result;
+                    }
+                    console.log($scope.results);
+                }
                 $scope.no++;
                 angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -300 + 'px)');
-                console.log($scope.no);
+                angular.forEach($scope.myQuestions, function(question, index){
+                    if($scope.no == index){
+                        $scope.currentQuestion = question;
+                    }
+                });
             }
             else {
             }
@@ -62,46 +89,59 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService'])
             if ($scope.no > 0) {
                 $scope.no--;
                 angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -300 + 'px)');
-                console.log($scope.no);
+                angular.forEach($scope.myQuestions, function(question, index){
+                    if($scope.no == index){
+                        $scope.currentQuestion = question;
+                    }
+                });
             }
             else {
                 console.log("nope");
             }
         };
+        /**/
+        $scope.endOfSurvey = "";
 
 
 
 //================ RESULTS CONTROLLER =========================//
 
-        $scope.myAnswer = { Text: '' };
-
-
+        $scope.selectedAnswer = {};
+        $scope.response = {};
         $scope.results = [];
-
-        $scope.result = {
-
-            question_id: $scope.questionID,
-            value: $scope.value
-        };
-
         $scope.questionID = "";
+        $scope.result = {};
+        $scope.answerID = [];
 
-        $scope.thisAnswer = "";
 
+        $scope.clickedAnswer = function(answer){
 
-        $scope.submitAnswers = function(answerText){
-            answer = {};
-            answer.Text = answerText;
-            $scope.results.push(answer);
-            console.log($scope.results);
+            if($scope.currentQuestion.Type == "radio") {
+                console.log("radio");
+                $scope.result = {
+                    questionID: $scope.currentQuestion._id,
+                    answerID: answer._id
+                };
+                index = _.findLastIndex($scope.results, {questionID: $scope.result.questionID});
+                if (index == -1) {
+                    console.log("first");
+                    $scope.results.push($scope.result);
+                }
+                else {
+                    console.log("second");
+                    $scope.results[index] = $scope.result;
+                }
+                console.log($scope.results);
+            }
+            else if($scope.currentQuestion.Type == "checkbox"){
+                console.log("checkbox");
+                $scope.answerID.push(answer._id);
+                $scope.result = {
+                    questionID: $scope.currentQuestion._id,
+                    answerID: $scope.answerID
+                };
+            }
         };
-
-        $scope.print = function(answer){
-
-            $scope.thisAnswer = answer;
-            console.log(answer);
-
-        }
 
 
     });

@@ -11,17 +11,19 @@
                 <div id="slide1_images" ng-style="{width: noSlidesWidth}">
                     <div class="question" ng-repeat="question in thisSurvey.Questions">
                         <h2>{{ question.Title}}</h2>
-                        <label class="btn input-group-btn {{ question.Type }}" for="{{ answer._id }}" ng-repeat="answer in question.Answers" onchange="checked()">
-                                <input class="{{ question.Type }}" type="{{ question.Type }}" name="answer" id="{{ answer._id }}" ng-value="answer.Text" ng-model="myAnswer.Text">
+                        <label class="btn input-group-btn {{ question.Type }}" name="group"
+                               ng-repeat="answer in question.Answers" onchange="checked()">
+                                <input class="{{ question.Type }}" type="{{ question.Type }}" name="group" id="{{answer._id}}" ng-click="clickedAnswer(answer)">
                                 <span class="title">{{ answer.Text }}</span>
                             </label>
-                        <h3>You chose: {{ myAnswer.Text }}</h3>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3 pull-right">
-                <span class="glyphicon glyphicon-menu-right" ng-click="forward(); submitAnswers(myAnswer.Text)"></span>
+                <span class="glyphicon glyphicon-menu-right" ng-click="forward();" ng-show="endOfSurvey"></span>
+                <button class="btn btn-success" ng-show="endOfSurvey">Submit!</button>
             </div>
+                </div>
         </fieldset>
         </div>
     </form>
@@ -30,8 +32,8 @@
 
 <script>
     var checked = function () {
-        $("input:not(:checked)").parent().closest("label").css("background-color", "salmon").css("color", "white");
-        $("input:checked").parent().closest("label").css("background-color", "mediumpurple").css("color", "white");
+        $("input:not(:checked)").parent().closest("label").css("background-color", "crimson").css("color", "white");
+        $("input:checked").parent().closest("label").css("background-color", "cornflowerblue").css("color", "white");
     }
 
 </script>

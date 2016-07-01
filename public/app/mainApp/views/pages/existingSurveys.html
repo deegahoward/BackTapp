@@ -32,11 +32,14 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a href="#" ng-click="surveyClicked(survey); showSurvey();">Preview/Edit</a></li>
-                                    <li><a href="#" ng-click="showAlert()">Delete</a></li>
-                                    <li><a href="#">Get URL</a></li>
+                                    <li><a href="#" ng-click="showAlert('DeleteSurvey')">Delete</a></li>
+                                    <li><a href="#" ng-click="showAlert('surveyURL')">Get URL</a></li>
                                 </ul>
                                 <div class="alert alert-danger" role="alert" id="DeleteSurvey">
                                     <strong>Warning!</strong> If you're sure you want to delete, <a href="#" ng-click="deleteSurvey(survey)" class="alert-link">click here</a>.
+                                </div>
+                                <div class="alert alert-success" role="alert" id="surveyURL">
+                                    <strong>URL = </strong><a href="#" class="alert-link">example/takeSurvey/{{survey._id}}</a>.
                                 </div>
                             </div>
                         </div>

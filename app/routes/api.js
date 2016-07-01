@@ -119,13 +119,13 @@ module.exports = function (app, express, io) {
                     next();
                 }
             });
-        } else if (req.url == "/surveys" || req.url == "/surveys/:survey_id") {
+        } else if (!token && req.url == '/surveys' || '/surveys/:survey_id') {
 
             next();
         } else {
             console.log("error two - no toke");
             console.log(req.url);
-
+            console.log(req.path);
 
             res.status(403).send({success: false, message: "No Token Provided"});
         }
@@ -193,7 +193,7 @@ module.exports = function (app, express, io) {
 
     .get(function (req, res) {
 
-        console.log(req.params);
+        console.log('success');
 
         Survey.findById(req.params.survey_id, function (err, survey) {
             if (err)

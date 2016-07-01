@@ -118,17 +118,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
             else if($scope.selectedQType == "checkbox"){
 
                 console.log("checkbox");
-                $scope.isRadio = true;
-                $scope.isCheckbox = false;
-
-            }
-
-            else if($scope.selectedQType == "Star"){
-
-                console.log("star");
-                $scope.isStar = true;
-                $scope.isMultiple = false;
-                $scope.isSingle = false;
+                $scope.isRadio = false;
+                $scope.isCheckbox = true;
 
             }
 
@@ -143,6 +134,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
                     .success(function (data) {
                         vm.surveys = data;
                         $scope.mySurveys = vm.surveys;
+                        console.log($scope.mySurveys);
                         angular.forEach($scope.mySurveys, function(survey){
                             $scope.myQuestions = [];
                             angular.forEach(survey.Questions, function(question){
@@ -157,7 +149,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
          $scope.showSurvey = function(){
 
             angular.element('#existingSurveys').css('left', '0');
-            angular.element('#thisSurvey').css({'top': '80px', 'opacity': '1'});
+            angular.element('#thisSurvey').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
 
          };
 
@@ -169,12 +161,10 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
 
          };
 
-         $scope.showAlert = function(){
+         $scope.showAlert = function(alert){
 
-             angular.element('#DeleteSurvey').css('display', 'inline-block');
-         }
-
-
+             angular.element('#'+ alert).css('display', 'inline-block');
+         };
 
 
     })
