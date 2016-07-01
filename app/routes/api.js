@@ -1,6 +1,8 @@
 var User = require('../models/user');
 var Story = require('../models/story');
 var Survey = require('../models/survey');
+var Results = require('../models/result');
+
 
 var config = require('../../config');
 
@@ -173,6 +175,8 @@ module.exports = function (app, express, io) {
 
         });
 
+           console.log(survey);
+
         survey.save(function (err) {
             if (err) {
                 res.send(err);
@@ -236,6 +240,35 @@ module.exports = function (app, express, io) {
 
         });
 
+    });
+
+    api.route('/results')
+
+
+        .post(function (req, res) {
+
+            console.log(req.body.SurveyID);
+            console.log(req.body.Responses);
+
+        var results = new Results({
+
+            SurveyID: req.body.SurveyID,
+            Responses: req.body.Responses
+
+        });
+
+        results.save(function (err) {
+            if (err) {
+                console.log(err);
+                res.send(err);
+                return;
+            }
+
+            res.json({
+                success: true,
+                message: 'New results created!!!'
+            });
+        });
     });
 
 

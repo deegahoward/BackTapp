@@ -20,8 +20,8 @@
                 </div>
             </div>
             <div class="col-sm-3 pull-right">
-                <span class="glyphicon glyphicon-menu-right" ng-click="forward();" ng-show="endOfSurvey"></span>
-                <button class="btn btn-success" ng-show="endOfSurvey">Submit!</button>
+                <span class="glyphicon glyphicon-menu-right" ng-click="forward();" ng-show="notEndOfSurvey"></span>
+                <button class="btn btn-success" ng-show="endOfSurvey" ng-click="submitResponse()">Submit!</button>
             </div>
                 </div>
         </fieldset>

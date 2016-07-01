@@ -1,6 +1,6 @@
 
 
-angular.module('MyApp', ['appRoutes', 'mainCtrl', 'authService', 'userCtrl', 'userService', 'storyService', 'storyCtrl', 'surveyService', 'ui.router', 'surveyCtrl'])
+angular.module('MyApp', ['appRoutes', 'mainCtrl', 'authService', 'userCtrl', 'userService', 'storyService', 'resultsService', 'storyCtrl', 'surveyService', 'ui.router', 'surveyCtrl'])
 
 .config(function($httpProvider) {
 
@@ -8,7 +8,7 @@ angular.module('MyApp', ['appRoutes', 'mainCtrl', 'authService', 'userCtrl', 'us
 
 });
 
-angular.module('MobileApp', ['mobileCtrl', 'ui.router', 'surveyService'])
+angular.module('MobileApp', ['mobileCtrl', 'ui.router', 'surveyService', 'resultsService'])
 
 .config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
 
