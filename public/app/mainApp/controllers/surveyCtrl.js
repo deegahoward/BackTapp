@@ -1,4 +1,4 @@
-angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
+angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resultsService'])
 
     //================ New Survey Page Stuff =====================
 
@@ -167,6 +167,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
          };
 
 
+
     })
 
     //=========== CONTROLLER FOR PREVIEW PAGE/HTML SURVEY VIEWER ===========//
@@ -176,6 +177,67 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router'])
     // - each click can store answer to question
     // - $scope.results = SurveyID = get ID of current survey loaded, results array
 
-    .controller('exampleController', function($state, $scope){
+    .controller('ResultsController', function ($scope, Survey, $stateParams, Results, $state, Auth) {
+
+        var vm = this;
+
+        $scope.thisSurveyID = "";
+        $scope.resultSet = [];
+        $scope.myQuestions = [];
+
+        Auth.getUser()
+            .then(function (data) {
+                vm.user = data.data;
+                Survey.all(vm.user)
+                    .success(function (data) {
+                        vm.surveys = data;
+                        $scope.mySurveys = vm.surveys;
+                        //console.log($scope.mySurveys);
+                        angular.forEach($scope.mySurveys, function(survey){
+                            $scope.myQuestions = [];
+                            angular.forEach(survey.Questions, function(question){
+                                $scope.myQuestions.push(question);
+
+                            });
+                        });
+                        console.log($scope.myQuestions);
+                    });
+            });
+
+        $scope.getSurvey = function(survey){
+            $scope.thisSurveyID = survey._id;
+            $scope.getResults();
+
+            angular.forEach($scope.resultSet, function(result){
+
+
+
+            })
+
+        };
+
+        $scope.getResults = function(){
+            Results.all()
+                .success(function (data) {
+                    vm.results = data;
+                    $scope.myResults = vm.results;
+                    angular.forEach($scope.myResults, function (result) {
+                        if (result.SurveyID == $scope.thisSurveyID) {
+                            $scope.resultSet.push(result);
+                            console.log($scope.resultSet);
+                        }
+                    });
+                });
+        };
+
+
+
+
+        $scope.showResults = function(){
+
+            angular.element('#existingSurveys').css('left', '0');
+            angular.element('#thisSurvey').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
+
+        };
 
     });

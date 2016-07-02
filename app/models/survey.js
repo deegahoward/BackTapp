@@ -29,5 +29,5 @@ var SurveySchema = new Schema({
 });
 
 
-
+module.exports = mongoose.model('Questions', QuestionSchema);
 module.exports = mongoose.model('Survey', SurveySchema);

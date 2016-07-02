@@ -7,17 +7,19 @@ var Schema = mongoose.Schema;
 
 var ResponseSchema = new Schema({
 
-    QuestionID: String,//{type: Schema.Types.ObjectId, ref: 'Question'},
-    AnswerID: String
+    QuestionID: {type: Schema.Types.ObjectId, ref: 'Question'},
+    AnswerID: [String]
 
 });
 
 var ResultSetSchema = new Schema({
 
-    SurveyID: String,//{type: Schema.Types.ObjectId, ref: 'Survey'},
+    SurveyID: {type: Schema.Types.ObjectId, ref: 'Survey'},
     Responses: [ResponseSchema]
 
 });
+
+
 
 
 

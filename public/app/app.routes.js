@@ -36,8 +36,11 @@ angular.module('appRoutes', ['ui.router'])
         .state('existingSurveys.Preview', {
             templateUrl: 'app/mainApp/views/pages/preview.html',
             parent: 'existingSurveys',
-            controller: 'exampleController'
 
+        })
+        .state('results', {
+            url: '/results',
+            templateUrl: 'app/mainApp/views/pages/results.html'
         });
 
     $locationProvider.html5Mode(true);

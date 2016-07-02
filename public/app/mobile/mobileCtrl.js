@@ -5,9 +5,8 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
         var vm = this;
 
-        $scope.Title = "Welcome to the other side!";
-
         var surveyID = $stateParams;
+
 
         $scope.surveyName = "";
         $scope.thisSurvey = {};
@@ -15,6 +14,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         $scope.noSlides = [];
         $scope.no = 0;
         $scope.currentQuestion = {};
+
 
 
         Survey.all()
@@ -28,25 +28,17 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                         $scope.myQuestions = survey.Questions;
                         $scope.noSlidesWidth = survey.Questions.length * 300;
                         angular.forEach($scope.myQuestions, function (question, value, index) {
-
                             $scope.noSlides.push(index);
-
                             if($scope.no == question.index){
                                 console.log("this is the one");
                             }
-
-
                         })
                     }
                 });
             });
 
-
-
         $scope.close = function () {
-
             //$window.close();
-
         };
 
         setTimeout(function (){
@@ -163,11 +155,11 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
 
         var results = {
-            SurveyID: '345345345',
+            SurveyID: '5772351a9a71b9bc899f34ca',
             Responses: [
 
-                {QuestionID: '3453453345', AnswerID: '345345345'},
-                {QuestionID: 'sdfsdfsdf', AnswerID: 'sdfsdfsdsf'}
+                {QuestionID: '5772351a9a71b9bc899f34d7', AnswerID: ['sdfsdfsdfs', 'sdfsdfsdfsd']},
+                {QuestionID: '5772351a9a71b9bc899f34d2', AnswerID: ['sdfsdfsdsf']}
 
             ]
         };

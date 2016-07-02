@@ -10,6 +10,10 @@ angular.module('resultsService', [])
 
         };
 
+        resultsFactory.all = function (){
+            return $http.get('api/results');
+        };
+
 
         return resultsFactory;
 

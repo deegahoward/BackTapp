@@ -102,9 +102,6 @@ module.exports = function (app, express, io) {
 
         var token = req.body.token || req.param('token') || req.headers['x-access-token'];
 
-        var securePaths = ['/example', '/example/home', '/example/mobile'];
-
-
         // check if token exist
         if (token) {
 
@@ -121,7 +118,7 @@ module.exports = function (app, express, io) {
                     next();
                 }
             });
-        } else if (!token && req.url == '/surveys' || '/surveys/:survey_id') {
+       } else if (!token && req.url == '/surveys' || '/surveys/:survey_id') {
 
             next();
         } else {
@@ -229,7 +226,7 @@ module.exports = function (app, express, io) {
 
     .delete(function (req, res) {
 
-        console.log("deleting...")
+        console.log("deleting...");
 
         Survey.remove({
 
@@ -243,6 +240,19 @@ module.exports = function (app, express, io) {
     });
 
     api.route('/results')
+
+        .get(function (req, res) {
+
+            Results.find({/*creator: req.decoded.id*/}, function (err, results) {
+                if (err) {
+                    res.send(err);
+                    return;
+                }
+
+                res.json(results);
+
+            });
+        })
 
 
         .post(function (req, res) {
@@ -272,7 +282,28 @@ module.exports = function (app, express, io) {
     });
 
 
-//method to post new survey to the database
+    api.route('/results/:survey_id')
+
+        .get(function (req, res) {
+
+            /*console.log('getting results...');
+            SurveyID = req.params.survey_id;*/
+
+            Results.find().bySurveyID('5772351a9a71b9bc899f34ca').exec(function(err, results) {
+                console.log(results);
+            });
+
+
+           /* Results.findBySurveyID(SurveyID, function (err, results) {
+                if (err) {
+                    console.log(err);
+                    res.send(err);
+                }
+                res.json(results);
+
+            });*/
+
+        });
 
 
     app.use('/api', api);

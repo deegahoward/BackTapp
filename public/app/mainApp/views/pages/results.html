@@ -1,0 +1,42 @@
+<div class="row" ng-controller="ResultsController as result">
+
+    <div class="col-md-12">
+        <h1>Survey Results</h1>
+        <br>
+        <br>
+        <div class="col-sm-4" id="existingSurveys">
+            <div class="row">
+                <div class="panel panel-success">
+                    <div class="panel-heading">Your Surveys</div>
+                    <div class="panel-body">
+                        <div class="col-sm-8 col-sm-offset-1">
+                            <div class="btn-group" ng-repeat="survey in mySurveys">
+                                <button type="button" class="btn btn-success" ng-click="getSurvey(survey); showResults()">
+                                    {{ survey.Title }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 pull-right">
+            <div class="row">
+                <div class="panel panel-info"id="thisSurvey">
+                    <div class="panel-heading">Results for this survey</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <ul>
+                                <li ng-repeat="result in resultSet">
+                                {{result}}
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
