@@ -28,7 +28,10 @@
                             <div class="col-md-5">
                                 <ul>
                                 <li ng-repeat="result in resultSet">
-                                {{result}}
+                                    {{result.Responses}}
+                                    <li ng-repeat="response in result.Responses">
+                                    <!--{{response.QuestionID}}-->
+                                    </li>
                                 </li>
                                 </ul>
                             </div>

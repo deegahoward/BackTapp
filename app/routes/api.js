@@ -47,7 +47,7 @@ module.exports = function (app, express, io) {
         });
     });
 
-    api.get('/', function(req, res){
+    api.get('/', function (req, res) {
 
         res.json({message: "yo yo yo!"});
 
@@ -118,7 +118,7 @@ module.exports = function (app, express, io) {
                     next();
                 }
             });
-       } else if (!token && req.url == '/surveys' || '/surveys/:survey_id') {
+        } else if (!token && req.url == '/surveys' || '/surveys/:survey_id') {
 
             next();
         } else {
@@ -143,124 +143,9 @@ module.exports = function (app, express, io) {
 
     //method to get all existing surveys from the database
 
-   api.route('/surveys')
-
-    .get(function (req, res) {
-
-        console.log(req.decoded);
-
-        Survey.find({creator: req.decoded.id}, function (err, surveys) {
-            if (err) {
-                res.send(err);
-                return;
-            }
-
-            res.json(surveys);
-
-        });
-    })
-
-       .post(function (req, res) {
-
-
-        var survey = new Survey({
-
-            creator: req.decoded.id,
-            Title: req.body.Title,
-            Questions: req.body.Questions,
-            Answers: req.body.Answers
-
-        });
-
-           console.log(survey);
-
-        survey.save(function (err) {
-            if (err) {
-                res.send(err);
-                return;
-            }
-
-            res.json({
-                success: true,
-                message: 'Survey has been created!'
-            });
-        });
-    });
-
-
-
-    api.route('/surveys/:survey_id')
-
-
-    .get(function (req, res) {
-
-        console.log('success');
-
-        Survey.findById(req.params.survey_id, function (err, survey) {
-            if (err) {
-                res.send(err);
-            }
-            console.log(survey);
-            res.json(survey);
-
-        });
-
-    })
-
-        .put(function(req, res){
-
-            Survey.findById(req.params.survey_id, function(err, survey){
-                if(err)
-                res.send(err);
-
-                survey.Title = req.body.Title;
-
-                survey.save(function(err){
-                    if(err)
-                    res.send(err);
-
-                    res.json({message: 'Survey updated!'})
-                })
-            })
-
-
-        })
-
-    .delete(function (req, res) {
-
-        console.log("deleting...");
-
-        Survey.remove({
-
-            _id: req.params.survey_id
-        }, function(err, survey){
-            if(err)
-            res.send(err);
-
-        });
-
-    });
-
-    api.route('/results')
+    api.route('/surveys')
 
         .get(function (req, res) {
-
-            console.log(req.params.survey_id);
-
-            var SurveyID = req.params.survey_id;
-
-            Results.find({SurveyID: SurveyID}, function (err, results) {
-                if (err) {
-                    res.send(err);
-                    return;
-                }
-
-                res.json(results);
-
-            });
-        })
-
-        /*.get(function (req, res) {
 
             console.log(req.decoded);
 
@@ -273,57 +158,149 @@ module.exports = function (app, express, io) {
                 res.json(surveys);
 
             });
-        })*/
+        })
 
+        .post(function (req, res) {
+
+
+            var survey = new Survey({
+
+                creator: req.decoded.id,
+                Title: req.body.Title,
+                Questions: req.body.Questions,
+                Answers: req.body.Answers
+
+            });
+
+            console.log(survey);
+
+            survey.save(function (err) {
+                if (err) {
+                    res.send(err);
+                    return;
+                }
+
+                res.json({
+                    success: true,
+                    message: 'Survey has been created!'
+                });
+            });
+        });
+
+
+    api.route('/surveys/:survey_id')
+
+
+        .get(function (req, res) {
+
+            console.log('success');
+
+            Survey.findById(req.params.survey_id, function (err, survey) {
+                if (err) {
+                    res.send(err);
+                }
+                console.log(survey);
+                res.json(survey);
+
+            });
+
+        })
+
+        .put(function (req, res) {
+
+            Survey.findById(req.params.survey_id, function (err, survey) {
+                if (err)
+                    res.send(err);
+
+                survey.Title = req.body.Title;
+
+                survey.save(function (err) {
+                    if (err)
+                        res.send(err);
+
+                    res.json({message: 'Survey updated!'})
+                })
+            })
+
+
+        })
+
+        .delete(function (req, res) {
+
+            console.log("deleting...");
+
+            Survey.remove({
+
+                _id: req.params.survey_id
+            }, function (err, survey) {
+                if (err)
+                    res.send(err);
+
+            });
+
+        });
+
+    api.route('/results')
+
+        .get(function (req, res) {
+
+            Results.find({}, function (err, results) {
+                if (err) {
+                    res.send(err);
+                    return;
+                }
+
+                res.json(results);
+
+            });
+        })
 
         .post(function (req, res) {
 
             console.log(req.body.SurveyID);
             console.log(req.body.Responses);
 
-        var results = new Results({
+            var results = new Results({
 
-            SurveyID: req.body.SurveyID,
-            Responses: req.body.Responses
+                SurveyID: req.body.SurveyID,
+                Responses: req.body.Responses
 
-        });
+            });
 
-        results.save(function (err) {
-            if (err) {
-                console.log(err);
-                res.send(err);
-                return;
-            }
+            results.save(function (err) {
+                if (err) {
+                    console.log(err);
+                    res.send(err);
+                    return;
+                }
 
-            res.json({
-                success: true,
-                message: 'New results created!!!'
+                res.json({
+                    success: true,
+                    message: 'New results created!!!'
+                });
             });
         });
-    });
 
 
     api.route('/results/:survey_id')
 
         .get(function (req, res) {
 
-            /*console.log('getting results...');
-            SurveyID = req.params.survey_id;*/
+            console.log(req.body.id);
 
-            Results.find().bySurveyID('5772351a9a71b9bc899f34ca').exec(function(err, results) {
+            SurveyID = req.params.survey_id;
+
+            Results.find({SurveyID: '5772351a9a71b9bc899f34ca'}, function (err, results) {
                 console.log(results);
-            });
 
-
-           /* Results.findBySurveyID(SurveyID, function (err, results) {
                 if (err) {
                     console.log(err);
                     res.send(err);
                 }
                 res.json(results);
 
-            });*/
 
+            });
         });
 
 

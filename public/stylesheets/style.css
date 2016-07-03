@@ -252,6 +252,17 @@ option {
     padding-right: 10px;
 }
 
+#submitButton {
+    margin-right: 40px;
+}
+
+#submitButton .btn-success {
+    font-size: 20px;
+    border-radius: 20px;
+    margin-right: 40px;
+
+}
+
 #slide1_container {
     width: 300px;
     overflow: hidden; /* So the sliding bit doesn't stick out. */

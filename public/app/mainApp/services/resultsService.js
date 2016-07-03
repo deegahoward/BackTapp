@@ -6,11 +6,13 @@ angular.module('resultsService', [])
         var resultsFactory = {};
 
         resultsFactory.send = function (results) {
+            console.log(results);
             return $http.post('/api/results', results);
 
         };
 
         resultsFactory.all = function (id){
+            console.log(id);
             return $http.get('api/results/' + id);
         };
 
