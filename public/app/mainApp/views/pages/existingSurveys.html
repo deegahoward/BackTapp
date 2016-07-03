@@ -1,45 +1,32 @@
-<div class="row" ng-controller="ExistingSurveyController as survey">
+<div class="row">
 
     <div class="col-md-12">
         <h1>Existing Surveys</h1>
         <br>
         <br>
-        <div class="alert alert-success" ng-show="">
-
-        </div>
-
         <div class="col-sm-4" id="existingSurveys">
             <div class="row">
                 <div class="panel panel-success">
                     <div class="panel-heading">Your Surveys</div>
                     <div class="panel-body">
                         <div class="col-sm-8 col-sm-offset-1">
-                            <!--<ul>
-                                <li class="btn btn-success dropdown-toggle"
-                                    ng-repeat="survey in mySurveys" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Toggle Dropdown</span>
-
-                                    {{ survey.Title }}
-
-
-                                </li>
-
-                            </ul>-->
                             <div class="btn-group" ng-repeat="survey in mySurveys">
-                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-success dropdown-toggle" id="{{survey._id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                    {{ survey.Title }} <span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu" aria-labelledby="{{survey._id}}">
                                     <li><a href="#" ng-click="surveyClicked(survey); showSurvey();">Preview/Edit</a></li>
-                                    <li><a href="#" ng-click="showAlert('DeleteSurvey')">Delete</a></li>
-                                    <li><a href="#" ng-click="showAlert('surveyURL')">Get URL</a></li>
+                                    <li><a href="#" ng-click="showDeleteAlert(survey)">Delete</a></li>
+                                    <li><a href="#" ng-click="showUrlAlert(survey)">Get URL</a></li>
                                 </ul>
-                                <div class="alert alert-danger" role="alert" id="DeleteSurvey">
+                                <div class="alert alert-danger" role="alert" id="delete{{survey._id}}">
                                     <strong>Warning!</strong> If you're sure you want to delete, <a href="#" ng-click="deleteSurvey(survey)" class="alert-link">click here</a>.
+                                    <span class="glyphicon glyphicon-remove" ng-click="hideDeleteAlert(survey)"></span>
                                 </div>
-                                <div class="alert alert-success" role="alert" id="surveyURL">
-                                    <strong>URL = </strong><a href="#" class="alert-link">example/takeSurvey/{{survey._id}}</a>.
+                                <div class="alert alert-success" role="alert" id="url{{survey._id}}">
+                                    <strong>URL = </strong><a href="example/takeSurvey/{{survey._id}}" class="alert-link">example/takeSurvey/{{survey._id}}</a>.
+                                    <span class="glyphicon glyphicon-remove" ng-click="hideUrlAlert(survey)"></span>
+
                                 </div>
                             </div>
                         </div>

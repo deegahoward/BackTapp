@@ -9,8 +9,7 @@ angular.module('appRoutes', ['ui.router'])
         .state('home', {
             url: '/',
             templateUrl: 'app/mainApp/views/pages/home.html',
-            //controller: 'MainController',
-            //controllerAs: 'main'
+
         })
         .state('login', {
             url: '/login',
@@ -35,7 +34,7 @@ angular.module('appRoutes', ['ui.router'])
         })
         .state('existingSurveys.Preview', {
             templateUrl: 'app/mainApp/views/pages/preview.html',
-            parent: 'existingSurveys',
+            parent: 'existingSurveys'
 
         })
         .state('results', {

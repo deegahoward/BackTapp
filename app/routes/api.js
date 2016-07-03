@@ -149,7 +149,7 @@ module.exports = function (app, express, io) {
 
         console.log(req.decoded);
 
-        Survey.find({/*creator: req.decoded.id*/}, function (err, surveys) {
+        Survey.find({creator: req.decoded.id}, function (err, surveys) {
             if (err) {
                 res.send(err);
                 return;
@@ -243,7 +243,11 @@ module.exports = function (app, express, io) {
 
         .get(function (req, res) {
 
-            Results.find({/*creator: req.decoded.id*/}, function (err, results) {
+            console.log(req.params.survey_id);
+
+            var SurveyID = req.params.survey_id;
+
+            Results.find({SurveyID: SurveyID}, function (err, results) {
                 if (err) {
                     res.send(err);
                     return;
@@ -253,6 +257,21 @@ module.exports = function (app, express, io) {
 
             });
         })
+
+        /*.get(function (req, res) {
+
+            console.log(req.decoded);
+
+            Survey.find({creator: req.decoded.id}, function (err, surveys) {
+                if (err) {
+                    res.send(err);
+                    return;
+                }
+
+                res.json(surveys);
+
+            });
+        })*/
 
 
         .post(function (req, res) {

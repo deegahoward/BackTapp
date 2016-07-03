@@ -130,9 +130,11 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         Auth.getUser()
             .then(function (data) {
                 vm.user = data.data;
+                console.log(vm.user);
                 Survey.all(vm.user)
                     .success(function (data) {
                         vm.surveys = data;
+                        console.log(vm.surveys);
                         $scope.mySurveys = vm.surveys;
                         console.log($scope.mySurveys);
                         angular.forEach($scope.mySurveys, function(survey){
@@ -161,9 +163,32 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
          };
 
-         $scope.showAlert = function(alert){
+         $scope.showDeleteAlert = function(survey){
 
-             angular.element('#'+ alert).css('display', 'inline-block');
+             var id = survey._id;
+
+             angular.element('#delete'+ id).css('display', 'inline-block');
+         };
+
+         $scope.showUrlAlert = function(survey){
+
+             var id = survey._id;
+
+             angular.element('#url'+ id).css('display', 'inline-block');
+         };
+
+         $scope.hideDeleteAlert = function(survey){
+
+             var id = survey._id;
+
+             angular.element('#delete'+ id).css('display', 'none');
+         };
+
+         $scope.hideUrlAlert = function(survey){
+
+             var id = survey._id;
+
+             angular.element('#url'+ id).css('display', 'none');
          };
 
 
