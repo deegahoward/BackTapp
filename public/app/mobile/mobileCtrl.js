@@ -6,7 +6,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         var vm = this;
 
         var surveyID = $stateParams;
-
+        console.log("HI");
 
         $scope.surveyName = "";
         $scope.thisSurvey = {};
