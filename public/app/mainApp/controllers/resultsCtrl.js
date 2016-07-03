@@ -7,6 +7,10 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
     var vm = this;
 
     $scope.thisSurveyID = "";
+    $scope.thisSurvey = {};
+    $scope.theQuestions = [];
+    $scope.theAnswers = [];
+    $scope.myResponses = [];
     $scope.resultSet = [];
     $scope.thisResponse = [];
 
@@ -21,38 +25,32 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                         $scope.myQuestions = [];
                         angular.forEach(survey.Questions, function(question){
                             $scope.myQuestions.push(question);
-
                         });
                     });
-                    console.log($scope.myQuestions);
                 });
         });
 
     $scope.getSurvey = function(survey){
         $scope.thisSurveyID = survey._id;
+        $scope.thisSurvey = survey;
+        $scope.theQuestions = survey.Questions;
+        console.log($scope.theQuestions);
         Results.all($scope.thisSurveyID)
             .success(function (data) {
                 vm.results = data;
                 $scope.resultSet = vm.results;
-                console.log($scope.resultSet);
                 angular.forEach($scope.resultSet, function(result){
                    $scope.myResponses = result.Responses;
-                    console.log($scope.myResponses);
                     angular.forEach($scope.myResponses, function(response){
-                        console.log(response.QuestionID);
+                        $scope.theAnswers = response.Answers;
+                        console.log($scope.theAnswers);
                     })
-
                 });
             });
-
     };
 
-
-
     $scope.showResults = function(){
-
         angular.element('#existingSurveys').css('left', '0');
         angular.element('#thisSurvey').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
-
     };
 });

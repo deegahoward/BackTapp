@@ -29,6 +29,11 @@ angular.module('MobileApp', ['mobileCtrl', 'ui.router', 'surveyService', 'result
             templateUrl: 'app/mobile/pages/sorry.html'
 
         })
+        .state('thankyou', {
+            url: '/example/thankyou',
+            templateUrl: 'app/mobile/pages/thankyou.html'
+
+        })
         .state('takeSurvey2', {
             url: '/example/takeSurvey2/:id',
             templateUrl: 'app/mobile/pages/takeSurvey2.html'

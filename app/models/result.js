@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var ResponseSchema = new Schema({
 
     QuestionID: {type: Schema.Types.ObjectId, ref: 'Question'},
-    AnswerID: [String]
+    Answers: [String]
 
 });
 

@@ -27,11 +27,16 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <ul>
-                                    <li ng-repeat="response in myResponses">
-                                    {{response.QuestionID}}
-                                        {{response.AnswerID}}
+                                    <li ng-repeat="question in theQuestions">
+                                        {{question.Title}}
                                     </li>
-                                </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-5">
+                                <ul>
+                                    <li ng-repeat="response in myResponses">
+                                        {{response.Answers}}
+                                    </li>
                                 </ul>
                             </div>
                         </div>
