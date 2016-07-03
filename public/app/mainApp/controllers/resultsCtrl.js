@@ -40,7 +40,6 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                     console.log($scope.myResponses);
                     angular.forEach($scope.myResponses, function(response){
                         console.log(response.QuestionID);
-                        angular.forEach()
                     })
 
                 });
