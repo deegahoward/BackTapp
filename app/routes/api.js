@@ -197,8 +197,10 @@ module.exports = function (app, express, io) {
         console.log('success');
 
         Survey.findById(req.params.survey_id, function (err, survey) {
-            if (err)
+            if (err) {
                 res.send(err);
+            }
+            console.log(survey);
             res.json(survey);
 
         });

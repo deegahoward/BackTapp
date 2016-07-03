@@ -5,8 +5,27 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
         var vm = this;
 
-        var surveyID = $stateParams;
-        console.log("HI");
+        var survey = $stateParams;
+
+        setTimeout(function(){
+
+
+        Survey.getOne(survey.id)
+            .success(function(data) {
+                vm.survey = data;
+                console.log(vm.survey);
+                $scope.surveyName = vm.survey.Title;
+                $scope.thisSurvey = vm.survey;
+                $scope.myQuestions = vm.survey.Questions;
+                $scope.noSlidesWidth = vm.survey.Questions.length * 300;
+                angular.forEach($scope.myQuestions, function (question, value, index) {
+                    $scope.noSlides.push(index);
+                    if($scope.no == question.index){
+                        console.log("this is the one");
+                    }
+                })
+
+            });
 
         $scope.surveyName = "";
         $scope.thisSurvey = {};
@@ -15,27 +34,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         $scope.no = 0;
         $scope.currentQuestion = {};
 
-
-
-        Survey.all()
-            .success(function (data) {
-                vm.surveys = data;
-                $scope.mySurveys = vm.surveys;
-                angular.forEach($scope.mySurveys, function (survey) {
-                    if (survey._id == surveyID.id) {
-                        $scope.surveyName = survey.Title;
-                        $scope.thisSurvey = survey;
-                        $scope.myQuestions = survey.Questions;
-                        $scope.noSlidesWidth = survey.Questions.length * 300;
-                        angular.forEach($scope.myQuestions, function (question, value, index) {
-                            $scope.noSlides.push(index);
-                            if($scope.no == question.index){
-                                console.log("this is the one");
-                            }
-                        })
-                    }
-                });
-            });
+        }, 500);
 
         $scope.close = function () {
             //$window.close();
