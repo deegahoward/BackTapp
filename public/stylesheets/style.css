@@ -15,7 +15,6 @@ form {
     border-radius: 20px;
     margin: auto;
     margin-top: 50px;
-    width: 350px;
     background-color: white;
     border: 2px dotted black;
     padding: 3%;
@@ -331,4 +330,10 @@ option {
     -moz-transition:2s;
     top:calc(100% + 700px);
     opacity: 0;
+}
+
+@media (min-width: 700px){
+
+
+
 }
