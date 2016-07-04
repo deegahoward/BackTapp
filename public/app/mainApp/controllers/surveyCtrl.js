@@ -83,6 +83,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.editingAnswers = false;
         $scope.saveButton = false;
         $scope.showAddQ = false;
+        $scope.viewingSurvey = false;
 
 
         $scope.surveyClicked = function (survey) {
@@ -202,6 +203,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             console.log(survey);
             Survey.update(survey);
             $scope.editingQuestion = false;
+            $scope.viewingSurvey = false;
+            $scope.cancelSurvey();
 
 
         };
@@ -230,8 +233,16 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
 
         $scope.showSurvey = function () {
+            $scope.viewingSurvey = true;
             angular.element('#existingSurveys').css('left', '0');
             angular.element('#thisSurvey').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
+        };
+
+        $scope.cancelSurvey = function(){
+            $scope.viewingSurvey = false;
+            angular.element('#existingSurveys').css('left', 'calc(100% - 750px)');
+            angular.element('#thisSurvey').css({'top': '300px', 'opacity': '0', 'margin-top': '600px'});
+
         };
 
         $scope.deleteSurvey = function (survey) {
