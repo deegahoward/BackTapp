@@ -15,7 +15,7 @@
                                             <label class="btn btn-default {{ question.Type }}" name="group"
                                                    ng-repeat="answer in question.Answers" onchange="checked()">
                                                 <input class="{{ question.Type }}" type="{{ question.Type }}" name="group" id="{{answer._id}}" ng-click="clickedAnswer(answer)">
-                                                <span class="title">{{ answer.Text }}</span>
+                                               {{ answer.Text }}
                                             </label>
                                         </div>
                                     </div>
