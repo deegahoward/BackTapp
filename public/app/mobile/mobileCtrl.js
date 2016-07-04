@@ -66,7 +66,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     console.log($scope.results);
                 }
                 $scope.no++;
-                angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -300 + 'px)');
+                angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -500 + 'px)');
                 angular.forEach($scope.myQuestions, function(question, index){
                     if($scope.no == index){
                         $scope.currentQuestion = question;
@@ -92,7 +92,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
             }
             if ($scope.no > 0) {
                 $scope.no--;
-                angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -300 + 'px)');
+                angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -500 + 'px)');
                 angular.forEach($scope.myQuestions, function(question, index){
                     if($scope.no == index){
                         $scope.currentQuestion = question;

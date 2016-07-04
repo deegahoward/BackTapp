@@ -138,7 +138,7 @@ option {
 
 .radio {
     padding-top: 30px !important;
-    height: 100px !important;
+    height: 100px;
     border-radius: 65px !important;
 }
 
@@ -332,8 +332,57 @@ option {
     opacity: 0;
 }
 
-@media (min-width: 700px){
+.box {
+    margin-bottom: 20px;
+    padding: 30px 15px;
+    background: #fff;
+    background: rgba(255,255,255,0.9);
+}
+
+.btn-default {
+
+    display: block;
+    color: white;
+    width: 40%;
+    padding: 10px;
+    margin-bottom: 8px;
+    margin-top: 10px;
+    margin-left: 30%;
+    background-color: crimson;
+
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation : portrait)
+{
+    .container {
+        width: 100%;
+    }
+
+    .btn-default {
+
+        width: 200px;
+        height: 170px;
+
+    }
+
+    h2 {
+        font-size: 50px;
+    }
+
+    #slide1_container {
+        width: 500px;
+        margin-right: 300px;
+    }
+
+    #slide1_images .question {
+        width: 500px;
+    }
+
+}
+
+@media screen and (min-width:1200px) {
 
 
 
 }
+
