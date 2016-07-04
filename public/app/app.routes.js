@@ -25,6 +25,11 @@ angular.module('appRoutes', ['ui.router'])
             controller: 'CreateSurveyController',
             controllerAs: 'survey'
         })
+        .state('success', {
+            url: '/success',
+            templateUrl: 'app/mainApp/views/pages/success.html',
+
+        })
         .state('existingSurveys', {
             url: '/existingSurveys',
             templateUrl: 'app/mainApp/views/pages/existingSurveys.html',

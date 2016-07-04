@@ -10,7 +10,8 @@ angular.module('resultsService', [])
 
         };
 
-        resultsFactory.all = function (id){
+        resultsFactory.all = function(id){
+            console.log(id);
             return $http.get('api/results/' + id);
         };
 

@@ -206,6 +206,13 @@ option {
     border-radius: 35px;
 }
 
+.btn-group .btn-danger, .btn-group .btn-warning {
+    margin-top: 10px;
+    border-radius: 5px;
+    display: block;
+
+}
+
 .row-centered {
     text-align: center;
 }
@@ -261,6 +268,10 @@ option {
     border-radius: 20px;
     margin-right: 40px;
 
+}
+
+#saveSurvey .btn-success {
+    font-size: 20px;
 }
 
 #slide1_container {

@@ -14,6 +14,7 @@
                         <label for="Name">What is the name of your survey?</label>
                         <input type="text" name="Name" id="Name" ng-model="Survey.Title"/>
                         <button class="btn btn-success" ng-click="startCreate()">Go!</button>
+                        <button class="btn btn-success" ng-if="showCancel" ui-sref="home">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -45,7 +46,7 @@
                                                 data-target="#answers" aria-expanded="false"
                                                 aria-controls="answers"><span
                                                 class="glyphicon glyphicon-plus"></span>Add Answers</button>
-                                        <button type="button" class="btn btn-success pull-right" ng-click="SaveSurvey()">
+                                        <button type="button" class="btn btn-success pull-right" ui-sref="success" ng-click="SaveSurvey()">
                                             <span class="glyphicon glyphicon-floppy-save"></span>  Save Survey
                                         </button>
 
@@ -61,8 +62,8 @@
                                     <li class="list-group-item" ng-repeat="answer in Answers">
 
                                         {{ answer.Text }} <button type="button" class="btn btn-success"
-                                                                  ng-click="removeAnswer(answer)"><span
-                                            class="glyphicon glyphicon-minus" ng-click="removeAnswer(answer)"></span>
+                                                                  ng-click="removeAnswer($index)"><span
+                                            class="glyphicon glyphicon-minus"></span>
                                     </button>
 
                                     </li>
@@ -103,7 +104,10 @@
                                                 </li>
                                             </ul>
                                         </div>
-
+                                        <button type="button" class="btn btn-success"
+                                                ng-click="removeQuestion($index)"><span
+                                                class="glyphicon glyphicon-minus"></span>
+                                        </button>
                                     </li>
                                 </ul>
 

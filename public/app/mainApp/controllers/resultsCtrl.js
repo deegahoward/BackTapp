@@ -34,16 +34,17 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
         $scope.thisSurveyID = survey._id;
         $scope.thisSurvey = survey;
         $scope.theQuestions = survey.Questions;
-        console.log($scope.theQuestions);
         Results.all($scope.thisSurveyID)
             .success(function (data) {
                 vm.results = data;
+                console.log(vm.results);
                 $scope.resultSet = vm.results;
                 angular.forEach($scope.resultSet, function(result){
                    $scope.myResponses = result.Responses;
+                    console.log($scope.myResponses);
                     angular.forEach($scope.myResponses, function(response){
                         $scope.theAnswers = response.Answers;
-                        console.log($scope.theAnswers);
+                        //console.log($scope.theAnswers);
                     })
                 });
             });

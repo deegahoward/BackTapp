@@ -145,10 +145,24 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     QuestionID: $scope.currentQuestion._id,
                     Answers: $scope.Answers
                 };
+
+                console.log($scope.results);
             }
         };
 
         $scope.submitResponse = function(){
+            if($scope.currentQuestion.Type == "checkbox"){
+                index = _.findLastIndex($scope.results, {questionID: $scope.result.questionID});
+                if (index == -1) {
+                    console.log("first");
+                    $scope.results.push($scope.result);
+                }
+                else {
+                    console.log("second");
+                    $scope.results[index] = $scope.result;
+                }
+                console.log($scope.results);
+            }
           var response = {
                 SurveyID: survey.id,
                 Responses: $scope.results

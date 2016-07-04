@@ -15,8 +15,10 @@ angular.module('surveyService', [])
 
         };
 
-        surveyFactory.update = function (id) {
-            return $http.put('/api/surveys/' + id)
+        surveyFactory.update = function (survey) {
+            var id = survey._id;
+            console.log(survey);
+            return $http.put('/api/surveys/' + id, survey);
         };
 
         surveyFactory.getOne = function (id) {

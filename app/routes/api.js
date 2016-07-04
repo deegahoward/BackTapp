@@ -208,11 +208,13 @@ module.exports = function (app, express, io) {
 
         .put(function (req, res) {
 
+
             Survey.findById(req.params.survey_id, function (err, survey) {
                 if (err)
                     res.send(err);
 
                 survey.Title = req.body.Title;
+                survey.Questions = req.body.Questions;
 
                 survey.save(function (err) {
                     if (err)
@@ -281,16 +283,12 @@ module.exports = function (app, express, io) {
             });
         });
 
-
     api.route('/results/:survey_id')
 
         .get(function (req, res) {
 
-            console.log(req.body.id);
-
-            SurveyID = req.params.survey_id;
-
-            Results.find({SurveyID: '5772351a9a71b9bc899f34ca'}, function (err, results) {
+            surveyID = req.params.survey_id;
+            Results.find({SurveyID: surveyID}, function (err, results) {
                 console.log(results);
 
                 if (err) {
@@ -298,13 +296,9 @@ module.exports = function (app, express, io) {
                     res.send(err);
                 }
                 res.json(results);
-
-
             });
         });
 
-
     app.use('/api', api);
-
 
 };
