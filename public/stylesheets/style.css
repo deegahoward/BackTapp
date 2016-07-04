@@ -391,7 +391,7 @@ option {
 
 @media screen and (min-width:1200px) {
 
-    .col-lg-12 {
+    #mobile .col-lg-12 {
         width: 80%;
     }
 
