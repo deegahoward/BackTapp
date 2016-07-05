@@ -122,11 +122,9 @@ option {
 
 .input-group-btn {
     display: block !important;
-    width: 40% !important;
     padding: 10px;
     margin-bottom: 8px !important;
     margin-top: 10px;
-    margin-left: 30%;
     background-color: crimson;
 }
 
@@ -274,7 +272,7 @@ option {
 }
 
 #slide1_container {
-    width: 300px;
+    width: 500px;
     overflow: hidden; /* So the sliding bit doesn't stick out. */
     margin: 0 auto;
 }
@@ -293,7 +291,7 @@ option {
     padding: 0;
     margin: 0;
     float: left; /* All the images are in a row next to each other. */
-    width: 300px;
+    width: 500px;
 }
 
 
@@ -368,8 +366,10 @@ option {
 
     .btn-default {
 
-        width: 200px;
         height: 170px;
+        font-size: 40px;
+        margin-left: 0;
+        text-align: center;
 
     }
 

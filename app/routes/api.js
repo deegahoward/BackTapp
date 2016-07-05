@@ -25,14 +25,33 @@ function createToken(user) {
 
 }
 
-
 module.exports = function (app, express, io) {
-
-
     var api = express.Router();
 
-
     //method to get all existing users from the database
+
+    api.post('/signup', function(req, res){
+        var user = new User({
+            name: req.body.name,
+            username: req.body.username,
+            password: req.body.password
+        });
+
+        var token = createToken(user);
+
+        user.save(function(err){
+            if(err){
+                res.send(err);
+                return;
+            }
+            res.json({
+                success: true,
+                message: 'User has been created',
+                token: token
+            });
+        });
+    });
+
 
     api.get('/users', function (req, res) {
 
@@ -45,12 +64,6 @@ module.exports = function (app, express, io) {
             res.json(users);
 
         });
-    });
-
-    api.get('/', function (req, res) {
-
-        res.json({message: "yo yo yo!"});
-
     });
 
     //method to post information entered by user to verify against existing user in database

@@ -17,7 +17,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                 $scope.surveyName = vm.survey.Title;
                 $scope.thisSurvey = vm.survey;
                 $scope.myQuestions = vm.survey.Questions;
-                $scope.noSlidesWidth = vm.survey.Questions.length * 300;
+                $scope.noSlidesWidth = vm.survey.Questions.length * 500;
                 angular.forEach($scope.myQuestions, function (question, value, index) {
                     $scope.noSlides.push(index);
                     if($scope.no == question.index){

@@ -12,7 +12,7 @@
                                     <div id="slide1_images" ng-style="{width: noSlidesWidth}">
                                         <div class="question" ng-repeat="question in thisSurvey.Questions">
                                             <h2>{{ question.Title}}</h2>
-                                            <label class="btn btn-default {{ question.Type }}" name="group"
+                                            <label class="btn btn-default {{ question.Type }}" name=""
                                                    ng-repeat="answer in question.Answers" onchange="checked()">
                                                 <input class="{{ question.Type }}" type="{{ question.Type }}" name="group" id="{{answer._id}}" ng-click="clickedAnswer(answer)">
                                                {{ answer.Text }}

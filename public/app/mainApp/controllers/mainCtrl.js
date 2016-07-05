@@ -54,11 +54,13 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
                         });
 
                     if (data.success) {
+                        console.log("yes");
                         $location.path('/');
                     }
-                    else
+                    else {
                         vm.error = data.message;
                         $scope.error = vm.error;
+                    }
 
                 });
         };
