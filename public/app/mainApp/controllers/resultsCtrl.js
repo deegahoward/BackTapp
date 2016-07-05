@@ -12,7 +12,7 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
     $scope.theAnswers = [];
     $scope.myResponses = [];
     $scope.resultSet = [];
-    $scope.thisResponse = [];
+    $scope.thisResult = {};
 
     Auth.getUser()
         .then(function (data) {
@@ -54,4 +54,11 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
         angular.element('#existingSurveys').css('left', '0');
         angular.element('#thisSurvey').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
     };
+
+    $scope.clickedResult = function(result){
+
+        $scope.thisResult = result;
+        console.log($scope.thisResult.Responses);
+
+    }
 });

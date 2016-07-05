@@ -26,18 +26,30 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-5">
-                                <ul>
-                                    <li ng-repeat="question in theQuestions">
-                                        {{question.Title}}
-                                    </li>
+                                <ul class="results">
+                                    <button class="btn btn-success" ng-repeat="result in resultSet track by $index" ng-click="clickedResult(result)">
+                                        {{$index + 1}}
+                                    </button>
                                 </ul>
                             </div>
-                            <div class="col-md-5">
-                                <ul>
-                                    <li ng-repeat="response in myResponses">
-                                        {{response.Answers}}
-                                    </li>
-                                </ul>
+                            <div class="col-md-8">
+                                    <h2>View Results</h2>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Question</th>
+                                            <th>Answer</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="response in thisResult.Responses">
+                                            <td>{{response.QuestionID}}</td>
+                                            <td>{{response.Answers}}</td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

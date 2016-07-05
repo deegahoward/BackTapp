@@ -277,6 +277,7 @@ option {
     margin: 0 auto;
 }
 
+
 #slide1_images {
     /* This is the bit that moves. It has 4 images, so 4 * 450 = 1800. You could use javascript
     to work this out instead by counting images. */
@@ -285,6 +286,7 @@ option {
     -moz-transition: all 1.0s ease-in-out;
     -o-transition: all 1.0s ease-in-out;
     transition: all 1.0s ease-in-out;
+    transform: translateX(0px);
 }
 
 #slide1_images .question {
@@ -347,6 +349,10 @@ option {
     margin-left: 30%;
     background-color: crimson;
 
+}
+
+.results .btn-success {
+    display: block;
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation : portrait)

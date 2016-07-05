@@ -49,6 +49,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
         }, 500);
 
+
         $scope.forward = function () {
             console.log("forward");
             if ($scope.no < $scope.noSlides.length - 1) {

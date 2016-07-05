@@ -15,7 +15,6 @@
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ survey.Title }} <span class="caret"></span>
                                 </button>
-                                <button class="btn btn-warning" ng-show="viewingSurvey" ng-click="cancelSurvey()">Cancel</button>
                                 <ul class="dropdown-menu" aria-labelledby="{{survey._id}}">
                                     <li><a href="#" ng-click="surveyClicked(survey); showSurvey();">Preview/Edit</a>
                                     </li>
@@ -42,7 +41,8 @@
         <div class="col-sm-6 pull-right">
             <div class="row">
                 <div class="panel panel-info" id="thisSurvey">
-                    <div class="panel-heading">Preview Box</div>
+                    <div class="panel-heading">Preview Box
+                    <span class="glyphicon glyphicon-remove pull-right" ng-click="cancelSurvey()"></span></div>
                     <div class="panel-body">
 
                         <div class="row">
