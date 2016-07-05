@@ -302,6 +302,7 @@ option {
     -moz-transition:2s;
     position:absolute;
     left:calc(100% - 750px);
+    z-index: 2000;
 }
 
 #thisSurvey {
@@ -336,6 +337,14 @@ option {
     padding: 30px 15px;
     background: #fff;
     background: rgba(255,255,255,0.9);
+}
+
+.answers {
+    padding: 30px;
+}
+
+#other {
+    display: block;
 }
 
 .btn-default {

@@ -35,16 +35,16 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="Type">Answer Type:</label>
-                                        <select id="Type" ng-model="NewQuestion.Type">
+                                        <select id="Type" ng-model="NewQuestion.Type" ng-change="checkType()">
                                             <option value="radio">Radio</option>
                                             <option value="checkbox">Checkbox</option>
-                                            <option value="text">TextInput</option>
+                                            <option value="text" >TextInput</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="button" class="btn btn-success pull-right" data-toggle="collapse"
                                                 data-target="#answers" aria-expanded="false"
-                                                aria-controls="answers"><span
+                                                aria-controls="answers" ng-show="showAddA"><span
                                                 class="glyphicon glyphicon-plus"></span>Add Answers</button>
                                         <button type="button" class="btn btn-success pull-right" ui-sref="success" ng-click="SaveSurvey()">
                                             <span class="glyphicon glyphicon-floppy-save"></span>  Save Survey
@@ -69,11 +69,15 @@
                                     </li>
 
                                 </ul>
-                                <div class="row">
+                                <div class="row answers">
+
                                     <div class="col-sm-5">
                                         <label for="Text">Answer:</label>
                                         <input type="text" name="Text" id="Text"
                                                placeholder="Type answer here..." ng-model="NewAnswer.Text"/>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" ng-model="other" id="other" ng-click="$event.stopPropagation()" value="other">Other?(textfield)</label>
+                                        </div>
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="button" class="btn btn-success pull-right"
@@ -82,13 +86,14 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="panel-footer">
-                                    <div class="row">
-                                        <button type="button" class="btn btn-success pull-right"
-                                                ng-click="AddQuestion(NewQuestion)"><span
-                                                class="glyphicon glyphicon-plus" id="QSubmit"></span>Save Question
-                                        </button>
-                                    </div>
+
+                            </div>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <button type="button" class="btn btn-success pull-right"
+                                            ng-click="AddQuestion(NewQuestion)"><span
+                                            class="glyphicon glyphicon-plus" id="QSubmit"></span>Save Question
+                                    </button>
                                 </div>
                             </div>
 

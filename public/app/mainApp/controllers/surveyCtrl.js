@@ -11,6 +11,10 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.NewAnswer = {};
         $scope.Answers = [];
         $scope.Questions = [];
+        $scope.showAddA = true;
+        $scope.other = false;
+
+
 
         $scope.showCancel = false;
 
@@ -28,14 +32,30 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.AddAnswer = function (answerText) {
             answer = {};
-            answer.Text = answerText;
+            if($scope.other = true){
+                answer.Text = "Type here...(other)"
+            }
+            else {
+                answer.Text = answerText;
+            }
             $scope.Answers.push(answer);
             $scope.NewAnswer = {};
+            $scope.other = false;
         };
 
         $scope.removeAnswer = function (index) {
             $scope.Answers.splice(index, 1);
             console.log($scope.Answers);
+        };
+
+        $scope.checkType = function(){
+            console.log($scope.NewQuestion);
+            if($scope.NewQuestion.Type == "text"){
+                $scope.showAddA = false;
+            }
+            else {
+                $scope.showAddA = true;
+            }
         };
 
         $scope.removeQuestion = function (index) {
@@ -151,9 +171,15 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.newAnswers.splice(index, 1);
         };
 
+        $scope.removeOldAnswer = function(index){
+
+            $scope.selectedQuestion.Answers.splice(index, 1);
+        };
+
         $scope.showAddQuestion = function () {
             $scope.showAddQ = true;
         };
+
 
         $scope.saveNewQuestion = function () {
 
@@ -234,7 +260,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.showSurvey = function () {
             $scope.viewingSurvey = true;
-            angular.element('#existingSurveys').css('left', '0');
+            angular.element('#existingSurveys').css('left', '-120px');
             angular.element('#thisSurvey').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
         };
 

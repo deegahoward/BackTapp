@@ -38,36 +38,28 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 pull-right">
+        <div class="col-sm-9 pull-right">
             <div class="row">
                 <div class="panel panel-info" id="thisSurvey">
-                    <div class="panel-heading">Preview Box
-                    <span class="glyphicon glyphicon-remove pull-right" ng-click="cancelSurvey()"></span></div>
-                    <div class="panel-body">
-
+                    <div class="panel-heading">
                         <div class="row">
-                            <div class="col-md-7">
-                                <h4>Survey Title:</h4>
-                                <p ng-show="!editingTitle">{{clickedSurvey.Title}}</p>
+                            <div class="col-md-4">
+                                <p ng-show="!editingTitle">{{clickedSurvey.Title}}&nbsp<span
+                                        class="glyphicon glyphicon-edit" ng-click="editTitle()"></span>
+                                </p>
                                 <textarea ng-show="editingTitle"
                                           ng-model="clickedSurvey.Title">{{clickedSurvey.Title}}</textarea>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-warning" ng-click="editTitle()">Edit Title
-                                    </button>
-                                    <button type="button" class="btn btn-success" ng-show="editingTitle"
-                                            ng-click="saveTitle()">Save
-                                    </button>
-                                </div>
+                                <span class="glyphicon glyphicon-save-file" ng-show="editingTitle"
+                                      ng-click="saveTitle()"></span>
                             </div>
-                            <div class="col-md-2" id="saveSurvey">
-                                <button type="button" class="btn btn-success" ng-show="saveButton"
-                                        ng-click="saveSurvey()"
-                                >Save Survey
-                                </button>
+                            <div class="col-md-3 pull-right">
+                                <span class="glyphicon glyphicon-remove pull-right" ng-click="cancelSurvey()"></span>
                             </div>
                         </div>
+                    </div>
+                    <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
@@ -80,81 +72,98 @@
                                         <li ng-click="showAddQuestion()"><span class="glyphicon glyphicon-plus"></span>
                                         </li>
                                     </ul>
-                                    <div class="btn group">
-                                        <button type="button" class="btn btn-warning" ng-show="showDelete"
-                                                ng-click="editQuestion()">Edit
-                                            Question
-                                        </button>
-                                        <button type="button" class="btn btn-danger" ng-click="deleteQuestion()"
-                                                ng-show="showDelete">Delete
-                                            Question
-                                        </button>
-                                        <button type="button" class="btn btn-success" ng-show="showAddQ"
-                                                ng-click="saveNewQuestion()">Save
-                                            Question
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class=".col-md-7-offset-2 .col-md-7" ng-show="showAddQ">
-                                        <h4>Question Title:</h4>
-                                        <textarea ng-model="newQuestion.Title">Type here...</textarea>
-                                        <h4>Answer Type:</h4>
-                                        <select id="Type" ng-model="newQuestion.Type">
-                                            <option value="radio">Radio</option>
-                                            <option value="checkbox">Checkbox</option>
-                                            <option value="text">TextInput</option>
-                                        </select>
-                                        <h4>Answers:</h4>
-                                        <textarea ng-model="newAnswer.Text">Enter Answer here...</textarea>
-                                        <span class="glyphicon glyphicon-plus" ng-click="addNewAnswer()"></span>
-                                        <li ng-repeat="answer in newAnswers">
-                                            {{answer.Text}}
-                                            <button type="button" class="btn btn-success"
-                                                    ng-click="removeAnswer($index)"><span
-                                                    class="glyphicon glyphicon-minus">
-                                            </span>
-                                            </button>
-                                        </li>
-                                    </div>
-                                    <div class=".col-md-7-offset-2 .col-md-7">
-                                        <h4 ng-show="showDelete">Question Title:</h4>
-                                        <p ng-show="!editingQuestion">{{selectedQuestion.Title}}</p>
-                                        <div class="well" ng-show="editingQuestion">
-                                            <textarea
-                                                    ng-model="selectedQuestion.Title">{{ selectedQuestion.Title }}</textarea>
-                                        </div>
-                                        <button type="button" class="btn btn-success" ng-show="editingQuestion"
-                                                ng-click="saveQuestionTitle()">Save
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h4 ng-show="editingAnswers">Answers:</h4>
-                                    <div class="well" ng-show="editingAnswers">
-                                        <textarea ng-repeat="answer in selectedQuestion.Answers" ng-model="answer.Text">{{answer.Text}}</textarea>
-                                    </div>
-                                    <button type="button" class="btn btn-success" ng-show="editingAnswers"
-                                            ng-click="saveAnswers()">Save
+                            <div class="col-md-4">
+                                <div class="btn group">
+                                    <button type="button" class="btn btn-warning" ng-show="showDelete"
+                                            ng-click="editQuestion()">Edit
+                                        Question
                                     </button>
-                                    <button type="button" class="btn btn-success" ng-show="editingAnswers"
-                                            ng-click="addAnswer()"><span
-                                            class="glyphicon glyphicon-plus">Add Answer</span>
+                                    <button type="button" class="btn btn-danger" ng-click="deleteQuestion()"
+                                            ng-show="showDelete">Delete
+                                        Question
                                     </button>
-
+                                    <button type="button" class="btn btn-success" ng-show="showAddQ"
+                                            ng-click="saveNewQuestion()">Save
+                                        Question
+                                    </button>
                                 </div>
+                            </div>
+                            <div class="col-md-4" id="saveSurvey">
+                                <button type="button" class="btn btn-success pull-right"
+                                        ng-click="saveSurvey()"
+                                >Save Survey
+                                </button>
                             </div>
                         </div>
-                        <div class="container">
-                            <div ui-view>
+                        <div class="row-centered">
+                            <h4 ng-show="showDelete">Question Title:</h4>
+                            <p ng-show="!editingQuestion">{{selectedQuestion.Title}}</p>
+                            <div class="well" ng-show="editingQuestion">
+                                <textarea ng-show="editingQuestion" ng-model="selectedQuestion.Title">{{ selectedQuestion.Title }}</textarea>
+                                <textarea ng-show="showAddQ" ng-model="newQuestion.Title">{{ newQuestion.Title }}</textarea>
+                            </div>
+
+                        </div>
+                        <button type="button" class="btn btn-success" ng-show="editingQuestion"
+                                ng-click="saveQuestionTitle()">Save
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 ng-show="editingAnswers">Answers:</h4>
+                            <div class="well" ng-show="editingAnswers">
+                                <div ng-repeat="answer in selectedQuestion.Answers">
+                                    <textarea ng-model="answer.Text">{{answer.Text}}</textarea>
+                                    <span class="glyphicon glyphicon-remove" ng-click="removeOldAnswer($index)"></span>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-success" ng-show="editingAnswers"
+                                    ng-click="saveAnswers()">Save
+                            </button>
+                            <button type="button" class="btn btn-success" ng-show="editingAnswers"
+                                    ng-click="addAnswer()"><span
+                                    class="glyphicon glyphicon-plus"></span>New
+                            </button>
+                            <h4 ng-show="showAddQ">Question Type:</h4>
+                            <select ng-show="showAddQ" id="Type" ng-model="newQuestion.Type">
+                                <option value="radio">Radio</option>
+                                <option value="checkbox">Checkbox</option>
+                                <option value="text">TextInput</option>
+                            </select>
+                        </div>
+                        <!--<div class="row">
+
+                            <h4>Answers:</h4>
+                            <textarea ng-model="newAnswer.Text">Enter Answer here...</textarea>
+                            <span class="glyphicon glyphicon-plus" ng-click="addNewAnswer()"></span>
+                            <li ng-repeat="answer in newAnswers">
+                                {{answer.Text}}
+                                <button type="button" class="btn btn-success"
+                                        ng-click="removeAnswer($index)"><span
+                                        class="glyphicon glyphicon-minus">
+                                            </span>
+                                </button>
+                            </li>
+                        </div>-->
+                        <div class="col-md-6">
+                            <div class="container">
+                                <div ui-view>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
         </div>
 
     </div>
+</div>
+</div>
+</div>
+
+</div>
 </div>
