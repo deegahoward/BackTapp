@@ -13,9 +13,6 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.Questions = [];
         $scope.showAddA = true;
         $scope.other = false;
-
-
-
         $scope.showCancel = false;
 
         $scope.AddQuestion = function (question) {
@@ -32,11 +29,15 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.AddAnswer = function (answerText) {
             answer = {};
-            if($scope.other = true){
+            console.log(answer);
+
+            if($scope.other == true){
                 answer.Text = "Type here...(other)"
+                console.log($scope.other);
             }
             else {
                 answer.Text = answerText;
+                console.log($scope.other);
             }
             $scope.Answers.push(answer);
             $scope.NewAnswer = {};

@@ -60,5 +60,15 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
         $scope.thisResult = result;
         console.log($scope.thisResult.Responses);
 
+        angular.forEach($scope.thisResult.Responses, function(response){
+
+            index = _.findLastIndex($scope.thisSurvey.Questions, {QuestionID: response.QuestionID});
+
+
+
+        })
+
+
+
     }
 });
