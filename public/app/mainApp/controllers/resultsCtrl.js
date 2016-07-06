@@ -9,7 +9,7 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
     $scope.thisSurveyID = "";
     $scope.thisSurvey = {};
     $scope.theQuestions = [];
-    $scope.theAnswers = [];
+    $scope.theAnswers = "";
     $scope.myResponses = [];
     $scope.resultSet = [];
     $scope.thisResult = {};
@@ -44,7 +44,6 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                     console.log($scope.myResponses);
                     angular.forEach($scope.myResponses, function(response){
                         $scope.theAnswers = response.Answers;
-                        //console.log($scope.theAnswers);
                     })
                 });
             });
@@ -56,19 +55,17 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
     };
 
     $scope.clickedResult = function(result){
-
         $scope.thisResult = result;
-        console.log($scope.thisResult.Responses);
-
         angular.forEach($scope.thisResult.Responses, function(response){
-
-            index = _.findLastIndex($scope.thisSurvey.Questions, {QuestionID: response.QuestionID});
-
-
+            index = _.findLastIndex($scope.thisSurvey.Questions, {_id: response.QuestionID});
+            var title = $scope.thisSurvey.Questions[index];
+            response.Title = title.Title;
 
         })
 
-
-
     }
+
+    $scope.arrayToString = function(string){
+        return string.join(", ");
+    };
 });

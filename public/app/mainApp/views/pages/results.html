@@ -43,8 +43,8 @@
                                         </thead>
                                         <tbody>
                                         <tr ng-repeat="response in thisResult.Responses">
-                                            <td>{{response.QuestionID}}</td>
-                                            <td>{{response.Answers}}</td>
+                                            <td>{{response.Title}}</td>
+                                            <td>{{arrayToString(response.Answers)}}</td>
                                         </tr>
 
                                         </tbody>
