@@ -274,13 +274,19 @@ module.exports = function (app, express, io) {
 
             console.log(req.body.SurveyID);
             console.log(req.body.Responses);
+            console.log(req.body.TimeStart);
+            console.log(req.body.TimeFinish);
 
             var results = new Results({
 
                 SurveyID: req.body.SurveyID,
+                TimeStart: req.body.TimeStart,
+                TimeFinish: req.body.TimeFinish,
                 Responses: req.body.Responses
 
             });
+
+            console.log(results);
 
             results.save(function (err) {
                 if (err) {

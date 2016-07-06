@@ -18,6 +18,12 @@
                     <span class="title">{{ answer.Text }}</span>
 
                 </label>
+                <label class="btn input-group-btn" name="{{ selectedQuestion._id }}"
+                       ng-repeat="answer in selectedQuestion.Answers" ng-show="isText">
+                    <span>Type here:</span>
+                    <input type="text" class="form-control" name="{{ selectedQuestion._id }}"
+                           placeholder="Type answer here..."/>
+                </label>
             </div>
         </fieldset>
     </form>

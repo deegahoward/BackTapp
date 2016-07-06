@@ -3,9 +3,15 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
     .controller('MobileController', function ($rootScope, $location, $scope, $state, $stateParams, Survey, $http, Results) {
 
+
         var vm = this;
 
         var survey = $stateParams;
+
+        var timestamp1 = new Date().toLocaleString().toString();
+        console.log(timestamp1);
+
+        var timestamp2 = "";
 
         setTimeout(function(){
 
@@ -152,6 +158,8 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         };
 
         $scope.submitResponse = function(){
+            timestamp2 = new Date().toLocaleString().toString();
+            console.log(timestamp2);
             if($scope.currentQuestion.Type == "checkbox"){
                 index = _.findLastIndex($scope.results, {questionID: $scope.result.questionID});
                 if (index == -1) {
@@ -166,8 +174,11 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
             }
           var response = {
                 SurveyID: survey.id,
+                TimeStart: timestamp1,
+                TimeFinish: timestamp2,
                 Responses: $scope.results
             };
+            console.log(response);
             Results.send(response);
         };
 

@@ -15,6 +15,8 @@ var ResponseSchema = new Schema({
 var ResultSetSchema = new Schema({
 
     SurveyID: {type: Schema.Types.ObjectId, ref: 'Survey'},
+    TimeStart: String,
+    TimeFinish: String,
     Responses: [ResponseSchema]
 
 });

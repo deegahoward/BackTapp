@@ -1,3 +1,4 @@
+
 <div class="row">
 
     <div class="col-md-12">
@@ -53,6 +54,10 @@
                                       ng-click="saveTitle()"></span>
                             </div>
                             <div class="col-md-3 pull-right">
+                                    <button type="button" class="btn btn-success"
+                                            ng-click="saveSurvey()"
+                                    >Save Survey
+                                    </button>
                                 <span class="glyphicon glyphicon-remove pull-right" ng-click="cancelSurvey()"></span>
                             </div>
                         </div>
@@ -90,12 +95,6 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-md-2 pull-right" id="saveSurvey">
-                                <button type="button" class="btn btn-success pull-right"
-                                        ng-click="saveSurvey()"
-                                >Save Survey
-                                </button>
-                            </div>
                         </div>
                         <div class="row-centered" ng-show="showDelete && !showAddQ">
                             <h4>Question Title:</h4>
@@ -124,7 +123,7 @@
                                         <option value="checkbox">Checkbox</option>
                                         <option value="text">TextInput</option>
                                     </select>
-                                    <h4>Answers:</h4>
+                                    <h4>Add Answer:</h4>
                                     <textarea ng-model="newAnswer.Text">Enter Answer here...</textarea>
                                     <span class="glyphicon glyphicon-plus" ng-click="addNewAnswer()"></span>
                                 </div>

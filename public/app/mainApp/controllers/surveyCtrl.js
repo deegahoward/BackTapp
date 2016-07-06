@@ -4,6 +4,10 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
     .controller('CreateSurveyController', function ($scope, Survey, Auth, $stateParams, $rootScope, $state) {
 
+
+
+
+
         var vm = this;
 
         $scope.Survey = {};
@@ -11,7 +15,6 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.NewAnswer = {};
         $scope.Answers = [];
         $scope.Questions = [];
-        $scope.showAddA = true;
         $scope.other = false;
         $scope.showCancel = false;
 
@@ -31,8 +34,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             answer = {};
             console.log(answer);
 
-            if($scope.other == true){
-                answer.Text = "Type here...(other)"
+            if($scope.other == true || $scope.NewQuestion.Type == "text"){
+                answer.Text = "Type here...(other)";
                 console.log($scope.other);
             }
             else {
@@ -52,10 +55,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.checkType = function(){
             console.log($scope.NewQuestion);
             if($scope.NewQuestion.Type == "text"){
-                $scope.showAddA = false;
             }
             else {
-                $scope.showAddA = true;
             }
         };
 
@@ -97,6 +98,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.selectedQType = "";
         $scope.isRadio = false;
         $scope.isCheckbox = false;
+        $scope.isText = false;
         $scope.starRating = [1, 2, 3, 4, 5];
         $scope.showDelete = false;
         $scope.editingQuestion = false;
@@ -108,6 +110,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
 
         $scope.surveyClicked = function (survey) {
+            $scope.clickedSurvey = {};
+            $scope.clickedQuestions = [];
             $scope.clickedSurvey = survey;
             $scope.clickedQuestions = survey.Questions;
             localStorage.setItem("clickedSurvey", angular.toJson($scope.clickedSurvey));
@@ -123,11 +127,21 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
                 console.log("radio");
                 $scope.isRadio = true;
                 $scope.isCheckbox = false;
+                $scope.isText = false;
+
             }
             else if ($scope.selectedQType == "checkbox") {
                 console.log("checkbox");
                 $scope.isRadio = false;
                 $scope.isCheckbox = true;
+                $scope.isText = false;
+
+            }
+            else {
+                console.log("text");
+                $scope.isText = true;
+                $scope.isRadio = false;
+                $scope.isCheckbox = false;
             }
         };
 

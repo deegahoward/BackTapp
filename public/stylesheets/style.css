@@ -297,9 +297,9 @@ option {
 
 
 #existingSurveys {
-    transition:2s;
-    -webkit-transition:2s;
-    -moz-transition:2s;
+    transition:1s;
+    -webkit-transition:1s;
+    -moz-transition:1s;
     position:absolute;
     left:calc(100% - 750px);
     z-index: 2000;
@@ -307,17 +307,17 @@ option {
 
 #thisSurvey {
     margin-top: 600px;
-    transition:2s ease-in-out;
-    -webkit-transition:2s;
-    -moz-transition:2s;
+    transition:1s ease-in-out;
+    -webkit-transition:1s;
+    -moz-transition:1s;
     top:calc(100% + 300px);
     opacity: 0;
 }
 
 #newSurvey {
-    transition:2s;
-    -webkit-transition:2s;
-    -moz-transition:2s;
+    transition:1s;
+    -webkit-transition:1s;
+    -moz-transition:1s;
     position:absolute;
     left:calc(100% - 850px);
     z-index: 1000;
@@ -325,9 +325,9 @@ option {
 
 #newQuestions {
     margin-top: 600px;
-    transition:2s ease-in-out;
-    -webkit-transition:2s;
-    -moz-transition:2s;
+    transition:1s ease-in-out;
+    -webkit-transition:1s;
+    -moz-transition:1s;
     top:calc(100% + 700px);
     opacity: 0;
 }
@@ -358,9 +358,6 @@ option {
 
 }
 
-.results .btn-success {
-    display: block;
-}
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation : portrait)
 {

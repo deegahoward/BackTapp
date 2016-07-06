@@ -9,7 +9,8 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
 
     console.log("1");
 
-        $scope.title = "BackTapp";
+
+    $scope.title = "BackTapp";
 
         //methods for logging in, logging out and setting user to current user
 

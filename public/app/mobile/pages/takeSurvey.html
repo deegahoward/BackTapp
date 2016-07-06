@@ -14,7 +14,7 @@
                                             <h2>{{ question.Title}}</h2>
                                             <label class="btn btn-default {{ question.Type }}" name=""
                                                    ng-repeat="answer in question.Answers" onchange="checked()">
-                                                <input class="{{ question.Type }}" type="{{ question.Type }}" name="group" id="{{answer._id}}" ng-click="clickedAnswer(answer)">
+                                                <input class="{{ question.Type }}" type="{{ question.Type }}" name="group" ng-model="selectedAnswer.Text" id="{{answer._id}}" ng-click="clickedAnswer(answer)">
                                                {{ answer.Text }}
                                             </label>
                                         </div>
@@ -30,8 +30,17 @@
             </div>
         </div>
     </div>
-
+</div>
 <script>
+    /*var urls = new Array("https://www.surveymonkey.co.uk/r/JJH9SX9", "http://backtapp.herokuapp.com/example/takeSurvey/577ab7f8dca19b0300066926");
+    var redirect = function()
+    {
+        console.log("working");
+        window.location = urls[Math.floor(urls.length*Math.random())];
+    };
+
+    redirect();*/
+
     var checked = function () {
         $("input:not(:checked)").parent().closest("label").css("background-color", "crimson").css("color", "white");
         $("input:checked").parent().closest("label").css("background-color", "cornflowerblue").css("color", "white");
