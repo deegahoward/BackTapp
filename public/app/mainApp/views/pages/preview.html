@@ -8,21 +8,20 @@
 
                 <label class="btn input-group-btn" name="{{ selectedQuestion._id }}"
                        ng-repeat="answer in selectedQuestion.Answers" onchange="checked()" ng-show="isRadio">
-                    <input class="answers" type="radio" name="{{ selectedQuestion._id }}">
-                    <span class="title">{{ answer.Text }}</span>
-
+                    <span class="title">{{ answer.Text}}</span>
+                    <input ng-show="!answer.Other" class="answers" type="radio" name="{{ selectedQuestion._id }}" id="{{ answer._id }}">
+                    <input ng-show="answer.Other" class="answers form-control" type="text" name="{{ selectedQuestion._id }}" id="{{ answer._id }}">
                 </label>
                 <label class="btn input-group-btn" name="{{ selectedQuestion._id }}"
                        ng-repeat="answer in selectedQuestion.Answers" onchange="checked()" ng-show="isCheckbox">
-                    <input class="answers" type="checkbox" name="{{ selectedQuestion._id }}">
+                    <input class="answers" type="checkbox" name="{{ selectedQuestion._id }}" id="{{ answer._id }}">
                     <span class="title">{{ answer.Text }}</span>
-
                 </label>
                 <label class="btn input-group-btn" name="{{ selectedQuestion._id }}"
                        ng-repeat="answer in selectedQuestion.Answers" ng-show="isText">
                     <span>Type here:</span>
                     <input type="text" class="form-control" name="{{ selectedQuestion._id }}"
-                           placeholder="Type answer here..."/>
+                           placeholder="Type answer here..." id="{{ answer._id }}"/>
                 </label>
             </div>
         </fieldset>

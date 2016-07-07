@@ -15,7 +15,6 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
         setTimeout(function(){
 
-
         Survey.getOne(survey.id)
             .success(function(data) {
                 vm.survey = data;
@@ -30,7 +29,6 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                         console.log("this is the one");
                     }
                 })
-
             });
 
         $scope.surveyName = "";
@@ -56,22 +54,41 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         }, 500);
 
 
+        $scope.checkType = function(){
+
+            if($scope.currentQuestion.Type == "checkbox"){
+                index = _.findLastIndex($scope.results, {questionID: $scope.result.questionID});
+                if (index == -1) {
+                    console.log("first");
+                    $scope.results.push($scope.result);
+                }
+                else {
+                    console.log("second");
+                    $scope.results[index] = $scope.result;
+                }
+                console.log($scope.results);
+            }
+            if($scope.currentQuestion.Type == "text"){
+                index = _.findLastIndex($scope.results, {questionID: $scope.result.questionID});
+                if (index == -1) {
+
+                    $scope.result = {
+                        QuestionID: $scope.currentQuestion._id,
+                        Answers: $scope.selectedAnswer.Text
+                    };
+                    $scope.results.push($scope.result);
+                }
+                else {
+                    $scope.results[index] = $scope.result;
+                }
+            }
+        };
+
         $scope.forward = function () {
             console.log("forward");
             if ($scope.no < $scope.noSlides.length - 1) {
                 $scope.notEndOfSurvey = true;
-                if($scope.currentQuestion.Type == "checkbox"){
-                    index = _.findLastIndex($scope.results, {questionID: $scope.result.questionID});
-                    if (index == -1) {
-                        console.log("first");
-                        $scope.results.push($scope.result);
-                    }
-                    else {
-                        console.log("second");
-                        $scope.results[index] = $scope.result;
-                    }
-                    console.log($scope.results);
-                }
+                $scope.checkType();
                 $scope.no++;
                 angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -500 + 'px)');
                 angular.forEach($scope.myQuestions, function(question, index){
@@ -129,24 +146,20 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         $scope.clickedAnswer = function(answer){
 
             if($scope.currentQuestion.Type == "radio") {
-                console.log("radio");
                 $scope.result = {
                     QuestionID: $scope.currentQuestion._id,
                     Answers: [answer.Text]
                 };
                 index = _.findLastIndex($scope.results, {QuestionID: $scope.result.QuestionID});
                 if (index == -1) {
-                    console.log("first");
                     $scope.results.push($scope.result);
                 }
                 else {
-                    console.log("second");
                     $scope.results[index] = $scope.result;
                 }
                 console.log($scope.results);
             }
             else if($scope.currentQuestion.Type == "checkbox"){
-                console.log("checkbox");
                 $scope.Answers.push(answer.Text);
                 $scope.result = {
                     QuestionID: $scope.currentQuestion._id,
@@ -155,23 +168,16 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
                 console.log($scope.results);
             }
+            else if($scope.currentQuestion.Type == "text"){
+            }
         };
+
 
         $scope.submitResponse = function(){
             timestamp2 = new Date().toLocaleString().toString();
             console.log(timestamp2);
-            if($scope.currentQuestion.Type == "checkbox"){
-                index = _.findLastIndex($scope.results, {questionID: $scope.result.questionID});
-                if (index == -1) {
-                    console.log("first");
-                    $scope.results.push($scope.result);
-                }
-                else {
-                    console.log("second");
-                    $scope.results[index] = $scope.result;
-                }
-                console.log($scope.results);
-            }
+            $scope.checkType();
+
           var response = {
                 SurveyID: survey.id,
                 TimeStart: timestamp1,

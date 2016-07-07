@@ -17,6 +17,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.Questions = [];
         $scope.other = false;
         $scope.showCancel = false;
+        $scope.skipLogic = false;
 
         $scope.AddQuestion = function (question) {
 
@@ -32,17 +33,19 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.AddAnswer = function (answerText) {
             answer = {};
-            console.log(answer);
-
-            if($scope.other == true || $scope.NewQuestion.Type == "text"){
+            if($scope.other == true){
                 answer.Text = "Type here...(other)";
-                console.log($scope.other);
+                answer.Other = true;
+                console.log(answer);
             }
             else {
                 answer.Text = answerText;
+                answer.Other = false;
                 console.log($scope.other);
             }
             $scope.Answers.push(answer);
+            console.log(answer);
+            console.log($scope.Answers);
             $scope.NewAnswer = {};
             $scope.other = false;
         };
@@ -58,6 +61,11 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             }
             else {
             }
+        };
+
+        $scope.skipTool = function(){
+
+            console.log($scope.skipLogic);
         };
 
         $scope.removeQuestion = function (index) {
@@ -107,6 +115,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.saveButton = false;
         $scope.showAddQ = false;
         $scope.viewingSurvey = false;
+        $scope.Other = false;
 
 
         $scope.surveyClicked = function (survey) {
@@ -123,6 +132,12 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.selectedQuestion = question;
             $scope.selectedQType = question.Type;
             console.log($scope.selectedQType);
+            angular.forEach($scope.selectedQuestion.Answers, function(answer){
+                if(answer.Other == true){
+                    $scope.Other = true;
+                }
+            });
+
             if ($scope.selectedQType == "radio") {
                 console.log("radio");
                 $scope.isRadio = true;
@@ -135,8 +150,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
                 $scope.isRadio = false;
                 $scope.isCheckbox = true;
                 $scope.isText = false;
-
             }
+
             else {
                 console.log("text");
                 $scope.isText = true;
@@ -175,8 +190,15 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.addNewAnswer = function () {
             var answer = {
-                Text: $scope.newAnswer.Text
+                Text: $scope.newAnswer.Text,
+                Other: false
             };
+
+            if($scope.other == true){
+                answer.Text = "Type here...(other)";
+                answer.Other = true;
+            }
+
             $scope.newAnswers.push(answer);
             console.log($scope.newAnswers);
             $scope.newAnswer = {};

@@ -124,8 +124,11 @@
                                         <option value="text">TextInput</option>
                                     </select>
                                     <h4>Add Answer:</h4>
-                                    <textarea ng-model="newAnswer.Text">Enter Answer here...</textarea>
+                                    <textarea placeholder="Type answer here..." ng-model="newAnswer.Text">Enter Answer here...</textarea>
                                     <span class="glyphicon glyphicon-plus" ng-click="addNewAnswer()"></span>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" ng-model="other" id="other" ng-click="$event.stopPropagation()" value="other">Other?(textfield)</label>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <li ng-repeat="answer in newAnswers">
@@ -152,7 +155,7 @@
                                 </button>
                                 <button type="button" class="btn btn-success" ng-show="editingAnswers"
                                         ng-click="addAnswer()"><span
-                                        class="glyphicon glyphicon-plus"></span>New
+                                        class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </div>
                             <div class="col-md-6" ng-show="!showAddQ">

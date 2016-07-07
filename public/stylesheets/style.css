@@ -339,6 +339,20 @@ option {
     background: rgba(255,255,255,0.9);
 }
 
+#skipLogic input[type=checkbox] {
+    display: block;
+}
+
+#skipLogic input[type=text]{
+    display: flex;
+}
+
+.row-padded {
+
+    padding: 20%;
+}
+
+
 .answers {
     padding: 30px;
 }
@@ -356,6 +370,11 @@ option {
     margin-top: 10px;
     background-color: crimson;
 
+}
+
+input[type=textfield] {
+
+    font-size: 20px;
 }
 
 

@@ -97,26 +97,36 @@
                                 </div>
                             </div>
 
-                            <div class="well well-sm">
-                                <ul>
-                                    <li ng-repeat="question in Questions">
-
-                                        {{ question.Title }} - {{ question.Type }}
-                                        <div class="well">
-                                            <ul>
-                                                <li ng-repeat="Answer in question.Answers">
+                            <div class="row row-padded">
+                                <div class="row" ng-repeat="question in Questions">
+                                    <div class="row">
+                                        <h3>{{ question.Title }} - {{ question.Type }}</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <li ng-repeat="Answer in question.Answers">
                                                     {{Answer.Text}}
                                                 </li>
-                                            </ul>
                                         </div>
-                                        <button type="button" class="btn btn-success"
+                                        <div class="col-md-5" id="skipLogic">
+                                        <div class="checkbox">
+                                            <label><input  type="checkbox" ng-model="skipLogic" ng-click="skipTool()" value="skip">Skip logic?</label>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-5" ng-show="skipLogic">
+                                            <label for="Text">If answer is:</label>
+                                            <input type="text" name="Text"
+                                                   placeholder="Type No." ng-model="SkipA"/>
+                                            <label for="Text">Go to Question:</label>
+                                            <input type="text" name="Text"
+                                                   placeholder="Type No." ng-model="SkipQ"/>
+                                        </div>
+                                        <button type="button" class="btn btn-success pull-right"
                                                 ng-click="removeQuestion($index)"><span
                                                 class="glyphicon glyphicon-minus"></span>
                                         </button>
-                                    </li>
-                                </ul>
-
-
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
