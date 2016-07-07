@@ -22,18 +22,15 @@
                                             <!--INPUT NON TEXT-->
                                             <input ng-show="!answer.Other" class="{{ question.Type }} form-control"
                                                    type="{{ question.Type }}" name="group_{{ question._id }}"
-                                                    ng-click="clickedAnswer(answer)"
+                                                   ng-click="clickedAnswer(answer)"
                                                    id="{{answer._id}}" name="{{ question._id }}">
 
                                             <input ng-show="answer.Other" class="text form-control" type="text"
                                                    name="group_{{ question._id }}"
                                                     ng-click="clickedAnswer(answer)"
-                                                   id="{{answer._id}}" name="{{ question._id }}">
+                                                   id="{{answer._id}}" name="{{ question._id }}" ng-model="selectedAnswer.Text">
 
                                             <!--INPUT TEXT-->
-
-
-
 
                                             <!--SPANS-->
 
