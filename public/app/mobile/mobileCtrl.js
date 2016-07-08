@@ -149,6 +149,8 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                                 $scope.results[index] = $scope.result;
                             }
                         }
+
+                       $scope.forward();
                     }
                     else if ($scope.currentQuestion.Type == "checkbox") {
                        if (answer.Other) {
