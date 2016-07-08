@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-3 pull-right" id="submitButton">
-                                <span class="glyphicon glyphicon-menu-right" ng-click="forward();"
+                                <span class="glyphicon glyphicon-menu-right" ng-click="forward(); skipQuestions()"
                                       ng-show="notEndOfSurvey"></span>
                                 <button class="btn btn-success" ng-show="endOfSurvey" ui-sref="thankyou"
                                         ng-click="submitResponse()">Submit!

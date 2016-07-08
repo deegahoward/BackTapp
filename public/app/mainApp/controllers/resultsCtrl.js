@@ -9,7 +9,7 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
     $scope.thisSurveyID = "";
     $scope.thisSurvey = {};
     $scope.theQuestions = [];
-    $scope.theAnswers = "";
+    $scope.theAnswers = [];
     $scope.myResponses = [];
     $scope.resultSet = [];
     $scope.thisResult = {};
@@ -63,7 +63,7 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
 
         })
 
-    }
+    };
 
     $scope.arrayToString = function(string){
         return string.join(", ");

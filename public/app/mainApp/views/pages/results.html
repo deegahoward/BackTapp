@@ -44,7 +44,8 @@
                                         <tbody>
                                         <tr ng-repeat="response in thisResult.Responses">
                                             <td>{{response.Title}}</td>
-                                            <td>{{arrayToString(response.Answers)}}</td>
+                                            <td><span ng-repeat="Answer in response.Answers">{{Answer.Text}}<Br></span></td>
+
                                         </tr>
 
                                         </tbody>
