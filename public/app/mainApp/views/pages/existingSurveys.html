@@ -11,6 +11,8 @@
                     <div class="panel-heading">Your Surveys</div>
                     <div class="panel-body">
                         <div class="col-sm-8 col-sm-offset-1">
+                            <div ng-show="!Loaded" class="loader"></div>
+
                             <div class="btn-group" ng-repeat="survey in mySurveys">
                                 <button type="button" class="btn btn-success dropdown-toggle" id="{{survey._id}}"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -116,7 +118,7 @@
                         </button>
                         <div class="row-centered">
                             <div class="col-md-12" ng-show="showAddQ">
-                                <div class="col-md-6">
+                                <div class="col-md-6" ng-show="showAddQ">
                                     <h4>Question Type:</h4>
                                     <select id="Type" ng-model="newQuestion.Type">
                                         <option value="radio">Radio</option>

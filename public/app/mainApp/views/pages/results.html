@@ -10,6 +10,7 @@
                     <div class="panel-heading">Your Surveys</div>
                     <div class="panel-body">
                         <div class="col-sm-8 col-sm-offset-1">
+                            <div ng-show="!Loaded" class="loader"></div>
                             <div class="btn-group" ng-repeat="survey in mySurveys">
                                 <button type="button" class="btn btn-success" ng-click="getSurvey(survey); showResults()">
                                     {{ survey.Title }}</button>

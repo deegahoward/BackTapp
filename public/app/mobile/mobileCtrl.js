@@ -130,9 +130,6 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                 $scope.clickedAnswer = function (answer, index) {
 
 
-
-
-
                    if ($scope.currentQuestion.Type == "radio") {
                         if (answer.Other) {
                         }

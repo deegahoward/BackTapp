@@ -6,6 +6,7 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
 
     var vm = this;
 
+    $scope.Loaded = false;
     $scope.thisSurveyID = "";
     $scope.thisSurvey = {};
     $scope.theQuestions = [];
@@ -28,6 +29,8 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                         });
                     });
                 });
+            $scope.Loaded = true;
+
         });
 
     $scope.getSurvey = function(survey){

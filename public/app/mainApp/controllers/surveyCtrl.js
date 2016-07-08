@@ -97,6 +97,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         var vm = this;
 
+        $scope.Loaded = false;
         $scope.clickedSurvey = {};
         $scope.clickedQuestions = [];
         $scope.selectedQuestion = {};
@@ -128,7 +129,11 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         };
 
         $scope.questionClicked = function (question) {
+            $scope.showAddQ = false;
             $scope.showDelete = true;
+            $scope.editingQuestion = false;
+            $scope.editingTitle = false;
+            $scope.editingAnswers = false;
             $scope.selectedQuestion = question;
             $scope.selectedQType = question.Type;
             console.log($scope.selectedQType);
@@ -172,6 +177,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         };
 
         $scope.editQuestion = function () {
+            $scope.showAddQ = false;
             $scope.editingQuestion = true;
             $scope.editingAnswers = true;
             $scope.saveButton = true;
@@ -214,6 +220,9 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         };
 
         $scope.showAddQuestion = function () {
+            $scope.editingQuestion = false;
+            $scope.editingTitle = false;
+            $scope.editingAnswers = false;
             $scope.showAddQ = true;
         };
 
@@ -292,6 +301,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
                             });
                         });
                     });
+                $scope.Loaded = true;
             });
 
 
