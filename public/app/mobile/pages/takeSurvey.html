@@ -17,26 +17,23 @@
                                         <!--LABEL-->
 
                                         <label class="btn input-group-btn"
-                                               ng-repeat="answer in question.Answers" onchange="checked()" name="{{ question._id }}">
+                                               ng-repeat="answer in question.Answers" onchange="checked()"
+                                               name="{{ question._id }}">
 
-                                            <!--INPUT NON TEXT-->
-                                            <input ng-show="!answer.Other" class="{{ question.Type }} form-control"
+                                            <input ng-if="!answer.Other" class="{{ question.Type }} form-control"
                                                    type="{{ question.Type }}" name="group_{{ question._id }}"
-                                                   ng-click="clickedAnswer(answer)"
-                                                   id="{{answer._id}}" name="{{ question._id }}">
+                                                   ng-click="clickedAnswer(answer, $index)"
+                                                   id="{{answer._id}}" value="{{answer.Text}}" name="{{ question._id }}" ng-checked="Answers.indexOf(answer) > -1">
 
-                                            <input ng-show="answer.Other" class="text form-control" type="text"
+                                            <input ng-if="answer.Other" class="text form-control" type="text"
                                                    name="group_{{ question._id }}"
-                                                    ng-click="clickedAnswer(answer)"
-                                                   id="{{answer._id}}" name="{{ question._id }}" ng-model="selectedAnswer.Text">
+                                                    ng-click="clickedAnswer(answer, $index)"
+                                                   id="{{answer._id}}" name="{{ question._id }}" ng-model="question.OtherText">
 
-                                            <!--INPUT TEXT-->
 
-                                            <!--SPANS-->
+                                            <span ng-if="answer.Other">{{ answer.Text }}</span>
 
-                                            <span ng-show="answer.Other">{{ answer.Text }}</span>
-
-                                            <span ng-show="!answer.Other">{{ answer.Text }}</span>
+                                            <span ng-if="!answer.Other">{{ answer.Text }}</span>
 
                                         </label>
                                     </div>
