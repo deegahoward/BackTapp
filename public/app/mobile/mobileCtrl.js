@@ -95,25 +95,35 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                 $scope.removedQuestions = [];
 
 
-                $scope.skipQuestions = function(){
+                $scope.skipQuestions = function(answer){
 
                     //if(answer.SkipLogic.Exists) {
                     //var indx = answer.SkipLogic.No - 1;
 
-                    var indx = (2 - 1);
+                    //usually plus 1
 
-                    var removedQ = {
-                        Question: $scope.thisSurvey.Questions[indx],
-                        Index: indx
-                    };
+                    var goTo = answer.SkipLogic.Question;
 
-                    $scope.removedQuestions.push(removedQ);
+                    angular.forEach($scope.thisSurvey.Questions, function(question, index){
 
-                    $scope.thisSurvey.Questions.splice(indx, 1);
+                        if(index > 0 && index < goTo){
+
+                            var removedQ = {
+                                Question: $scope.thisSurvey.Questions[index],
+                                Index: index
+                            };
+
+                            $scope.removedQuestions.push(removedQ);
+
+                            $scope.thisSurvey.Questions.splice(index, 1);
+
+                        }
+
+                    });
 
                     console.log($scope.removedQuestions);
 
-                    $scope.reAddQuestion();
+                    //$scope.reAddQuestion();
 
                     //}
 
@@ -129,6 +139,10 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
                 $scope.clickedAnswer = function (answer, index) {
 
+                    if(answer.SkipLogic.Exists)
+                    {
+                        $scope.skipQuestions(answer);
+                    }
                    if ($scope.currentQuestion.Type == "radio") {
                         if (answer.Other) {
                         }

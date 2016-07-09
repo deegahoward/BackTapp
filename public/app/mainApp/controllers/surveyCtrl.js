@@ -18,6 +18,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.other = false;
         $scope.showCancel = false;
         $scope.skipLogic = false;
+        $scope.skipQ = "";
 
         $scope.AddQuestion = function (question) {
 
@@ -32,15 +33,29 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         };
 
         $scope.AddAnswer = function (answerText) {
+            console.log($scope.skipLogic);
+            console.log($scope.skipQ);
             answer = {};
             if($scope.other == true){
                 answer.Text = "Type here...(other)";
                 answer.Other = true;
+                if($scope.skipLogic == true){
+                    answer.SkipLogic = {
+                        Exists: true,
+                        Question: $scope.skipQ
+                    }
+                }
                 console.log(answer);
             }
             else {
                 answer.Text = answerText;
                 answer.Other = false;
+                if($scope.skipLogic == true){
+                    answer.SkipLogic = {
+                        Exists: true,
+                        Question: $scope.skipQ
+                    }
+                }
                 console.log($scope.other);
             }
             $scope.Answers.push(answer);
@@ -48,6 +63,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             console.log($scope.Answers);
             $scope.NewAnswer = {};
             $scope.other = false;
+            $scope.skipQ = "";
+            $scope.skipLogic = false;
         };
 
         $scope.removeAnswer = function (index) {

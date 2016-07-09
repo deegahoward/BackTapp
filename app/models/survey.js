@@ -6,7 +6,11 @@ var Schema = mongoose.Schema;
 var AnswerSchema = new Schema({
 
     Text: String,
-    Other: Boolean
+    Other: Boolean,
+    SkipLogic: {
+        Exists: Boolean,
+        Question: String
+    }
 
 });
 

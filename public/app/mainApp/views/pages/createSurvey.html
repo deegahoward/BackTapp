@@ -1,5 +1,3 @@
-
-
 <div class="row" ng-if="main.loggedIn" ng-controller="CreateSurveyController as survey">
 
     <div class="col-md-12">
@@ -18,6 +16,29 @@
                     </div>
                 </div>
             </div>
+            <div class="row pull-left">
+                <div class="panel panel-success pull-left" id="displayQuestions" ng-show="Questions.length > 0">
+                    <div class="panel-heading">Questions</div>
+                    <div class="panel-body">
+                        <div class="row" ng-repeat="question in Questions track by $index">
+                            <div class="row">
+                                <h3>{{$index + 1}} - {{ question.Title }} - {{ question.Type }}</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <li ng-repeat="Answer in question.Answers">
+                                        {{Answer.Text}}
+                                    </li>
+                                </div>
+                                <button type="button" class="btn btn-success pull-right"
+                                        ng-click="removeQuestion($index)"><span
+                                        class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-sm-7 pull-right">
             <div class="row">
@@ -31,23 +52,27 @@
                                     <div class="col-sm-7">
                                         <label for="Title">Question Title:</label>
                                         <input type="text" name="Title" id="Title"
-                                               placeholder="Type question title here..." ng-model="NewQuestion.Title"/>
+                                               placeholder="Type question title here..."
+                                               ng-model="NewQuestion.Title"/>
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="Type">Answer Type:</label>
                                         <select id="Type" ng-model="NewQuestion.Type" ng-change="checkType()">
                                             <option value="radio">Radio</option>
                                             <option value="checkbox">Checkbox</option>
-                                            <option value="text" >TextInput</option>
+                                            <option value="text">TextInput</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-2">
-                                        <button type="button" class="btn btn-success pull-right" data-toggle="collapse"
+                                        <button type="button" class="btn btn-success pull-right"
+                                                data-toggle="collapse"
                                                 data-target="#answers" aria-expanded="false"
                                                 aria-controls="answers"><span
-                                                class="glyphicon glyphicon-plus"></span>Add Answers</button>
-                                        <button type="button" class="btn btn-success pull-right" ui-sref="success" ng-click="SaveSurvey()">
-                                            <span class="glyphicon glyphicon-floppy-save"></span>  Save Survey
+                                                class="glyphicon glyphicon-plus"></span>Add Answers
+                                        </button>
+                                        <button type="button" class="btn btn-success pull-right" ui-sref="success"
+                                                ng-click="SaveSurvey()">
+                                            <span class="glyphicon glyphicon-floppy-save"></span> Save Survey
                                         </button>
 
                                     </div>
@@ -61,10 +86,11 @@
                                 <ul class="list-group">
                                     <li class="list-group-item" ng-repeat="answer in Answers">
 
-                                        {{ answer.Text }} <button type="button" class="btn btn-success"
-                                                                  ng-click="removeAnswer($index)"><span
-                                            class="glyphicon glyphicon-minus"></span>
-                                    </button>
+                                        {{ answer.Text }}
+                                        <button type="button" class="btn btn-success"
+                                                ng-click="removeAnswer($index)"><span
+                                                class="glyphicon glyphicon-minus"></span>
+                                        </button>
 
                                     </li>
 
@@ -76,8 +102,20 @@
                                         <input type="text" name="Text" id="Text"
                                                placeholder="Type answer here..." ng-model="NewAnswer.Text"/>
                                         <div class="checkbox">
-                                            <label><input type="checkbox" ng-model="other" id="other" ng-click="$event.stopPropagation()" value="other">Other?(textfield)</label>
+                                            <label><input type="checkbox" ng-model="other" id="other"
+                                                          ng-click="$event.stopPropagation()" value="other">Other?(textfield)</label>
                                         </div>
+                                    </div>
+                                    <div class="col-md-5" id="skipLogic">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" ng-model="skipLogic" ng-click="skipTool(); $event.stopPropagation()"
+                                                          value="skip">Skip logic?</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" ng-show="skipLogic">
+                                        <label for="Text">Go to Question:</label>
+                                        <input type="text" name="Text"
+                                               placeholder="Type No." ng-model="skipQ"/>
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="button" class="btn btn-success pull-right"
@@ -97,37 +135,7 @@
                                 </div>
                             </div>
 
-                            <div class="row row-padded">
-                                <div class="row" ng-repeat="question in Questions">
-                                    <div class="row">
-                                        <h3>{{ question.Title }} - {{ question.Type }}</h3>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <li ng-repeat="Answer in question.Answers">
-                                                    {{Answer.Text}}
-                                                </li>
-                                        </div>
-                                        <div class="col-md-5" id="skipLogic">
-                                        <div class="checkbox">
-                                            <label><input  type="checkbox" ng-model="skipLogic" ng-click="skipTool()" value="skip">Skip logic?</label>
-                                        </div>
-                                        </div>
-                                        <div class="col-md-5" ng-show="skipLogic">
-                                            <label for="Text">If answer is:</label>
-                                            <input type="text" name="Text"
-                                                   placeholder="Type No." ng-model="SkipA"/>
-                                            <label for="Text">Go to Question:</label>
-                                            <input type="text" name="Text"
-                                                   placeholder="Type No." ng-model="SkipQ"/>
-                                        </div>
-                                        <button type="button" class="btn btn-success pull-right"
-                                                ng-click="removeQuestion($index)"><span
-                                                class="glyphicon glyphicon-minus"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
 
                     </div>
@@ -144,4 +152,4 @@
 
 
     </div>
-    </div>
+</div>
