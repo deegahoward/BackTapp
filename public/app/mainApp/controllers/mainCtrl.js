@@ -57,6 +57,7 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
                     if (data.success) {
                         console.log("yes");
                         $location.path('/');
+                        $state.go('home');
                     }
                     else {
                         vm.error = data.message;
