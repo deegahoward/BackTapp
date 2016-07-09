@@ -438,6 +438,13 @@ input[type=textfield] {
         font-size: 50px;
     }
 
+    select,
+    textarea,
+    input[type=text]
+    {
+        font-size: 16px;
+    }
+
 }
 
 @media screen and (min-width:1200px) {
@@ -451,7 +458,8 @@ input[type=textfield] {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     select,
     textarea,
-    input {
+    input[type=text]
+   {
         font-size: 16px;
     }
 }
