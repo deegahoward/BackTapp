@@ -129,7 +129,7 @@ option {
 }
 
 .input-group-btn span {
-    font-size: 50px;
+    font-size: 30px;
     color: white;
     font-weight:200;
 }
@@ -407,17 +407,22 @@ input[type=textfield] {
         font-size: 20px;
     }
 
-    .btn-default {
+    .input-group-btn {
 
         height: 170px;
-        font-size: 40px;
+        font-size: 70px;
         margin-left: 0;
         text-align: center;
 
     }
 
+    .form-control {
+        font-size: 30px;
+        height: 64px;
+    }
+
     h2 {
-        font-size: 70px;
+        font-size: 50px;
     }
 
     #slide1_container {
@@ -429,6 +434,10 @@ input[type=textfield] {
         width: 500px;
     }
 
+    .glyphicon-triangle-left, .glyphicon-triangle-right {
+        font-size: 50px;
+    }
+
 }
 
 @media screen and (min-width:1200px) {
@@ -437,6 +446,12 @@ input[type=textfield] {
         width: 80%;
     }
 
-
 }
 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select,
+    textarea,
+    input {
+        font-size: 16px;
+    }
+}

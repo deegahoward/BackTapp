@@ -129,10 +129,10 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
                 $scope.clickedAnswer = function (answer, index) {
 
-
                    if ($scope.currentQuestion.Type == "radio") {
                         if (answer.Other) {
                         }
+
                         else {
                             $scope.result = {
                                 QuestionID: $scope.currentQuestion._id,
@@ -145,9 +145,11 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                             else {
                                 $scope.results[index] = $scope.result;
                             }
+
+                            $scope.forward();
+
                         }
 
-                       $scope.forward();
                     }
                     else if ($scope.currentQuestion.Type == "checkbox") {
                        if (answer.Other) {
