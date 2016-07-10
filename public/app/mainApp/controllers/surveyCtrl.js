@@ -5,9 +5,6 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
     .controller('CreateSurveyController', function ($scope, Survey, Auth, $stateParams, $rootScope, $state) {
 
 
-
-
-
         var vm = this;
 
         $scope.Survey = {};
@@ -36,28 +33,42 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             console.log($scope.skipLogic);
             console.log($scope.skipQ);
             answer = {};
-            if($scope.other == true){
+            if ($scope.other == true) {
                 answer.Text = "Type here...(other)";
                 answer.Other = true;
-                if($scope.skipLogic == true){
+                if ($scope.skipLogic == true) {
                     answer.SkipLogic = {
                         Exists: true,
                         Question: $scope.skipQ
                     }
                 }
+                else {
+                    answer.SkipLogic = {
+                        Exists: false,
+                        Question: $scope.skipQ
+                    }
+                }
+
                 console.log(answer);
             }
             else {
                 answer.Text = answerText;
                 answer.Other = false;
-                if($scope.skipLogic == true){
+                if ($scope.skipLogic == true) {
                     answer.SkipLogic = {
                         Exists: true,
                         Question: $scope.skipQ
                     }
                 }
+                else {
+                    answer.SkipLogic = {
+                        Exists: false,
+                        Question: $scope.skipQ
+                    }
+                }
                 console.log($scope.other);
             }
+
             $scope.Answers.push(answer);
             console.log(answer);
             console.log($scope.Answers);
@@ -72,15 +83,15 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             console.log($scope.Answers);
         };
 
-        $scope.checkType = function(){
+        $scope.checkType = function () {
             console.log($scope.NewQuestion);
-            if($scope.NewQuestion.Type == "text"){
+            if ($scope.NewQuestion.Type == "text") {
             }
             else {
             }
         };
 
-        $scope.skipTool = function(){
+        $scope.skipTool = function () {
 
             console.log($scope.skipLogic);
         };
@@ -154,8 +165,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.selectedQuestion = question;
             $scope.selectedQType = question.Type;
             console.log($scope.selectedQType);
-            angular.forEach($scope.selectedQuestion.Answers, function(answer){
-                if(answer.Other == true){
+            angular.forEach($scope.selectedQuestion.Answers, function (answer) {
+                if (answer.Other == true) {
                     $scope.Other = true;
                 }
             });
@@ -184,8 +195,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.deleteQuestion = function () {
             $scope.saveButton = true;
-            angular.forEach($scope.clickedQuestions, function(question, i){
-                if(question.Title == $scope.selectedQuestion.Title){
+            angular.forEach($scope.clickedQuestions, function (question, i) {
+                if (question.Title == $scope.selectedQuestion.Title) {
                     $scope.clickedQuestions.splice(i, 1);
                     console.log(question.Title);
                 }
@@ -206,6 +217,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.saveButton = true;
         };
 
+        //add other and skiplogic here
+
         $scope.addAnswer = function () {
             var answer = {Text: ""};
             $scope.selectedQuestion.Answers.push(answer);
@@ -217,7 +230,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
                 Other: false
             };
 
-            if($scope.other == true){
+            if ($scope.other == true) {
                 answer.Text = "Type here...(other)";
                 answer.Other = true;
             }
@@ -231,7 +244,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.newAnswers.splice(index, 1);
         };
 
-        $scope.removeOldAnswer = function(index){
+        $scope.removeOldAnswer = function (index) {
 
             $scope.selectedQuestion.Answers.splice(index, 1);
         };
@@ -328,7 +341,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             angular.element('#thisSurvey').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
         };
 
-        $scope.cancelSurvey = function(){
+        $scope.cancelSurvey = function () {
             $scope.viewingSurvey = false;
             angular.element('#existingSurveys').css('left', 'calc(100% - 750px)');
             angular.element('#thisSurvey').css({'top': '300px', 'opacity': '0', 'margin-top': '600px'});

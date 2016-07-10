@@ -121,10 +121,13 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
                 $scope.clickedAnswer = function (answer, index) {
 
-                    if(answer.SkipLogic.Exists)
+                    console.log(answer.SkipLogic.Exists);
+
+                   if(answer.SkipLogic.Exists == true)
                     {
                         $scope.skipQuestions(answer);
                     }
+
                    if ($scope.currentQuestion.Type == "radio") {
                         if (answer.Other) {
                         }
