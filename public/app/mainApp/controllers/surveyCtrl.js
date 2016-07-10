@@ -362,6 +362,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.goToSurvey = function (survey) {
             $location.path('/example/takeSurvey/' + survey._id);
+            window.location = '/example/takeSurvey/' + survey._id;
+
 
         }
     });

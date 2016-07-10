@@ -97,44 +97,26 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
                 $scope.skipQuestions = function(answer){
 
-                    //if(answer.SkipLogic.Exists) {
-                    //var indx = answer.SkipLogic.No - 1;
-
-                    //usually plus 1
-
                     var goTo = answer.SkipLogic.Question;
-
                     angular.forEach($scope.thisSurvey.Questions, function(question, index){
-
-                        if(index > 0 && index < goTo){
-
+                        if(index > $scope.no && index < goTo){
                             var removedQ = {
                                 Question: $scope.thisSurvey.Questions[index],
                                 Index: index
                             };
-
                             $scope.removedQuestions.push(removedQ);
-
                             $scope.thisSurvey.Questions.splice(index, 1);
-
                         }
-
                     });
-
                     console.log($scope.removedQuestions);
-
                     //$scope.reAddQuestion();
-
                     //}
-
                 };
 
                 $scope.reAddQuestion = function(){
 
                     var question = $scope.removedQuestions[0];
-
                     $scope.thisSurvey.Questions.splice(question.Index, 0, question.Question);
-
                 };
 
                 $scope.clickedAnswer = function (answer, index) {
