@@ -39,9 +39,8 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         }, 500);
 
         $scope.forward = function () {
-            console.log("1 works");
+            console.log($scope.results);
             if ($scope.no < $scope.noSlides) {
-                console.log("2 works");
                 $scope.notEndOfSurvey = true;
                 $scope.checkType();
                 $scope.selectedAnswer = {};
@@ -114,8 +113,6 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         };
 
         $scope.reAddQuestions = function () {
-            console.log("re-adding");
-            console.log($scope.removedQuestions);
             var arr = $scope.removedQuestions;
             var i = arr.length;
             while(i--){
@@ -123,8 +120,6 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     $scope.thisSurvey.Questions.splice(arr[i].Index, 0, arr[i].Question);
                     arr.splice(i, 1);
                 }
-                console.log($scope.thisSurvey.Questions);
-                console.log($scope.removedQuestions);
             }
             $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 500;
             $scope.noSlides = $scope.thisSurvey.Questions.length;
@@ -159,6 +154,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
             }
             else if ($scope.currentQuestion.Type == "checkbox") {
+                console.log("check");
                 if (answer.Other) {
                 }
                 else {
@@ -169,6 +165,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     else {
                         $scope.Answers.push(answer);
                     }
+                    console.log($scope.Answers);
                 }
             }
             else if ($scope.currentQuestion.Type == "text") {
@@ -178,30 +175,41 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
         $scope.checkType = function () {
 
+
             if ($scope.currentQuestion.Type == "checkbox") {
+                console.log("check");
                 var tempAnswer = {
                     Text: $scope.currentQuestion.OtherText,
                     Other: true
                 };
+                console.log(tempAnswer);
                 index = _.findLastIndex($scope.Answers, {Other: true});
                 if (index == -1) {
+
                     $scope.Answers.push(tempAnswer);
                 }
                 else {
                     $scope.Answers.splice(index, 1);
                     $scope.Answers.push(tempAnswer);
                 }
-                index = _.findLastIndex($scope.results, {QuestionID: $scope.result.QuestionID});
                 $scope.result = {
                     QuestionID: $scope.currentQuestion._id,
                     Answers: $scope.Answers
                 };
+
+                index = _.findLastIndex($scope.results, {QuestionID: $scope.result.QuestionID});
+                console.log($scope.results[index]);
+                console.log($scope.result);
                 if (index == -1) {
+                    console.log("1");
                     $scope.results.push($scope.result);
                 }
                 else {
+                    console.log("2");
                     $scope.results[index] = $scope.result;
                 }
+
+                console.log($scope.results);
             }
             if ($scope.currentQuestion.Type == "text") {
                 index = _.findLastIndex($scope.results, {QuestionID: $scope.currentQuestion._id});
@@ -216,9 +224,13 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     $scope.results[index].Answers = [$scope.currentQuestion.OtherText];
                 }
             }
+            
+            $scope.Answers = [];
+            $scope.result = {};
         };
 
         $scope.submitResponse = function () {
+
 
             timestamp2 = new Date().toLocaleString().toString();
             $scope.checkType();
@@ -228,6 +240,8 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                 TimeFinish: timestamp2,
                 Responses: $scope.results
             };
+
+            console.log($scope.results);
 
             Results.send(response);
 
