@@ -56,7 +56,7 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
 
                     if (data.success) {
                         console.log("yes");
-                        $location.path('/');
+                        //$location.path('/');
                         $state.go('home');
                     }
                     else {
