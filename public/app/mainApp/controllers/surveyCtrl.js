@@ -16,6 +16,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.showCancel = false;
         $scope.skipLogic = false;
         $scope.skipQ = "";
+        $scope.addingAnswer = false;
 
         $scope.AddQuestion = function (question) {
 
@@ -26,7 +27,12 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.Questions.push(tempQuestion);
             $scope.NewQuestion = {};
             $scope.Answers = [];
+            $scope.addingAnswer = false;
             $('.collapse').collapse('hide');
+        };
+
+        $scope.showAddAnswer = function(){
+            $scope.addingAnswer = true;
         };
 
         $scope.AddAnswer = function (answerText) {
@@ -117,6 +123,8 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             angular.element('#newQuestions').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
         };
     })
+
+
 
     //=============================== EXISTING SURVEYS CONTROLLER =============================================
 

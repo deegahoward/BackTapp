@@ -52,14 +52,10 @@
                                 </p>
                                 <textarea ng-show="editingTitle"
                                           ng-model="clickedSurvey.Title">{{clickedSurvey.Title}}</textarea>
-                                <span class="glyphicon glyphicon-save-file" ng-show="editingTitle"
+                                <span class="glyphicon glyphicon-ok" ng-show="editingTitle"
                                       ng-click="saveTitle()"></span>
                             </div>
                             <div class="col-md-3 pull-right">
-                                    <button type="button" class="btn btn-success"
-                                            ng-click="saveSurvey()"
-                                    >Save Survey
-                                    </button>
                                 <span class="glyphicon glyphicon-remove pull-right" ng-click="cancelSurvey()"></span>
                             </div>
                         </div>
@@ -83,7 +79,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="btn group">
-                                    <button type="button" class="btn btn-warning" ng-show="showDelete"
+                                    <button type="button" class="btn btn-success" ng-show="showDelete"
                                             ng-click="editQuestion()">Edit
                                         Question
                                     </button>
@@ -95,6 +91,10 @@
                                             ng-click="saveNewQuestion()">Save
                                         Question
                                     </button>
+                                    <button type="button" class="btn btn-success"
+                                            ng-click="saveSurvey()"
+                                    >Save Survey
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -103,6 +103,8 @@
                             <p ng-show="!editingQuestion">{{selectedQuestion.Title}}</p>
                             <div class="well" ng-show="editingQuestion">
                                 <textarea ng-show="editingQuestion" ng-model="selectedQuestion.Title">{{ selectedQuestion.Title }}</textarea>
+                                <span class="glyphicon glyphicon-ok" ng-show="editingQuestion" ng-click="saveQuestionTitle()"></span>
+
                             </div>
 
                         </div>
@@ -111,20 +113,19 @@
                             <div class="well">
                                 <textarea ng-model="newQuestion.Title">{{ newQuestion.Title }}</textarea>
                             </div>
-
+                            <span class="glyphicon glyphicon-ok" ng-show="editingQuestion" ng-click="saveQuestionTitle()"></span>
                         </div>
-                        <button type="button" class="btn btn-success" ng-show="editingQuestion"
-                                ng-click="saveQuestionTitle()">Save
-                        </button>
                         <div class="row-centered">
                             <div class="col-md-12" ng-show="showAddQ">
                                 <div class="col-md-6" ng-show="showAddQ">
                                     <h4>Question Type:</h4>
+                                    <div class="select-style">
                                     <select id="Type" ng-model="newQuestion.Type">
                                         <option value="radio">Radio</option>
                                         <option value="checkbox">Checkbox</option>
                                         <option value="text">TextInput</option>
                                     </select>
+                                        </div>
                                     <h4>Add Answer:</h4>
                                     <textarea placeholder="Type answer here..." ng-model="newAnswer.Text">Enter Answer here...</textarea>
                                     <span class="glyphicon glyphicon-plus" ng-click="addNewAnswer()"></span>
@@ -135,11 +136,10 @@
                                 <div class="col-md-6">
                                     <li ng-repeat="answer in newAnswers">
                                         {{answer.Text}}
-                                        <button type="button" class="btn btn-success"
-                                                ng-click="removeAnswer($index)"><span
-                                                class="glyphicon glyphicon-minus">
+                                        <span class="glyphicon glyphicon-minus"
+                                                ng-click="removeAnswer($index)">
                                             </span>
-                                        </button>
+                                        </span>
                                     </li>
                                 </div>
                             </div>
@@ -152,13 +152,12 @@
                                               ng-click="removeOldAnswer($index)"></span>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-success" ng-show="editingAnswers"
-                                        ng-click="saveAnswers()">Save
-                                </button>
-                                <button type="button" class="btn btn-success" ng-show="editingAnswers"
-                                        ng-click="addAnswer()"><span
-                                        class="glyphicon glyphicon-plus"></span>
-                                </button>
+                                <span class="glyphicon glyphicon-ok pull-right" ng-show="editingAnswers"
+                                        ng-click="saveAnswers()">
+                                </span>
+                                <span class="glyphicon glyphicon-plus pull-left" ng-show="editingAnswers"
+                                        ng-click="addAnswer()"></span>
+                                </span>
                             </div>
                             <div class="col-md-6" ng-show="!showAddQ">
                                 <div class="container">

@@ -30,6 +30,10 @@ input[type=radio], input[type=checkbox] {
     display: none;
 }
 
+.btn-group {
+    margin: 5px;
+}
+
 input:checked {
     background-color: #000;
 }
@@ -40,12 +44,35 @@ label {
 
 label.active {
 
-    background-color: cornflowerblue;
+    background-color: rgba(98, 203, 203, 1);
     color: white;
 }
 
 option {
     color: blue;
+}
+
+.select-style {
+    border: 1px solid #ccc;
+    width: 120px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fafafa url("/app/images/arrow.png") no-repeat 90% 50%;
+    margin: auto;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
 }
 
 .error {
@@ -82,11 +109,70 @@ option {
 
 }
 
+.btn-success:focus {
+    background-color: rgba(98, 203, 203, 1);
+    border: none;
+    outline: none;
+}
+
+.btn-success:active {
+    background-color: #4F4E4E ;
+}
+
+.open>.dropdown-toggle.btn-success {
+    color: #fff;
+    background-color: #4F4E4E;
+    border-color: #4F4E4E;
+
+}
+
+.btn-success:active:focus {
+    color: #fff;
+    background-color: #4F4E4E;
+    border-color: #4F4E4E;
+}
+
+.open>.dropdown-toggle.btn-success:hover, .open>.dropdown-toggle.btn-success:active,
+.open>.dropdown-toggle.btn-success:focus{
+    color: #fff;
+    background-color: #4F4E4E;
+    border-color: #4F4E4E;
+}
+
+.btn-group.open .dropdown-toggle {
+    color: #fff;
+    background-color: #4F4E4E;
+    border-color: #4F4E4E;
+
+}
+
+.alert-success {
+    color: grey;
+    background-color: aliceblue;
+    border-color: gainsboro;
+}
+
+.btn-danger {
+    background-color: firebrick;
+    border: none;
+}
+
 .panel-success .panel-heading {
 
-    background-color:crimson ;
+    background-color: #4F4E4E ;
     color: white;
     letter-spacing: 2px;
+    border: none;
+}
+
+.panel-info .panel-heading {
+
+    background-color: lightgray;
+    color: grey;
+    border: none;
+    font-weight: 400;
+    letter-spacing: 2px;
+
 }
 
 .panel-default .panel-heading {
@@ -170,9 +256,9 @@ option {
 }
 
 .btn-success {
-    background-color: cornflowerblue;
+    background-color: rgba(98, 203, 203, 1);
     color: white;
-    border-color: white;
+    border: none;
 }
 
 .btn-success:hover {
@@ -228,6 +314,12 @@ option {
     margin-right: -4px;
 }
 
+.logo {
+
+    height: 150px;
+
+}
+
 #previewBox {
     width: 80%;
 }
@@ -248,7 +340,7 @@ option {
     font-weight: 200;
     font-size: 18px;
     text-align: left;
-    background-color: crimson;
+    background-color: rgba(98, 203, 203, 1);
     border: none;
     color: white;
 }
@@ -378,7 +470,7 @@ option {
     padding: 10px;
     margin-bottom: 8px;
     margin-top: 10px;
-    background-color: crimson;
+    background-color: rgba(98, 203, 203, 1);
 
 }
 
@@ -389,7 +481,7 @@ input[type=textfield] {
 
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid cornflowerblue; /* Blue */
+    border-top: 16px solid rgba(98, 203, 203, 1); /* Blue */
     border-radius: 50%;
     width: 80px;
     height: 80px;
