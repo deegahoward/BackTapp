@@ -185,10 +185,10 @@ option {
     border-color: white !important;
 
 }
-
+/*
 .dropdown-toggle {
     margin: 5%
-}
+}*/
 
 .dropdown-menu li {
 
@@ -529,6 +529,12 @@ input[type=textfield] {
 
     }
 
+    .input-group-btn span {
+        font-size: 50px;
+        font-weight: 400;
+    }
+
+
     .form-control {
         font-size: 30px;
         height: 64px;
@@ -548,7 +554,7 @@ input[type=textfield] {
     }
 
     .glyphicon-triangle-left, .glyphicon-triangle-right {
-        font-size: 50px;
+        font-size: 100px;
     }
 
     select,
@@ -565,7 +571,9 @@ input[type=textfield] {
 
     #submitButton .btn-success {
         font-size: 30px;
-        border-radius: 20px;
+        width: 160px;
+        height: 160px;
+        border-radius: 100px;
         margin-right: 40px;
 
     }

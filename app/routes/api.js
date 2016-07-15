@@ -317,6 +317,27 @@ module.exports = function (app, express, io) {
             });
         });
 
+    api.route('/answers/:answer_id')
+
+        .get(function (req, res){
+
+            Results.count({
+                SurveyID: '5788fdadd5bc16726a6fb1d4'
+            }, function (err, result) {
+                if (err) {
+                    next(err);
+                } else {
+                    console.log(result);
+                    res.json(result);
+                }
+            });
+
+        });
+
+
+
+
+
     app.use('/api', api);
 
 };

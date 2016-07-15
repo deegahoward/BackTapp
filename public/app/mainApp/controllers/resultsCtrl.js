@@ -14,6 +14,7 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
     $scope.myResponses = [];
     $scope.resultSet = [];
     $scope.thisResult = {};
+    $scope.compareAnswers = [];
 
     Auth.getUser()
         .then(function (data) {
@@ -40,13 +41,27 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
         Results.all($scope.thisSurveyID)
             .success(function (data) {
                 vm.results = data;
-                console.log(vm.results);
                 $scope.resultSet = vm.results;
                 angular.forEach($scope.resultSet, function(result){
                    $scope.myResponses = result.Responses;
-                    console.log($scope.myResponses);
+                    //console.log($scope.myResponses);
                     angular.forEach($scope.myResponses, function(response){
                         $scope.theAnswers = response.Answers;
+                        var allQAnswers = {
+                            QID: response.QuestionID,
+                            Answers: [response.Answers.Text]
+                        };
+                        index = _.findLastIndex($scope.compareAnswers, {QID: response.QuestionID});
+                        if (index == -1) {
+                            console.log(1);
+                            $scope.compareAnswers.push(allQAnswers);
+                        }
+                        else {
+                            console.log(2);
+                            $scope.compareAnswers[index].Answers.push(response.Answers.Text);
+                        }
+
+                        console.log($scope.compareAnswers);
                     })
                 });
             });
@@ -72,13 +87,27 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
         return string.join(", ");
     };
 
-    $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-    $scope.series = ['Series A', 'Series B'];
+    //Chart Stuff
 
-    $scope.data = [
-        [65, 59, 80, 81, 56, 55, 40],
-        [28, 48, 40, 19, 86, 27, 90]
-    ];
+
+
+    var barData = {
+        labels: ['Italy', 'UK', 'USA', 'Germany', 'France', 'Japan'],
+        datasets: [
+            {
+                label: '2010 customers #',
+                fillColor: '#382765',
+                data: [2500, 1902, 1041, 610, 1245, 952]
+            },
+            {
+                label: '2014 customers #',
+                fillColor: '#7BC225',
+                data: [3104, 1689, 1318, 589, 1199, 1436]
+            }
+        ]
+    };
+    var context = document.getElementById('clients').getContext('2d');
+    var clientsChart = new Chart(context).Bar(barData);
 
 
     });

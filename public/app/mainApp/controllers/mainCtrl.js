@@ -77,7 +77,6 @@ mainApp.controller('MainController', function ($rootScope, $location, Auth, $sco
 
 
 
-
     });
 
 

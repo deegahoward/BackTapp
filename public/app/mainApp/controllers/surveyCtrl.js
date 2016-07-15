@@ -174,6 +174,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.editingTitle = false;
             $scope.editingAnswers = false;
             $scope.selectedQuestion = question;
+            console.log($scope.selectedQuestion);
             $scope.selectedQType = question.Type;
             console.log($scope.selectedQType);
             angular.forEach($scope.selectedQuestion.Answers, function (answer) {
@@ -392,6 +393,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             var id = survey._id;
             angular.element('#delete' + id).css('display', 'inline-block');
         };
+
 
         $scope.showUrlAlert = function (survey) {
             var id = survey._id;
