@@ -230,6 +230,8 @@ option {
     height: 50px !important;
     width: 150px !important;
     border-radius: 20px !important;
+    background-color: white !important;
+    color: black !important;
 }
 
 .question h4 {
@@ -249,6 +251,10 @@ option {
 .row-padded {
 
     padding: 10%;
+}
+
+.dropdown-menu {
+    min-width: 260px;
 }
 
 .glyphicon-star:hover {
@@ -577,3 +583,7 @@ input[type=textfield] {
         font-size: 16px;
     }
 }
+
+/* charts stuff */
+
+

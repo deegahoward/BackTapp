@@ -40,7 +40,8 @@
     <script type="text/javascript" src="app/app.js"></script>
     <script type="text/javascript" src="stylesheets/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-
+    <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="node_modules/chart.js/Chart.min.js"></script>
 
 
 
@@ -59,6 +60,7 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right">
+                <li ng-if="main.loggedIn"><a ui-sref="home">Home</a></li>
                 <li ng-if="!main.loggedIn"><a ui-sref="login">Login</a></li>
                 <li ng-if="!main.loggedIn"><a ui-sref="signup">Signup</a></li>
                 <li ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>

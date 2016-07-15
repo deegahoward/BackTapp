@@ -37,21 +37,21 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.AddAnswer = function (answerText) {
             console.log($scope.skipLogic);
-            console.log($scope.skipQ);
             answer = {};
+            //$scope.skippedQs = $scope.skipQ.split(",");
             if ($scope.other == true) {
                 answer.Text = "Type here...(other)";
                 answer.Other = true;
                 if ($scope.skipLogic == true) {
                     answer.SkipLogic = {
                         Exists: true,
-                        Question: $scope.skipQ
-                    }
+                        Questions: $scope.skippedQs
+                }
                 }
                 else {
                     answer.SkipLogic = {
                         Exists: false,
-                        Question: $scope.skipQ
+                        Questions: []
                     }
                 }
 
@@ -63,13 +63,13 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
                 if ($scope.skipLogic == true) {
                     answer.SkipLogic = {
                         Exists: true,
-                        Question: $scope.skipQ
+                        Questions: $scope.skippedQs
                     }
                 }
                 else {
                     answer.SkipLogic = {
                         Exists: false,
-                        Question: $scope.skipQ
+                        Questions: []
                     }
                 }
                 console.log($scope.other);
@@ -153,6 +153,9 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.showAddQ = false;
         $scope.viewingSurvey = false;
         $scope.Other = false;
+        $scope.skipLogic = false;
+        $scope.skipQ = "";
+        $scope.showSave = false;
 
 
         $scope.surveyClicked = function (survey) {
@@ -203,6 +206,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.deleteQuestion = function () {
             $scope.saveButton = true;
+            $scope.showSave = true;
             angular.forEach($scope.clickedQuestions, function (question, i) {
                 if (question.Title == $scope.selectedQuestion.Title) {
                     $scope.clickedQuestions.splice(i, 1);
@@ -217,6 +221,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.editingQuestion = true;
             $scope.editingAnswers = true;
             $scope.saveButton = true;
+            $scope.showSave = true;
 
         };
 
@@ -235,12 +240,29 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.addNewAnswer = function () {
             var answer = {
                 Text: $scope.newAnswer.Text,
-                Other: false
+                Other: false,
+                SkipLogic: {
+                    Exists: "",
+                    Question: ""
+                }
             };
 
             if ($scope.other == true) {
                 answer.Text = "Type here...(other)";
                 answer.Other = true;
+
+                if ($scope.skipLogic == true) {
+                    answer.SkipLogic = {
+                        Exists: true,
+                        Question: $scope.skipQ
+                    }
+                }
+                else {
+                    answer.SkipLogic = {
+                        Exists: false,
+                        Question: $scope.skipQ
+                    }
+                }
             }
 
             $scope.newAnswers.push(answer);
@@ -262,6 +284,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.editingTitle = false;
             $scope.editingAnswers = false;
             $scope.showAddQ = true;
+            $scope.showSave = true;
         };
 
 
@@ -275,6 +298,9 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.clickedQuestions.push(question);
             console.log($scope.clickedQuestions);
             $scope.showAddQ = false;
+            $scope.newQuestion.Title = "";
+            $scope.newAnswers = [];
+            $scope.newQuestion.Type = "";
         };
 
         $scope.saveTitle = function () {
@@ -315,6 +341,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.editingQuestion = false;
             $scope.viewingSurvey = false;
             $scope.cancelSurvey();
+            $scope.showSave = false;
 
 
         };

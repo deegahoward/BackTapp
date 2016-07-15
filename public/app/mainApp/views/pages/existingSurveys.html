@@ -92,7 +92,7 @@
                                         Question
                                     </button>
                                     <button type="button" class="btn btn-success"
-                                            ng-click="saveSurvey()"
+                                            ng-show="showSave" ng-click="saveSurvey()"
                                     >Save Survey
                                     </button>
                                 </div>
@@ -130,11 +130,21 @@
                                     <textarea placeholder="Type answer here..." ng-model="newAnswer.Text">Enter Answer here...</textarea>
                                     <span class="glyphicon glyphicon-plus" ng-click="addNewAnswer()"></span>
                                     <div class="checkbox">
-                                        <label><input type="checkbox" ng-model="other" id="other" ng-click="$event.stopPropagation()" value="other">Other?(textfield)</label>
+                                        <label class="skip"><input type="checkbox" ng-model="other" id="other" ng-click="$event.stopPropagation()" value="other">Other?(textfield)</label>
+                                    </div>
+                                        <div class="checkbox" id="skipLogic">
+                                            <label class="skip"><input type="checkbox" ng-model="skipLogic"
+                                                          ng-click="skipTool(); $event.stopPropagation()"
+                                                          value="skip">Skip logic?</label>
+                                        </div>
+                                    <div class="col-md-5" ng-show="skipLogic">
+                                        <label for="text">Skip Questions...(e.g 6,7,8):</label>
+                                        <input type="text" name="Text"
+                                               placeholder="Type No." ng-model="skipQ"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <li ng-repeat="answer in newAnswers">
+                                    <li ng-repeat="answer in newAnswers" >
                                         {{answer.Text}}
                                         <span class="glyphicon glyphicon-minus"
                                                 ng-click="removeAnswer($index)">

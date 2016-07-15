@@ -93,7 +93,8 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
 
         $scope.skipQuestions = function (answer) {
-            var goTo = answer.SkipLogic.Question;
+            var skippedQs = answer.SkipLogic.Questions;
+            console.log(skippedQs)
             var arr = $scope.thisSurvey.Questions;
             var i;
             i = arr.length;
