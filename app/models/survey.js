@@ -9,7 +9,7 @@ var AnswerSchema = new Schema({
     Other: Boolean,
     SkipLogic: {
         Exists: Boolean,
-        Questions: [String]
+        Questions: String
     }
 
 });

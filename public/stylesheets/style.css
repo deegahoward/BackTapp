@@ -206,6 +206,11 @@ option {
     font-size: 11px;
 }
 
+
+.glyphicon-triangle-left, .glyphicon-triangle-right {
+    font-size: 50px;
+}
+
 .input-group-btn {
     display: block !important;
     padding: 10px;

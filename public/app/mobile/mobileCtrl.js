@@ -40,7 +40,9 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
         $scope.forward = function () {
             console.log($scope.results);
-            if ($scope.no < $scope.noSlides) {
+            console.log($scope.no);
+            console.log($scope.noSlides);
+            if ($scope.no < $scope.noSlides - 1) {
                 $scope.notEndOfSurvey = true;
                 $scope.checkType();
                 $scope.selectedAnswer = {};
@@ -59,7 +61,13 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         };
 
         $scope.backward = function () {
+            console.log($scope.no);
+            console.log($scope.noSlides);
             if ($scope.no == $scope.noSlides) {
+                $scope.endOfSurvey = false;
+                $scope.notEndOfSurvey = true;
+            }
+            if($scope.no < $scope.noSlides){
                 $scope.endOfSurvey = false;
                 $scope.notEndOfSurvey = true;
             }
@@ -93,24 +101,35 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
 
         $scope.skipQuestions = function (answer) {
-            var skippedQs = answer.SkipLogic.Questions;
-            console.log(skippedQs)
+            var skippedQs = answer.SkipLogic.Questions.split(',');
+            console.log(skippedQs);
             var arr = $scope.thisSurvey.Questions;
             var i;
             i = arr.length;
             while (i--) {
-                if (i > $scope.no && i < goTo - 1) {
-                    var removedQ = {
-                        Question: arr[i],
-                        Index: i,
-                        CurrentID: $scope.currentQuestion._id
-                    };
-                    $scope.removedQuestions.push(removedQ);
-                    arr.splice(i, 1);
-                }
+                angular.forEach(skippedQs, function (question) {
+                    var q = question - 1;
+                    console.log(q);
+                    if (i == q) {
+                        console.log("Same");
+                        var removedQ = {
+                            Question: arr[i],
+                            Index: i,
+                            CurrentID: $scope.currentQuestion._id
+                        };
+                        $scope.removedQuestions.push(removedQ);
+                        arr.splice(i, 1);
+                        console.log(arr);
+
+                    }
+                });
             }
+
             $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 500;
             $scope.noSlides = $scope.thisSurvey.Questions.length;
+
+            console.log($scope.noSlidesWidth);
+            console.log($scope.noSlides);
         };
 
         $scope.reAddQuestions = function () {
@@ -127,7 +146,6 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         };
 
         $scope.clickedAnswer = function (answer, index) {
-
             $scope.reAddQuestions();
             if (answer.SkipLogic.Exists == true) {
                 $scope.skipQuestions(answer);

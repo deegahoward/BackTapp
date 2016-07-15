@@ -1,6 +1,6 @@
 
 
-angular.module('MyApp', ['appRoutes', 'mainCtrl', 'authService', 'userCtrl', 'userService', 'storyService', 'resultsService', 'storyCtrl', 'surveyService', 'ui.router', 'surveyCtrl', 'resultsCtrl'])
+angular.module('MyApp', ['appRoutes', 'mainCtrl', 'authService', 'userCtrl', 'userService', 'resultsService', 'surveyService', 'ui.router', 'surveyCtrl', 'resultsCtrl'])
 
 .config(function($httpProvider) {
 
@@ -37,11 +37,8 @@ angular.module('MobileApp', ['mobileCtrl', 'ui.router', 'surveyService', 'result
         .state('landingPage', {
             url: '/example/landingPage',
             templateUrl:'app/mobile/pages/landingPage.html'
-        })
-        .state('takeSurvey2', {
-            url: '/example/takeSurvey2/:id',
-            templateUrl: 'app/mobile/pages/takeSurvey2.html'
         });
+
 
 
     $locationProvider.html5Mode(true);

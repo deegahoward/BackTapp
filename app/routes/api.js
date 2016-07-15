@@ -1,5 +1,4 @@
 var User = require('../models/user');
-var Story = require('../models/story');
 var Survey = require('../models/survey');
 var Results = require('../models/result');
 

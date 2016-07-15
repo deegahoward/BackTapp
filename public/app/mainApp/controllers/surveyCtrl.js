@@ -37,21 +37,21 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.AddAnswer = function (answerText) {
             console.log($scope.skipLogic);
+            console.log($scope.skipQ);
             answer = {};
-            //$scope.skippedQs = $scope.skipQ.split(",");
             if ($scope.other == true) {
                 answer.Text = "Type here...(other)";
                 answer.Other = true;
                 if ($scope.skipLogic == true) {
                     answer.SkipLogic = {
                         Exists: true,
-                        Questions: $scope.skippedQs
-                }
+                        Questions: $scope.skipQ
+                    }
                 }
                 else {
                     answer.SkipLogic = {
                         Exists: false,
-                        Questions: []
+                        Questions: $scope.skipQ
                     }
                 }
 
@@ -63,13 +63,13 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
                 if ($scope.skipLogic == true) {
                     answer.SkipLogic = {
                         Exists: true,
-                        Questions: $scope.skippedQs
+                        Questions: $scope.skipQ
                     }
                 }
                 else {
                     answer.SkipLogic = {
                         Exists: false,
-                        Questions: []
+                        Questions: ""
                     }
                 }
                 console.log($scope.other);
@@ -254,13 +254,13 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
                 if ($scope.skipLogic == true) {
                     answer.SkipLogic = {
                         Exists: true,
-                        Question: $scope.skipQ
+                        Questions: $scope.skipQ
                     }
                 }
                 else {
                     answer.SkipLogic = {
                         Exists: false,
-                        Question: $scope.skipQ
+                        Questions: ""
                     }
                 }
             }
