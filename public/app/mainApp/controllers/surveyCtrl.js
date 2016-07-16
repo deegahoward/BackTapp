@@ -159,6 +159,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
 
         $scope.surveyClicked = function (survey) {
+            $scope.showDelete = false;
             $scope.clickedSurvey = {};
             $scope.clickedQuestions = [];
             $scope.clickedSurvey = survey;
@@ -302,6 +303,9 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.newQuestion.Title = "";
             $scope.newAnswers = [];
             $scope.newQuestion.Type = "";
+            $scope.skipQ = "";
+            $scope.skipLogic = false;
+            $scope.other = false;
         };
 
         $scope.saveTitle = function () {

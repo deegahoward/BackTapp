@@ -150,6 +150,8 @@ option {
     color: grey;
     background-color: aliceblue;
     border-color: gainsboro;
+    white-space: normal;
+
 }
 
 .btn-danger {
@@ -204,6 +206,8 @@ option {
     display: none;
     width: 300px;
     font-size: 11px;
+    white-space: normal;
+
 }
 
 
@@ -217,6 +221,7 @@ option {
     margin-bottom: 8px !important;
     margin-top: 10px;
     background-color: crimson;
+    white-space: normal;
 }
 
 .input-group-btn span {
@@ -270,6 +275,9 @@ option {
     background-color: rgba(98, 203, 203, 1);
     color: white;
     border: none;
+    white-space: normal;
+    text-align: left;
+
 }
 
 .btn-success:hover {
@@ -482,6 +490,8 @@ option {
     margin-bottom: 8px;
     margin-top: 10px;
     background-color: rgba(98, 203, 203, 1);
+    white-space: normal;
+
 
 }
 
@@ -526,6 +536,8 @@ input[type=textfield] {
         font-size: 70px;
         margin-left: 0;
         text-align: center;
+        white-space: normal;
+
 
     }
 
