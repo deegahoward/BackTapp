@@ -388,6 +388,11 @@ option {
 
 }
 
+#clients {
+    max-width: 580px;
+    max-height: 400px;
+}
+
 #saveSurvey .btn-success {
     font-size: 20px;
 }

@@ -20,15 +20,28 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 pull-right">
+        <div class="col-sm-7 pull-right">
             <div class="row">
                 <div class="panel panel-info"id="thisSurvey">
                     <div class="panel-heading">Results for this survey</div>
                     <div class="panel-body">
-                        <div class="row">
+                        <div class="row-centered">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                    Select a question: <span class="caret"></span>{{ question.Type }}
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="question in myQuestions" ng-if="question.Type != 'text'"
+                                        ng-click="showGraph(question)"> {{ question.Title }}
+                                    </li>
+                                </ul>
+                            </div>
+                            </div>
+                        <div class="row-padded">
                             <canvas id="clients" width="300" height="200"></canvas>
 
-                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-5">
                                 <ul class="results">
@@ -47,12 +60,13 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <tr><<</tr>
                                         <tr ng-repeat="response in thisResult.Responses">
                                             <td>{{response.Title}}</td>
                                             <td><span ng-repeat="Answer in response.Answers">{{Answer.Text}}<Br></span></td>
 
                                         </tr>
-
+                                        <tr>>></tr>
                                         </tbody>
                                     </table>
                                 </div>
