@@ -45,6 +45,7 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
             $scope.thisSurveyID = survey._id;
             $scope.thisSurvey = survey;
             $scope.theQuestions = survey.Questions;
+            console.log($scope.theQuestions);
             Results.all($scope.thisSurveyID)
                 .success(function (data) {
                     vm.results = data;
@@ -122,7 +123,7 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
             };
 
 
-            angular.forEach($scope.myQuestions, function (q) {
+            angular.forEach($scope.theQuestions, function (q) {
                 if (q.Type !== "text") {
                     if (q._id == id) {
                         var answers = q.Answers;

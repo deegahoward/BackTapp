@@ -500,6 +500,8 @@ option {
 
 }
 
+
+
 input[type=textfield] {
 
     font-size: 20px;
@@ -581,6 +583,14 @@ input[type=textfield] {
         font-size: 16px;
     }
 
+    select:focus,
+    textarea:focus,
+    input:focus {
+        font-size: 16px;
+        background: #eee;
+    }
+
+
 
     #submitButton {
         margin-right: 40px;
@@ -611,6 +621,13 @@ input[type=textfield] {
     input[type=text]
    {
         font-size: 16px;
+    }
+
+    select:focus,
+    textarea:focus,
+    input:focus {
+        font-size: 16px;
+        background: #eee;
     }
 }
 

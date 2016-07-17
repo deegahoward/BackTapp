@@ -27,7 +27,7 @@ angular.module('appRoutes', ['ui.router'])
         })
         .state('success', {
             url: '/success',
-            templateUrl: 'app/mainApp/views/pages/success.html',
+            templateUrl: 'app/mainApp/views/pages/success.html'
 
         })
         .state('existingSurveys', {
@@ -45,6 +45,10 @@ angular.module('appRoutes', ['ui.router'])
         .state('results', {
             url: '/results',
             templateUrl: 'app/mainApp/views/pages/results.html'
+        })
+        .state('userguide', {
+            url: '/userguide',
+            templateUrl: 'app/mainApp/views/pages/userGuide.html'
         });
 
     $locationProvider.html5Mode(true);

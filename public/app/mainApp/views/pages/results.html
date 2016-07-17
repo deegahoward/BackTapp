@@ -32,7 +32,7 @@
                                     Select a question: <span class="caret"></span>{{ question.Type }}
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li ng-repeat="question in myQuestions" ng-if="question.Type != 'text'"
+                                    <li ng-repeat="question in theQuestions" ng-if="question.Type != 'text'"
                                         ng-click="showGraph(question)"> {{ question.Title }}
                                     </li>
                                 </ul>
@@ -43,7 +43,7 @@
 
                         </div>
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-12">
                                 <ul class="results">
                                     <button class="btn btn-success" ng-repeat="result in resultSet track by $index" ng-click="clickedResult(result)">
                                         {{$index + 1}}
@@ -60,13 +60,11 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr><<</tr>
                                         <tr ng-repeat="response in thisResult.Responses">
                                             <td>{{response.Title}}</td>
                                             <td><span ng-repeat="Answer in response.Answers">{{Answer.Text}}<Br></span></td>
 
                                         </tr>
-                                        <tr>>></tr>
                                         </tbody>
                                     </table>
                                 </div>
