@@ -60,11 +60,16 @@
     }
 </script>
 <script>
-    var urls = new Array("https://docs.google.com/forms/d/e/1FAIpQLScSIY6N6grRPq1Y_bTNu9pV7jWmujm0lhTmGdulVO_LmlTzxg/viewform", "http://backtapp.herokuapp.com/example/takeSurvey/578d1cb044c4b3370ff997bd");
-    var redirect = function()
-     {
-     console.log("working");
-     window.location = urls[Math.floor(urls.length*Math.random())];
+    var num = Math.floor(Math.random() * 1) + 1;
+     var redirect = function() {
+
+         console.log(num);
+
+         if (num == 1) {
+
+             window.location = "https://docs.google.com/forms/d/e/1FAIpQLScSIY6N6grRPq1Y_bTNu9pV7jWmujm0lhTmGdulVO_LmlTzxg/viewform";
+
+         }
      };
 
      redirect();

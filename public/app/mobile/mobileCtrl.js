@@ -3,6 +3,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
     .controller('MobileController', function ($rootScope, $location, $scope, $state, $stateParams, Survey, $http, Results) {
 
+
         var vm = this;
         var survey = $stateParams;
         var timestamp1 = new Date().toLocaleString().toString();
