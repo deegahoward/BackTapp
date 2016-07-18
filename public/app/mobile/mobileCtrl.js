@@ -255,8 +255,8 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
             $scope.checkType();
             var response = {
                 SurveyID: survey.id,
-                TimeStart: timestamp1,
-                TimeFinish: timestamp2,
+                TimeStart: timestamp1.replace(/,/g, ''),
+                TimeFinish: timestamp2.replace(/,/g, ''),
                 Responses: $scope.results
             };
 

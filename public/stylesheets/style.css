@@ -413,6 +413,7 @@ option {
 #clients {
     max-width: 580px;
     max-height: 400px;
+    padding-left: 50px;
 }
 
 #saveSurvey .btn-success {
@@ -524,7 +525,7 @@ option {
 
 
 
-input[type=textfield] {
+input[type=text] {
 
     font-size: 20px;
 }

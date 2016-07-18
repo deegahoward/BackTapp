@@ -37,33 +37,23 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="btn btn-success" ng-click='downloadCSV({ filename: "stock-data.csv" });'>
+                                Download CSV
+                                </div>
                             </div>
-                        <div class="row-padded">
-                            <canvas id="clients" width="300" height="200"></canvas>
+                        <div class="row">
+                            <h3>{{currentQuestion.Title}}</h3>
+                            <canvas id="clients" width="300" height="200" padding-left="60px"></canvas>
 
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul class="results">
-                                    <button class="btn btn-success" ng-repeat="result in resultSet track by $index" ng-click="clickedResult(result)">
-                                        {{$index + 1}}
-                                    </button>
-                                </ul>
-                            </div>
-                            <div class="col-md-8">
-                                    <h2>View Results</h2>
+                        <div class="row-padded">
+                            <div class=".col-md-8-offset-2 .col-md-8">
+                                    <h3>Survey Statistics</h3>
                                     <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>Question</th>
-                                            <th>Answer</th>
-                                        </tr>
-                                        </thead>
                                         <tbody>
-                                        <tr ng-repeat="response in thisResult.Responses">
-                                            <td>{{response.Title}}</td>
-                                            <td><span ng-repeat="Answer in response.Answers">{{Answer.Text}}<Br></span></td>
-
+                                        <tr>
+                                            <td>No of times taken:</td>
+                                            <td>{{resultSet.length}}</td>
                                         </tr>
                                         </tbody>
                                     </table>
