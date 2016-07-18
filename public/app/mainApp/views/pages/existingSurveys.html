@@ -68,8 +68,8 @@
                                         Select a question: <span class="caret"></span>{{ question.Type }}
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li ng-repeat="question in clickedSurvey.Questions"
-                                            ng-click="questionClicked(question)" ui-sref=".Preview">{{ question.Title }}
+                                        <li ng-repeat="question in clickedSurvey.Questions track by $index"
+                                            ng-click="questionClicked(question)" ui-sref=".Preview"><b>{{ $index + 1 }}:</b> {{ question.Title }}
                                         </li>
                                         <li ng-click="showAddQuestion()" class="btn btn-success"><span class="glyphicon glyphicon-plus">Add New Question</span>
                                         </li>

@@ -58,7 +58,6 @@ option {
     border-radius: 3px;
     overflow: hidden;
     background: #fafafa url("/app/images/arrow.png") no-repeat 90% 50%;
-    margin: auto;
 }
 
 .select-style select {

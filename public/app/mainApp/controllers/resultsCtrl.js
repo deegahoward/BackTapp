@@ -196,14 +196,29 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
 
                     angular.forEach(response.Answers, function (ans) {
 
+                        //console.log(ans);
+
                         answers.push(ans.Text);
+
+                        //console.log(answers);
+
 
                     });
 
-                    thisResult[question] = answers;
+                    answers = answers.filter(function( element ) {
+                        return element !== undefined;
+                    });
 
+                    var i = answers.toString().replace(',','/');
+
+                    console.log(i);
+                    console.log(answers);
+
+
+                    thisResult[question] = i;
 
                 });
+
 
                 allResults.push(thisResult);
                 thisResult = {};
