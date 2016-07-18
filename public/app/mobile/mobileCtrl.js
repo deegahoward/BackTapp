@@ -3,6 +3,15 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
     .controller('MobileController', function ($rootScope, $location, $scope, $state, $stateParams, Survey, $http, Results) {
 
+        var num = Math.floor(Math.random() * 2) + 1;
+
+        console.log(num);
+
+        if(num == 1){
+
+            window.location = "https://docs.google.com/forms/d/e/1FAIpQLScSIY6N6grRPq1Y_bTNu9pV7jWmujm0lhTmGdulVO_LmlTzxg/viewform";
+
+        }
 
         var vm = this;
         var survey = $stateParams;
