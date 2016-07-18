@@ -18,7 +18,27 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.skipQ = "";
         $scope.addingAnswer = false;
 
+        $('[data-toggle="tooltip"]').tooltip();
+
         $scope.AddQuestion = function (question) {
+
+            console.log($scope.NewAnswer.Text);
+
+            angular.forEach($scope.Answers, function(answer){
+
+                if($scope.NewAnswer.Text !== answer.Text && $scope.NewAnswer.Text !== undefined){
+
+                    console.log("no");
+
+                    $scope.AddAnswer($scope.NewAnswer.Text);
+
+                }
+
+                else {
+                    console.log("it exists");
+                }
+
+            });
 
             tempQuestion = {};
             tempQuestion.Title = question.Title;

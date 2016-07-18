@@ -54,7 +54,7 @@ option {
 
 .select-style {
     border: 1px solid #ccc;
-    width: 120px;
+    width: 180px;
     border-radius: 3px;
     overflow: hidden;
     background: #fafafa url("/app/images/arrow.png") no-repeat 90% 50%;
@@ -210,6 +210,28 @@ option {
 
 }
 
+.glyphicon-plus-sign {
+    font-size: 35px;
+    color: rgba(98, 203, 203, 1);
+
+}
+
+
+.glyphicon-plus-sign:hover {
+    color: dimgray;
+    cursor: pointer;
+
+}
+
+.glyphicon-question-sign {
+    font-size: 20px;
+    color: rgba(98, 203, 203, 1);
+}
+
+.glyphicon-question-sign:hover {
+    color: dimgray;
+    cursor: pointer;
+}
 
 .glyphicon-triangle-left, .glyphicon-triangle-right {
     font-size: 50px;

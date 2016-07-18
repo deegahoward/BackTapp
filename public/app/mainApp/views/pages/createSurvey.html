@@ -26,7 +26,7 @@
                             </div>
                             <div class="row-padded">
                                 <div class="col-md-10">
-                                    <li ng-repeat="Answer in question.Answers" contenteditable="true">
+                                    <li ng-repeat="Answer in question.Answers" ng-click="editingQuestion()" ng-model="editedAnswer">
                                         {{Answer.Text}}
                                     </li>
                                 </div>
@@ -70,10 +70,12 @@
                                                 <option value="text">Text Input</option>
                                             </select>
                                         </div>
+                                        <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top"
+                                              title="Single choice: A choice of one answer only, Multiple choice: A choice of one or more answers, Text Input: An open field to type answer"></span>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-2 pull-right">
+                                    <div class="col-sm-3 pull-right">
                                         <button type="button" class="btn btn-success pull-right"
                                                 data-toggle="collapse"
                                                 data-target="#answers" aria-expanded="false"
@@ -109,6 +111,9 @@
                                     <div class="checkbox">
                                         <label><input type="checkbox" ng-model="other" id="other"
                                                       ng-click="$event.stopPropagation()" value="other">Other?(textfield)</label>
+                                        <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+                                              title="Tick this box if you would like an open textfield answer (leave field blank)"></span>
+
                                     </div>
                                 </div>
                                 <div class="col-md-5" id="skipLogic">
@@ -117,6 +122,9 @@
                                                       ng-click="skipTool(); $event.stopPropagation()"
                                                       value="skip">Skip logic?</label>
                                     </div>
+                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top"
+                                          title="If you would like some answers to cause questions to be skipped, tick this box and note the questions"></span>
+
                                 </div>
                                 <div class="col-md-3" ng-show="skipLogic">
                                     <label for="Text">Skip Questions...(e.g 6,7,8):</label>
@@ -124,7 +132,7 @@
                                            placeholder="Type No." ng-model="skipQ"/>
                                 </div>
                                 <div class="col-sm-2">
-                                    <span class="glyphicon glyphicon-ok-circle"
+                                    <span class="glyphicon glyphicon-plus-sign" data-toggle="tooltip" data-placement="top" title="Add Answer"
                                           ng-click="AddAnswer(NewAnswer.Text)"></span>
                                 </div>
                             </div>

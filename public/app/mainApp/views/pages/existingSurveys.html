@@ -71,7 +71,7 @@
                                         <li ng-repeat="question in clickedSurvey.Questions"
                                             ng-click="questionClicked(question)" ui-sref=".Preview">{{ question.Title }}
                                         </li>
-                                        <li ng-click="showAddQuestion()"><span class="glyphicon glyphicon-plus"></span>
+                                        <li ng-click="showAddQuestion()" class="btn btn-success"><span class="glyphicon glyphicon-plus">Add New Question</span>
                                         </li>
                                     </ul>
                                 </div>
