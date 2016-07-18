@@ -545,7 +545,7 @@ input[type=text] {
 }
 
 
-@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation : portrait)
+@media only screen and (min-device-width: 275px) and (max-device-width: 667px) and (orientation : portrait)
 {
     .container {
         width: 100%;
@@ -567,8 +567,6 @@ input[type=text] {
         margin-left: 0;
         text-align: center;
         white-space: normal;
-
-
     }
 
     .input-group-btn span {
@@ -601,15 +599,17 @@ input[type=text] {
 
     select,
     textarea,
-    input[type=text]
+    input[type=text],
+    .form-control
     {
-        font-size: 16px;
+        font-size: 20px;
     }
 
     select:focus,
     textarea:focus,
-    input:focus {
-        font-size: 16px;
+    input:focus,
+    .form-control{
+        font-size: 20px;
         background: #eee;
     }
 
@@ -641,15 +641,18 @@ input[type=text] {
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     select,
     textarea,
-    input[type=text]
+    input[type=text],
+    .form-control
    {
-        font-size: 16px;
+        font-size: 20px;
     }
 
     select:focus,
     textarea:focus,
-    input:focus {
-        font-size: 16px;
+    input:focus,
+    .form-control:focus
+    {
+        font-size: 20px;
         background: #eee;
     }
 }
