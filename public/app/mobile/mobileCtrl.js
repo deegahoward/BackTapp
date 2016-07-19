@@ -3,7 +3,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
     .controller('MobileController', function ($rootScope, $location, $scope, $state, $stateParams, Survey, $http, Results) {
 
-       /* var num = Math.floor(Math.random() * 2) + 1;
+       var num = Math.floor(Math.random() * 2) + 1;
 
         console.log(num);
 
@@ -12,7 +12,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
             window.location = "https://docs.google.com/forms/d/e/1FAIpQLScSIY6N6grRPq1Y_bTNu9pV7jWmujm0lhTmGdulVO_LmlTzxg/viewform";
 
         }
-*/
+
         var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
         console.log(width);
