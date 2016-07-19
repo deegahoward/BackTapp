@@ -3,14 +3,58 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
     .controller('MobileController', function ($rootScope, $location, $scope, $state, $stateParams, Survey, $http, Results) {
 
-       var num = Math.floor(Math.random() * 2) + 1;
+
+
+        var num = Math.floor(Math.random() * 2) + 1;
 
         console.log(num);
 
         if(num == 1){
 
+            var count = Results.getCount("578ea3ebacc0148e34a9b9d6")
+                .success(function (data) {
+                    console.log(data);
+                    vm.count = data;
+                    $scope.thisCount = vm.count;
+                    $scope.count = vm.count.Count;
+                    console.log($scope.thisCount);
+
+                    var newCount = {
+                        _id: $scope.thisCount._id,
+                        id: $scope.thisCount.id,
+                        Count: $scope.thisCount.Count + 1
+                    };
+
+                    console.log(newCount);
+                    Results.updateCount(newCount);
+
+                });
+
+
             window.location = "https://docs.google.com/forms/d/e/1FAIpQLScSIY6N6grRPq1Y_bTNu9pV7jWmujm0lhTmGdulVO_LmlTzxg/viewform";
 
+        }
+
+        else {
+
+            count = Results.getCount("578ea3e6acc0148e34a9b9d5")
+                .success(function (data) {
+                    console.log(data);
+                    vm.count = data;
+                    $scope.thisCount = vm.count;
+                    $scope.count = vm.count.Count;
+                    console.log($scope.thisCount);
+
+                    var newCount = {
+                        _id: $scope.thisCount._id,
+                        id: $scope.thisCount.id,
+                        Count: $scope.thisCount.Count + 1
+                    };
+
+                    console.log(newCount);
+                    Results.updateCount(newCount);
+
+                });
         }
 
         var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;

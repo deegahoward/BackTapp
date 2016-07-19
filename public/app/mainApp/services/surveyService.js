@@ -35,7 +35,6 @@ angular.module('surveyService', [])
 
         };
 
-
         return surveyFactory;
 
     });

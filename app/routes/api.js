@@ -1,6 +1,7 @@
 var User = require('../models/user');
 var Survey = require('../models/survey');
 var Results = require('../models/result');
+var Count = require('../models/count');
 
 
 var config = require('../../config');
@@ -29,7 +30,7 @@ module.exports = function (app, express, io) {
 
     //method to get all existing users from the database
 
-    api.post('/signup', function(req, res){
+    api.post('/signup', function (req, res) {
         var user = new User({
             name: req.body.name,
             username: req.body.username,
@@ -38,8 +39,8 @@ module.exports = function (app, express, io) {
 
         var token = createToken(user);
 
-        user.save(function(err){
-            if(err){
+        user.save(function (err) {
+            if (err) {
                 res.send(err);
                 return;
             }
@@ -304,7 +305,6 @@ module.exports = function (app, express, io) {
     api.route('/results/:survey_id')
 
         .get(function (req, res) {
-
             surveyID = req.params.survey_id;
             Results.find({SurveyID: surveyID}, function (err, results) {
                 console.log(results);
@@ -317,9 +317,81 @@ module.exports = function (app, express, io) {
             });
         });
 
+    api.route('/count')
+
+        .post(function (req, res) {
+
+            console.log(req.body.ID);
+            console.log(req.body.count);
+
+            var count = new Count({
+
+                id: req.body.ID,
+                Count: req.body.count
+            });
+
+            console.log(count);
+
+            count.save(function (err) {
+                if (err) {
+                    console.log(err);
+                    res.send(err);
+                    return;
+                }
+
+                res.json({
+                    success: true,
+                    message: 'New count submitted!'
+                });
+            });
+
+        });
+
+
+    api.route('/count/:count_id')
+
+        .get(function (req, res) {
+
+            console.log(req.params.count_id);
+
+            Count.findById(req.params.count_id, function (err, count) {
+
+                if (err) {
+
+                    console.log(err);
+                    res.send(err);
+                }
+                console.log("no");
+                res.json(count);
+            })
+
+        })
+
+        .put(function (req, res) {
+
+
+            Count.findById(req.params.count_id, function (err, count) {
+                if (err)
+                    res.send(err);
+
+                console.log(count);
+
+                count.Count = req.body.Count;
+
+                count.save(function (err) {
+                    if (err)
+                        res.send(err);
+
+                    res.json({message: 'Count updated!'})
+                })
+            })
+
+
+        });
+
     api.route('/answers/:answer_id')
 
-        .get(function (req, res){
+        .get(function (req, res) {
 
             Results.count({
                 SurveyID: '5788fdadd5bc16726a6fb1d4'
@@ -333,9 +405,6 @@ module.exports = function (app, express, io) {
             });
 
         });
-
-
-
 
 
     app.use('/api', api);
