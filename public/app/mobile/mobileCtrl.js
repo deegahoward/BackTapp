@@ -27,11 +27,9 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
                     console.log(newCount);
                     Results.updateCount(newCount);
+                    window.location = "https://docs.google.com/forms/d/e/1FAIpQLScSIY6N6grRPq1Y_bTNu9pV7jWmujm0lhTmGdulVO_LmlTzxg/viewform";
 
                 });
-
-
-            window.location = "https://docs.google.com/forms/d/e/1FAIpQLScSIY6N6grRPq1Y_bTNu9pV7jWmujm0lhTmGdulVO_LmlTzxg/viewform";
 
         }
 
