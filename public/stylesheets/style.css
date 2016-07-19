@@ -402,10 +402,11 @@ option {
     margin-top: 30%
 }
 
-#submitButton .btn-success {
-    font-size: 30px;
-    border-radius: 20px;
-    margin-right: 40px;
+#submitButton{
+    font-size: 20px;
+    width: 90px;
+    height: 90px;
+    border-radius: 100px;
 
 }
 
@@ -420,9 +421,10 @@ option {
 }
 
 #slide1_container {
-    width: 500px;
-    overflow: hidden; /* So the sliding bit doesn't stick out. */
-}
+     width: 500px;
+     overflow: hidden; /* So the sliding bit doesn't stick out. */
+
+ }
 
 
 #slide1_images {
@@ -556,44 +558,64 @@ input[type=text] {
         text-overflow: ellipsis;
         overflow: hidden;
         width: 100%;
+        /*
         font-size: 20px;
+        */
     }
 
     .input-group-btn {
 
         /*height: 170px;*/
-        font-size: 70px;
+        font-size: 30px;
         margin-left: 0;
         text-align: center;
         white-space: normal;
+        max-width: 280px;
+        padding-top: 0;
     }
 
     .input-group-btn span {
-        font-size: 50px;
-        font-weight: 400;
+        font-size: 25px;
+        font-weight: 300;
     }
 
 
     .form-control {
         font-size: 30px;
         height: 64px;
+        margin-top: 10px;
     }
 
     h2 {
-        font-size: 50px;
+        font-size: 25px;
+        weight: 300px;
+        padding: 15px;
     }
 
     #slide1_container {
-        width: 500px;
-        margin-right: 300px;
+        width: 300px;
     }
 
     #slide1_images .question {
-        width: 500px;
+        width: 300px;
     }
 
     .glyphicon-triangle-left, .glyphicon-triangle-right {
-        font-size: 100px;
+        font-size: 50px;
+        position: fixed;
+        top: 100px;
+    }
+
+    .glyphicon-triangle-left {
+        left: 0;
+    }
+
+    .glyphicon-triangle-right {
+        right: 0;
+    }
+
+    .row {
+        margin-left: -10px;
     }
 
     select,
@@ -613,26 +635,30 @@ input[type=text] {
     }
 
 
-
     #submitButton {
-        margin-right: 40px;
-    }
-
-    #submitButton .btn-success {
-        font-size: 30px;
-        width: 160px;
-        height: 160px;
+        font-size: 20px;
+        width: 90px;
+        height: 90px;
         border-radius: 100px;
         margin-right: 40px;
+        position: fixed;
+        top: 300px;
+        right: -40px;
 
     }
 
 }
 
-@media screen and (min-width:1200px) {
+@media screen and (min-width:1000px) {
 
     #mobile .col-lg-12 {
         width: 80%;
+    }
+
+    #slide1_container {
+
+        margin-left: 30%;
+        margin-right: 30%;
     }
 
 }

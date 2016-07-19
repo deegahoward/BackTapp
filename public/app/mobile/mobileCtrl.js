@@ -3,7 +3,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
     .controller('MobileController', function ($rootScope, $location, $scope, $state, $stateParams, Survey, $http, Results) {
 
-        var num = Math.floor(Math.random() * 2) + 1;
+       /* var num = Math.floor(Math.random() * 2) + 1;
 
         console.log(num);
 
@@ -11,6 +11,16 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
             window.location = "https://docs.google.com/forms/d/e/1FAIpQLScSIY6N6grRPq1Y_bTNu9pV7jWmujm0lhTmGdulVO_LmlTzxg/viewform";
 
+        }
+*/
+        var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+        console.log(width);
+
+        $scope.bigScreen = false;
+
+        if(width > 600){
+            $scope.bigScreen = true;
         }
 
         var vm = this;
@@ -25,7 +35,13 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     $scope.surveyName = vm.survey.Title;
                     $scope.thisSurvey = vm.survey;
                     $scope.myQuestions = vm.survey.Questions;
-                    $scope.noSlidesWidth = vm.survey.Questions.length * 500;
+                    if(width > 600) {
+                        $scope.noSlidesWidth = vm.survey.Questions.length * 500;
+                    }
+                    else {
+                        $scope.noSlidesWidth = vm.survey.Questions.length * 300;
+
+                    }
                     $scope.noSlides = vm.survey.Questions.length;
                 });
 
@@ -57,7 +73,13 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                 $scope.checkType();
                 $scope.selectedAnswer = {};
                 $scope.no++;
-                angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -500 + 'px)');
+                if(width > 600) {
+                    angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -500 + 'px)');
+                }
+                else {
+                    angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -300 + 'px)');
+
+                }
                 angular.forEach($scope.myQuestions, function (question, index) {
                     if ($scope.no == index) {
                         $scope.currentQuestion = question;
@@ -83,7 +105,13 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
             }
             if ($scope.no > 0) {
                 $scope.no--;
-                angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -500 + 'px)');
+                if(width > 600) {
+                    angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -500 + 'px)');
+                }
+                else {
+                    angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -300 + 'px)');
+
+                }
                 angular.forEach($scope.myQuestions, function (question, index) {
                     if ($scope.no == index) {
                         $scope.currentQuestion = question;
@@ -135,8 +163,16 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                 });
             }
 
-            $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 500;
-            $scope.noSlides = $scope.thisSurvey.Questions.length;
+            if(width > 600){
+                $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 500;
+                $scope.noSlides = $scope.thisSurvey.Questions.length;
+            }
+
+            else {
+
+                $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 300;
+                $scope.noSlides = $scope.thisSurvey.Questions.length;
+            }
 
             console.log($scope.noSlidesWidth);
             console.log($scope.noSlides);
@@ -151,8 +187,17 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     arr.splice(i, 1);
                 }
             }
-            $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 500;
-            $scope.noSlides = $scope.thisSurvey.Questions.length;
+
+            if(width > 600){
+                $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 500;
+                $scope.noSlides = $scope.thisSurvey.Questions.length;
+            }
+
+            else {
+
+                $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 300;
+                $scope.noSlides = $scope.thisSurvey.Questions.length;
+            }
         };
 
         $scope.clickedAnswer = function (answer, index) {
