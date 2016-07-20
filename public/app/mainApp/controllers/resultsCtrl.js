@@ -220,8 +220,13 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                     angular.forEach(response.Answers, function (ans) {
 
                         //console.log(ans);
+                        if(ans !== null) {
 
-                        answers.push(ans.Text);
+                            answers.push(ans.Text);
+                        }
+                        else {
+                            console.log("no answer");
+                        }
 
                         //console.log(answers);
 
