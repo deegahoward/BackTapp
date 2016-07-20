@@ -54,7 +54,12 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                                 Answers: []
                             };
                             angular.forEach(response.Answers, function (ans) {
-                                allQAnswers.Answers.push(ans.Text);
+                                if(ans !== null) {
+                                    allQAnswers.Answers.push(ans.Text);
+                                }
+                                else {
+                                    console.log("no answer");
+                                }
                             });
                             index = _.findLastIndex($scope.compareAnswers, {QID: response.QuestionID});
                             if (index == -1) {
@@ -63,7 +68,9 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                             else {
                                 var answers = "";
                                 angular.forEach(response.Answers, function (ans) {
-                                    answers = ans.Text;
+                                    if(ans !== null) {
+                                        answers = ans.Text;
+                                    }
                                 });
                                 $scope.compareAnswers[index].Answers.push(answers);
                             }
@@ -74,6 +81,22 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
 
                 });
         };
+
+        $scope.one = "";
+        $scope.two = "";
+
+        $scope.count1 = Results.getCount("578ea3ebacc0148e34a9b9d6")
+            .success(function(data){
+                console.log(data);
+                $scope.one = data.Count;
+
+            });
+        $scope.count2 = Results.getCount("578ea3e6acc0148e34a9b9d5")
+            .success(function(data){
+                console.log(data);
+                $scope.two = data.Count;
+            });
+
 
 
         $scope.showResults = function () {

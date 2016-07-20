@@ -23,7 +23,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                         _id: $scope.thisCount._id,
                         id: $scope.thisCount.id,
                         Count: $scope.thisCount.Count + 1
-                    };
+                };
 
                     console.log(newCount);
                     Results.updateCount(newCount);
