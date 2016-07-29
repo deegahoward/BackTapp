@@ -377,7 +377,7 @@ module.exports = function (app, express, io) {
                 console.log(count);
 
                 count.Count = req.body.Count;
-                count.StartTimeArray.push(Date.toLocaleString());
+                count.StartTimeArray.push(Date.now());
 
                 count.save(function (err) {
                     if (err)
