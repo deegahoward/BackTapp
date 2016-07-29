@@ -5,7 +5,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
 
 
-        var num = Math.floor(Math.random() * 2) + 1;
+       /* var num = Math.floor(Math.random() * 2) + 1;
 
         console.log(num);
 
@@ -53,7 +53,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     Results.updateCount(newCount);
 
                 });
-        }
+        }*/
 
         var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
