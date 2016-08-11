@@ -18,6 +18,9 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.skipQ = "";
         $scope.addingAnswer = false;
 
+        var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+
         $('[data-toggle="tooltip"]').tooltip();
 
         $scope.AddQuestion = function (question) {
@@ -27,17 +30,12 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             angular.forEach($scope.Answers, function(answer){
 
                 if($scope.NewAnswer.Text !== answer.Text && $scope.NewAnswer.Text !== undefined){
-
                     console.log("no");
-
                     $scope.AddAnswer($scope.NewAnswer.Text);
-
                 }
-
                 else {
                     console.log("it exists");
                 }
-
             });
 
             tempQuestion = {};
@@ -53,6 +51,15 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.showAddAnswer = function(){
             $scope.addingAnswer = true;
+        };
+
+        $scope.resetQuestion = function(){
+
+          $scope.NewQuestion = {};
+          $scope.NewAnswer = {};
+
+
+
         };
 
         $scope.AddAnswer = function (answerText) {
@@ -138,9 +145,16 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         };
 
         $scope.startCreate = function () {
-            $scope.showCancel = true;
-            angular.element('#newSurvey').css('left', '-150px');
-            angular.element('#newQuestions').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
+            console.log(width);
+            if(width > 700) {
+                $scope.showCancel = true;
+                angular.element('#newSurvey').css('left', '-150px');
+                angular.element('#newQuestions').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
+            }
+            else{
+                angular.element('#newQuestions').css({'opacity': '1'});
+            }
+
         };
     })
 
@@ -402,7 +416,18 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         };
 
         $scope.cancelSurvey = function () {
+            $scope.clickedSurvey = {};
             $scope.viewingSurvey = false;
+            $scope.showDelete = false;
+            $scope.editingQuestion = false;
+            $scope.editingTitle = false;
+            $scope.editingAnswers = false;
+            $scope.saveButton = false;
+            $scope.showAddQ = false;
+            $scope.Other = false;
+            $scope.skipLogic = false;
+            $scope.skipQ = "";
+            $scope.showSave = false;
             angular.element('#existingSurveys').css('left', 'calc(100% - 750px)');
             angular.element('#thisSurvey').css({'top': '300px', 'opacity': '0', 'margin-top': '600px'});
 

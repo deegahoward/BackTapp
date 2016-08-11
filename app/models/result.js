@@ -4,7 +4,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-
 var ResponseSchema = new Schema({
 
     QuestionID: {type: Schema.Types.ObjectId, ref: 'Question'},
@@ -21,8 +20,6 @@ var ResultSetSchema = new Schema({
 
 });
 
-
-
-
-
 module.exports = mongoose.model('Results', ResultSetSchema);
+
+

@@ -4,7 +4,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
     .controller('MobileController', function ($rootScope, $location, $scope, $state, $stateParams, Survey, $http, Results) {
 
 
-
+/*
        var num = Math.floor(Math.random() * 2) + 1;
 
         console.log(num);
@@ -53,11 +53,9 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     Results.updateCount(newCount);
 
                 });
-        }
+        }*/
 
         var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-
-        console.log(width);
 
         $scope.bigScreen = false;
 
@@ -108,8 +106,6 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
         $scope.forward = function () {
             console.log($scope.results);
-            console.log($scope.no);
-            console.log($scope.noSlides);
             if ($scope.no < $scope.noSlides - 1) {
                 $scope.notEndOfSurvey = true;
                 $scope.checkType();
@@ -135,8 +131,6 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         };
 
         $scope.backward = function () {
-            console.log($scope.no);
-            console.log($scope.noSlides);
             if ($scope.no == $scope.noSlides) {
                 $scope.endOfSurvey = false;
                 $scope.notEndOfSurvey = true;
@@ -182,16 +176,13 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
         $scope.skipQuestions = function (answer) {
             var skippedQs = answer.SkipLogic.Questions.split(',');
-            console.log(skippedQs);
             var arr = $scope.thisSurvey.Questions;
             var i;
             i = arr.length;
             while (i--) {
                 angular.forEach(skippedQs, function (question) {
                     var q = question - 1;
-                    console.log(q);
                     if (i == q) {
-                        console.log("Same");
                         var removedQ = {
                             Question: arr[i],
                             Index: i,
@@ -199,25 +190,18 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                         };
                         $scope.removedQuestions.push(removedQ);
                         arr.splice(i, 1);
-                        console.log(arr);
-
                     }
                 });
             }
-
             if(width > 600){
                 $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 500;
                 $scope.noSlides = $scope.thisSurvey.Questions.length;
             }
-
             else {
 
                 $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 300;
                 $scope.noSlides = $scope.thisSurvey.Questions.length;
             }
-
-            console.log($scope.noSlidesWidth);
-            console.log($scope.noSlides);
         };
 
         $scope.reAddQuestions = function () {
@@ -243,6 +227,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         };
 
         $scope.clickedAnswer = function (answer, index) {
+
             $scope.reAddQuestions();
             if (answer.SkipLogic.Exists == true) {
                 $scope.skipQuestions(answer);
@@ -270,7 +255,6 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
             }
             else if ($scope.currentQuestion.Type == "checkbox") {
-                console.log("check");
                 if (answer.Other) {
                 }
                 else {
@@ -281,68 +265,70 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     else {
                         $scope.Answers.push(answer);
                     }
-                    console.log($scope.Answers);
                 }
             }
             else if ($scope.currentQuestion.Type == "text") {
-            }
 
+            }
         };
 
         $scope.checkType = function () {
 
+                if ($scope.currentQuestion.Type == "checkbox") {
+                    console.log("check");
+                    var tempAnswer = {
+                        Text: $scope.currentQuestion.OtherText,
+                        Other: true
+                    };
 
-            if ($scope.currentQuestion.Type == "checkbox") {
-                console.log("check");
-                var tempAnswer = {
-                    Text: $scope.currentQuestion.OtherText,
-                    Other: true
-                };
-                console.log(tempAnswer);
-                index = _.findLastIndex($scope.Answers, {Other: true});
-                if (index == -1) {
+                    console.log(tempAnswer);
+                    index = _.findLastIndex($scope.Answers, {Other: true});
+                    if (index == -1) {
 
-                    $scope.Answers.push(tempAnswer);
-                }
-                else {
-                    $scope.Answers.splice(index, 1);
-                    $scope.Answers.push(tempAnswer);
-                }
-                $scope.result = {
-                    QuestionID: $scope.currentQuestion._id,
-                    Answers: $scope.Answers
-                };
-
-                index = _.findLastIndex($scope.results, {QuestionID: $scope.result.QuestionID});
-                console.log($scope.results[index]);
-                console.log($scope.result);
-                if (index == -1) {
-                    console.log("1");
-                    $scope.results.push($scope.result);
-                }
-                else {
-                    console.log("2");
-                    $scope.results[index] = $scope.result;
-                }
-
-                console.log($scope.results);
-            }
-            if ($scope.currentQuestion.Type == "text") {
-                index = _.findLastIndex($scope.results, {QuestionID: $scope.currentQuestion._id});
-                if (index == -1) {
+                        $scope.Answers.push(tempAnswer);
+                    }
+                    else {
+                        $scope.Answers.splice(index, 1);
+                        $scope.Answers.push(tempAnswer);
+                    }
                     $scope.result = {
                         QuestionID: $scope.currentQuestion._id,
-                        Answers: [{Text: $scope.currentQuestion.OtherText}]
+                        Answers: $scope.Answers
                     };
-                    $scope.results.push($scope.result);
+
+                    index = _.findLastIndex($scope.results, {QuestionID: $scope.result.QuestionID});
+                    console.log($scope.results[index]);
+                    console.log($scope.result);
+                    if (index == -1) {
+                        console.log("1");
+                        $scope.results.push($scope.result);
+                    }
+                    else {
+                        console.log("2");
+                        $scope.results[index] = $scope.result;
+                    }
+
+                    console.log($scope.results);
                 }
-                else {
-                    $scope.results[index].Answers = [$scope.currentQuestion.OtherText];
+                else if ($scope.currentQuestion.Type == "text") {
+                    index = _.findLastIndex($scope.results, {QuestionID: $scope.currentQuestion._id});
+                    if (index == -1) {
+                        $scope.result = {
+                            QuestionID: $scope.currentQuestion._id,
+                            Answers: [{Text: $scope.currentQuestion.OtherText}]
+                        };
+                        $scope.results.push($scope.result);
+                    }
+                    else {
+                        $scope.results[index].Answers = [$scope.currentQuestion.OtherText];
+                    }
                 }
-            }
-            
-            $scope.Answers = [];
-            $scope.result = {};
+
+                $scope.Answers = [];
+                $scope.result = {};
+                $scope.currentQuestion.OtherText = "";
+
+
         };
 
         $scope.submitResponse = function () {

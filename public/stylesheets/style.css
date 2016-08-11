@@ -57,6 +57,7 @@ option {
     width: 180px;
     border-radius: 3px;
     overflow: hidden;
+    margin: auto;
     background: #fafafa url("/app/images/arrow.png") no-repeat 90% 50%;
 }
 
@@ -263,6 +264,13 @@ option {
     border-radius: 20px !important;
     background-color: white !important;
     color: black !important;
+
+}
+
+.checkbox label {
+
+    font-size: 15px;
+    font-weight: 200;
 }
 
 .question h4 {
@@ -360,12 +368,29 @@ option {
 
 }
 
+.validation {
+
+    color: darkred;
+    font-size: 12px;
+}
+
+.glyphicon-minus:hover {
+
+    color: #4F4E4E;
+}
+
 #previewBox {
     width: 80%;
 }
 
  h3 {
      text-align: center;
+ }
+
+ #newSurveyForm {
+
+     border: none;
+
  }
 
 #menubuttons {
@@ -411,6 +436,8 @@ option {
 }
 
 #clients {
+    width: 580px!important;
+    height: 400px!important;
     max-width: 580px;
     max-height: 400px;
     padding-left: 50px;
@@ -644,6 +671,40 @@ input[type=text] {
         position: fixed;
         top: 300px;
         right: -40px;
+
+    }
+
+}
+
+@media screen and (max-width: 700px){
+
+    #newSurvey {
+
+        width: 300px;
+        left: 0;
+
+    }
+
+    #newQuestions {
+
+        margin-top: 130px;
+        transition: 1s ease-in-out;
+        -webkit-transition: 1s;
+        -moz-transition: 1s;
+        top: 100;
+        opacity: 0;
+
+    }
+
+
+}
+
+@media screen and (max-width: 1400px){
+
+    #newSurvey {
+
+        width: 600px;
+        left: 250;
 
     }
 

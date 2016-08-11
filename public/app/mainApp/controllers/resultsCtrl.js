@@ -40,13 +40,14 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
             $scope.thisSurveyID = survey._id;
             $scope.thisSurvey = survey;
             $scope.theQuestions = survey.Questions;
+            console.log($scope.theQuestions);
             Results.all($scope.thisSurveyID)
                 .success(function (data) {
                     vm.results = data;
                     $scope.resultSet = vm.results;
                     angular.forEach($scope.resultSet, function (result) {
+
                         $scope.myResponses = result.Responses;
-                        //console.log(result);
                         angular.forEach($scope.myResponses, function (response) {
                             $scope.theAnswers = response.Answers;
                             var allQAnswers = {
@@ -54,11 +55,16 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                                 Answers: []
                             };
                             angular.forEach(response.Answers, function (ans) {
-                                if(ans !== null) {
-                                    allQAnswers.Answers.push(ans.Text);
+                                if(ans != null) {
+                                    if(ans.Text == undefined){
+                                        //allQAnswers.Answers.push("other");
+                                    }
+                                    else {
+                                        allQAnswers.Answers.push(ans.Text);
+                                    }
                                 }
                                 else {
-                                    console.log("no answer");
+                                    allQAnswers.Answers.push("no answer");
                                 }
                             });
                             index = _.findLastIndex($scope.compareAnswers, {QID: response.QuestionID});
@@ -67,37 +73,50 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                             }
                             else {
                                 var answers = "";
-                                angular.forEach(response.Answers, function (ans) {
-                                    if(ans !== null) {
-                                        answers = ans.Text;
-                                    }
-                                });
-                                $scope.compareAnswers[index].Answers.push(answers);
+
+                                console.log(allQAnswers.Answers);
+
+                                if(allQAnswers.Answers.length <= 1){
+
+                                    $scope.compareAnswers[index].Answers.push((allQAnswers.Answers).toString());
+
+                                }
+
+                                else {
+
+                                    angular.forEach(allQAnswers.Answers, function (ans) {
+                                        if(ans !== null) {
+                                            if(ans == undefined){
+                                                //answers = "other";
+                                            }
+                                            else {
+                                                $scope.compareAnswers[index].Answers.push((ans).toString());
+                                            }
+                                        }
+                                        else {
+                                        }
+                                    });
+
+
+                                }
+
+
+
+
                             }
                         });
                     });
+
+                    console.log($scope.compareAnswers);
                     $scope.currentQuestion = $scope.theQuestions[0];
                     $scope.showGraph($scope.theQuestions[0]);
 
-                });
+                })
+
         };
 
         $scope.one = "";
         $scope.two = "";
-
-        $scope.count1 = Results.getCount("578ea3ebacc0148e34a9b9d6")
-            .success(function(data){
-                console.log(data);
-                $scope.one = data.Count;
-
-            });
-        $scope.count2 = Results.getCount("578ea3e6acc0148e34a9b9d5")
-            .success(function(data){
-                console.log(data);
-                $scope.two = data.Count;
-            });
-
-
 
         $scope.showResults = function () {
             angular.element('#existingSurveys').css('left', '0');
@@ -121,15 +140,24 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
 
         //Chart Stuff
 
+
+
         $scope.showGraph = function (question) {
+
+            var context = document.getElementById('clients').getContext('2d');
+            context.clearRect(0,0, context.canvas.width, context.canvas.height);
+            var labelArray = [];
+            var dataArray = {};
 
             $scope.currentQuestion = question;
 
             var id = question._id;
+            var type = question.Type;
             var labelArray = [];
+
             var dataArray = {
                 label: '',
-                fillColor: 'hotpink',
+                backgroundColor: 'hotpink',
                 data: []
             };
 
@@ -145,23 +173,40 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                         for (i = 0; i < arr.length; i++) {
                             angular.forEach($scope.compareAnswers, function (question) {
                                 if (question.QID == id) {
-                                    var count = 0;
-                                    var answers = question.Answers;
-                                    angular.forEach(answers, function (ans) {
-                                        if (ans == arr[i]) {
-                                            count++;
-                                        }
-                                    });
-                                    dataArray.data.push(count);
+                                    //if(type == "radio") {
+                                        var count = 0;
+                                        var answers = question.Answers;
+                                        angular.forEach(answers, function (ans) {
+                                            if (ans == arr[i]) {
+                                                count++;
+                                            }
+                                        });
+
+                                        dataArray.data.push(count);
                                 }
                             });
                         }
-                        var barData = {
+
+
+
+                        var clientsChart = new Chart(context,{
+                            type:'bar',
+                            data: {
                             labels: labelArray,
-                            datasets: [dataArray]
-                        };
-                        var context = document.getElementById('clients').getContext('2d');
-                        var clientsChart = new Chart(context).Bar(barData);
+                                datasets: [dataArray]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+
                     }
                 }
             });
@@ -203,58 +248,56 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
 
         $scope.downloadCSV = function (args) {
 
-            var allResults = [];
 
+            var allQuestions = $scope.theQuestions;
+            var allResults = [];
             var thisResult = {};
 
-            angular.forEach($scope.resultSet, function (result) {
 
-                thisResult.TimeStart = result.TimeStart;
-                thisResult.TimeFinish = result.TimeFinish;
+                angular.forEach($scope.resultSet, function(result){
 
-                angular.forEach(result.Responses, function (response, $index) {
+                    thisResult.TimeStart = result.TimeStart;
+                    thisResult.TimeFinish = result.TimeFinish;
 
-                    var question = "question" + ($index + 1);
-                    var answers = [];
+                    angular.forEach(allQuestions, function(q){
 
-                    angular.forEach(response.Answers, function (ans) {
-
-                        //console.log(ans);
-                        if(ans !== null) {
-
-                            answers.push(ans.Text);
-                        }
-                        else {
-                            console.log("no answer");
-                        }
-
-                        //console.log(answers);
-
-
+                        thisResult[q._id] = ["No Answer"];
                     });
 
-                    answers = answers.filter(function( element ) {
-                        return element !== undefined;
-                    });
+                        angular.forEach(result.Responses, function(response){
 
-                    var i = answers.toString().replace(',','/');
+                            var answers = [];
 
-                    console.log(i);
-                    console.log(answers);
+                            angular.forEach(response.Answers, function (ans) {
+                                if(ans != null || "") {
+                                    if(ans.Text != undefined) {
+                                        answers.push(ans.Text);
+                                    }
+                                    else {
+                                    }
+                                }
+                                else {
+                                }
+
+                            });
 
 
-                    thisResult[question] = i;
+                            var i = answers.toString().replace(',','/');
+                            thisResult[response.QuestionID] = i;
+                            console.log(thisResult);
+
+                        });
+
+                    allResults.push(thisResult);
+
+                    thisResult = {};
+                    console.log(allResults);
+
 
                 });
 
 
-                allResults.push(thisResult);
-                thisResult = {};
 
-
-            });
-
-            console.log(allResults);
 
             var data, filename, link;
             var csv = convertArrayOfObjectsToCSV({
@@ -274,6 +317,5 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
             link.setAttribute('download', filename);
             link.click();
         };
-
 
     });

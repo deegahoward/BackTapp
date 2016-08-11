@@ -1,6 +1,7 @@
 var User = require('../models/user');
 var Survey = require('../models/survey');
 var Results = require('../models/result');
+
 var Count = require('../models/count');
 
 
@@ -316,6 +317,22 @@ module.exports = function (app, express, io) {
                 res.json(results);
             });
         });
+
+    api.route('/responses/:question_id')
+
+        .get(function (req, res){
+
+        question_ID = req.params.question_id;
+
+            Results.find({'Responses.QuestionID': question_ID}, function(err, responses){
+                if(err)console.log(err)
+                if(responses){
+                    console.log(responses); //goku
+                }
+            });
+
+
+    });
 
     api.route('/count')
 

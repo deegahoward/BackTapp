@@ -3,157 +3,185 @@
     <div class="col-md-12">
         <h1>Making a new survey</h1>
 
+        <form id="newSurveyForm" name="newSurveyForm" novalidate>
 
-        <div class=".col-md-5-offset-2 .col-md-5">
-            <div class="row">
-                <div class="panel panel-success" id="newSurvey">
-                    <div class="panel-heading">Survey</div>
-                    <div class="panel-body">
-                        <label for="Name">What is the name of your survey?</label>
-                        <input type="text" name="Name" id="Name" ng-model="Survey.Title"/>
-                        <button class="btn btn-success" ng-click="startCreate()">Go!</button>
-                        <button class="btn btn-success" ng-if="showCancel" ui-sref="home">Cancel</button>
+            <div class=".col-md-5-offset-2 .col-md-5">
+                <div class="row">
+                    <div class="panel panel-success" id="newSurvey">
+                        <div class="panel-heading">Survey</div>
+                        <div class="panel-body">
+
+                            <label for="Name">What is the name of your survey?</label>
+                            <input type="text" name="Name" id="Name" ng-model="Survey.Title" required/>
+                            <button class="btn btn-success" ng-click="startCreate()"
+                                    ng-disabled="newSurveyForm.Name.$invalid">Go!
+                            </button>
+                            <button class="btn btn-success" ng-if="showCancel" ui-sref="home">Cancel</button>
+                            <p class="validation" ng-show="newSurveyForm.Name.$invalid && newSurveyForm.Name.$touched">
+                                Please enter a survey name</p>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row pull-left">
-                <div class="panel panel-success pull-left" id="displayQuestions" ng-show="Questions.length > 0">
-                    <div class="panel-heading">Questions</div>
-                    <div class="panel-body">
-                        <div class="row" ng-repeat="question in Questions track by $index">
-                            <div class="row">
-                                <h3>{{$index + 1}}: {{ question.Title }} ({{ question.Type }})</h3>
-                            </div>
-                            <div class="row-padded">
-                                <div class="col-md-10">
-                                    <li ng-repeat="Answer in question.Answers" ng-click="editingQuestion()" ng-model="editedAnswer">
-                                        {{Answer.Text}}
-                                    </li>
+                <div class="row pull-left">
+                    <div class="panel panel-success pull-left" id="displayQuestions" ng-show="Questions.length > 0">
+                        <div class="panel-heading">Questions</div>
+                        <div class="panel-body">
+                            <div class="row" ng-repeat="question in Questions track by $index">
+                                <div class="row">
+                                    <h3>{{$index + 1}}: {{ question.Title }} ({{ question.Type }})</h3>
                                 </div>
+                                <div class="row-padded">
+                                    <div class="col-md-10">
+                                        <li ng-repeat="Answer in question.Answers" ng-click="editingQuestion()"
+                                            ng-model="editedAnswer">
+                                            {{Answer.Text}}
+                                        </li>
+                                    </div>
                                 <span class="glyphicon glyphicon-remove-circle pull-right"
                                       ng-click="removeQuestion($index)">
 
                                 </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-7 pull-right">
-            <div class="row">
-                <div class="panel panel-success" id="newQuestions">
-                    <div class="panel-heading">Questions
-                        <button type="button" class="btn btn-success pull-right" ui-sref="success"
-                                ng-click="SaveSurvey()">
-                            <span class="glyphicon glyphicon-floppy-save"></span> Save Survey
-                        </button>
-                    </div>
-                    <div class="panel-body">
-                        <div class="panel panel-default">
-                            <!-- Default panel contents -->
-                            <div class="panel-heading">
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <label for="Title">Question Title:</label>
-                                        <input type="text" name="Title" id="Title"
-                                               placeholder="Type question title here..."
-                                               ng-model="NewQuestion.Title"/>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label for="Type">Type:</label>
-                                        <div class="select-style">
-                                            <select id="Type" ng-model="NewQuestion.Type"
-                                                    ng-change="checkType()">
-                                                <option value="radio">Single Choice</option>
-                                                <option value="checkbox">Multiple Choice</option>
-                                                <option value="text">Text Input</option>
-                                            </select>
-                                        </div>
-                                        <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top"
-                                              title="Single choice: A choice of one answer only, Multiple choice: A choice of one or more answers, Text Input: An open field to type answer"></span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3 pull-right">
-                                        <button type="button" class="btn btn-success pull-right"
-                                                data-toggle="collapse"
-                                                data-target="#answers" aria-expanded="false"
-                                                aria-controls="answers" ng-click="showAddAnswer()"><span
-                                                class="glyphicon glyphicon-plus"></span>Add Answers
-                                        </button>
-                                    </div>
-
-                                </div>
-
-                            </div>
+            <div class="col-sm-7 pull-right">
+                <div class="row">
+                    <div class="panel panel-success" id="newQuestions">
+                        <div class="panel-heading">Questions
+                            <button type="button" class="btn btn-success pull-right" ui-sref="success"
+                                    ng-click="SaveSurvey()">
+                                <span class="glyphicon glyphicon-floppy-save"></span> Save Survey
+                            </button>
                         </div>
+                        <div class="panel-body">
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <label for="Title">Question Title:</label>
+                                            <input type="text" name="Title" id="Title"
+                                                   placeholder="Type question title here..."
+                                                   ng-model="NewQuestion.Title" required/>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="Type">Type:</label>
+                                            <div class="select-style">
+                                                <select id="Type" name="Type" ng-model="NewQuestion.Type"
+                                                        ng-change="checkType()" required>
+                                                    <option value="radio">Single Choice</option>
+                                                    <option value="checkbox">Multiple Choice</option>
+                                                    <option value="text">Text Input</option>
+                                                </select>
 
-                        <div class="panel collapse" id="answers" data-toggle="collapse">
+                                            </div>
+                                        <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                              data-placement="top"
+                                              title="Single choice: A choice of one answer only, Multiple choice: A choice of one or more answers, Text Input: An open field to type answer"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 pull-left">
+                                            <p class="validation"
+                                               ng-show="newSurveyForm.Title.$invalid && newSurveyForm.Title.$touched">
+                                                Please enter question</p>
+                                            <p class="validation"
+                                               ng-show="newSurveyForm.Type.$invalid && newSurveyForm.Type.$touched">
+                                                Please select question type</p>
+                                        </div>
+                                        <div class="col-sm-3 pull-right">
+                                            <button type="button" class="btn btn-success pull-right"
+                                                    ng-click="resetQuestion()"><span
+                                                    class="glyphicon glyphicon-erase"></span>Reset
+                                            </button>
 
-                            <!-- List group -->
-                            <ul class="list-group">
-                                <li class="list-group-item" ng-repeat="answer in Answers">
+                                            <button type="button" class="btn btn-success pull-right"
+                                                    data-toggle="collapse"
+                                                    data-target="#answers" aria-expanded="false"
+                                                    aria-controls="answers" ng-click="showAddAnswer()"
+                                                    ng-disabled="newSurveyForm.Title.$invalid || newSurveyForm.Type.$invalid"><span
+                                                    class="glyphicon glyphicon-plus"></span>Answer
+                                            </button>
+                                        </div>
 
-                                    {{ answer.Text }}
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="panel collapse" id="answers" data-toggle="collapse">
+
+                                <!-- List group -->
+                                <ul class="list-group">
+                                    <li class="list-group-item" ng-repeat="answer in Answers">
+
+                                        {{ answer.Text }}
                                     <span class="glyphicon glyphicon-minus"
                                           ng-click="removeAnswer($index)"></span>
 
-                                </li>
+                                    </li>
 
-                            </ul>
-                            <div class="row answers">
+                                </ul>
+                                <div class="row answers">
 
-                                <div class="col-sm-5">
-                                    <label for="Text">Answer:</label>
-                                    <input type="text" name="Text" id="Text"
-                                           placeholder="Type answer here..." ng-model="NewAnswer.Text"/>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" ng-model="other" id="other"
-                                                      ng-click="$event.stopPropagation()" value="other">Other?(textfield)</label>
-                                        <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom"
+                                    <div class="col-sm-5">
+                                        <label for="Text">Answer:</label>
+                                        <input type="text" name="Text" id="Text"
+                                               placeholder="Type answer here..." ng-model="NewAnswer.Text"/>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" ng-model="other" id="other"
+                                                          ng-click="$event.stopPropagation()" value="other">Other?(textfield)</label>
+                                        <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                              data-placement="bottom"
                                               title="Tick this box if you would like an open textfield answer (leave field blank)"></span>
 
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-5" id="skipLogic">
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" ng-model="skipLogic"
-                                                      ng-click="skipTool(); $event.stopPropagation()"
-                                                      value="skip">Skip logic?</label>
-                                    </div>
-                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top"
+                                    <div class="col-md-5" id="skipLogic">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" ng-model="skipLogic"
+                                                          ng-click="skipTool(); $event.stopPropagation()"
+                                                          value="skip">Skip logic?</label>
+                                        </div>
+                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"
+                                          data-placement="top"
                                           title="If you would like some answers to cause questions to be skipped, tick this box and note the questions"></span>
 
-                                </div>
-                                <div class="col-md-3" ng-show="skipLogic">
-                                    <label for="Text">Skip Questions...(e.g 6,7,8):</label>
-                                    <input type="text" name="Text"
-                                           placeholder="Type No." ng-model="skipQ"/>
-                                </div>
-                                <div class="col-sm-2">
-                                    <span class="glyphicon glyphicon-plus-sign" data-toggle="tooltip" data-placement="top" title="Add Answer"
+                                    </div>
+                                    <div class="col-md-3" ng-show="skipLogic">
+                                        <label for="Text">Skip Questions...(e.g 6,7,8):</label>
+                                        <input type="text" name="Text"
+                                               placeholder="Type No." ng-model="skipQ"/>
+                                    </div>
+                                    <div class="col-sm-2">
+                                    <span class="glyphicon glyphicon-plus-sign" data-toggle="tooltip"
+                                          data-placement="top" title="Add Answer"
                                           ng-click="AddAnswer(NewAnswer.Text)"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <button type="button" class="btn btn-success pull-right"
+                                            ng-click="AddQuestion(NewQuestion)" ng-show="addingAnswer"><span
+                                            class="glyphicon glyphicon-ok" id="QSubmit"></span>Save Question
+                                    </button>
                                 </div>
                             </div>
 
-                        </div>
-                        <div class="panel-footer">
-                            <div class="row">
-                                <button type="button" class="btn btn-success pull-right"
-                                        ng-click="AddQuestion(NewQuestion)" ng-show="addingAnswer"><span
-                                        class="glyphicon glyphicon-ok" id="QSubmit"></span>Save Question
-                                </button>
-                            </div>
-                        </div>
 
+                        </div>
 
                     </div>
 
                 </div>
-
             </div>
-        </div>
+        </form>
     </div>
 
 
