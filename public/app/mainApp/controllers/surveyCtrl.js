@@ -23,9 +23,21 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $('[data-toggle="tooltip"]').tooltip();
 
+        $scope.startCreate = function () {
+            console.log(width);
+            if(width > 700) {
+                $scope.showCancel = true;
+                angular.element('#newSurvey').css('left', '-150px');
+                angular.element('#newQuestions').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
+            }
+            else{
+                angular.element('#newQuestions').css({'opacity': '1'});
+            }
+
+        };
+
         $scope.AddQuestion = function (question) {
 
-            console.log($scope.NewAnswer.Text);
 
             angular.forEach($scope.Answers, function(answer){
 
@@ -46,7 +58,15 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.NewQuestion = {};
             $scope.Answers = [];
             $scope.addingAnswer = false;
+
+            if($scope.Questions.length > 14){
+
+                $("#longSurvey").show();
+
+            }
             $('.collapse').collapse('hide');
+            $scope.newSurveyForm.$setPristine();
+            $scope.newSurveyForm.$setUntouched();
         };
 
         $scope.showAddAnswer = function(){
@@ -57,8 +77,6 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
           $scope.NewQuestion = {};
           $scope.NewAnswer = {};
-
-
 
         };
 
@@ -124,11 +142,6 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             }
         };
 
-        $scope.skipTool = function () {
-
-            console.log($scope.skipLogic);
-        };
-
         $scope.removeQuestion = function (index) {
             $scope.Questions.splice(index, 1);
             console.log($scope.Questions);
@@ -141,21 +154,13 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             survey.Creator = $scope.main.user.id;
             console.log(survey);
             console.log(survey.Creator);
-            Survey.create(JSON.stringify(survey));
+            Survey.create(JSON.stringify(survey), function(){
+
+                $state.go("success");
+            });
         };
 
-        $scope.startCreate = function () {
-            console.log(width);
-            if(width > 700) {
-                $scope.showCancel = true;
-                angular.element('#newSurvey').css('left', '-150px');
-                angular.element('#newQuestions').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
-            }
-            else{
-                angular.element('#newQuestions').css({'opacity': '1'});
-            }
 
-        };
     })
 
 

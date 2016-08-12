@@ -119,6 +119,11 @@ option {
     background-color: #4F4E4E ;
 }
 
+.btn-space {
+    margin-top: 5px;
+}
+
+
 .open>.dropdown-toggle.btn-success {
     color: #fff;
     background-color: #4F4E4E;
@@ -204,8 +209,9 @@ option {
 
 .alert {
     display: none;
-    width: 300px;
+    width: 100%;
     font-size: 11px;
+    margin-top: 5px;
     white-space: normal;
 
 }
@@ -221,6 +227,11 @@ option {
     color: dimgray;
     cursor: pointer;
 
+}
+
+.glyphicon-remove-circle:hover {
+    color: rgba(98, 203, 203, 1);
+    cursor: pointer;
 }
 
 .glyphicon-question-sign {
@@ -296,17 +307,12 @@ option {
     min-width: 260px;
 }
 
-.glyphicon-star:hover {
-    color: salmon;
-}
-
 .btn-success {
     background-color: rgba(98, 203, 203, 1);
     color: white;
     border: none;
     white-space: normal;
     text-align: left;
-
 }
 
 .btn-success:hover {

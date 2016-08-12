@@ -2,6 +2,12 @@
 
     <div class="col-md-12">
         <h1>Making a new survey</h1>
+        <div id="longSurvey" class="alert alert-danger alert-dismissible fade in pull-right" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Are you sure you want to add another question?</strong> Get more responses and keep it under 15!.
+        </div>
 
         <form id="newSurveyForm" name="newSurveyForm" novalidate>
 
@@ -12,7 +18,7 @@
                         <div class="panel-body">
 
                             <label for="Name">What is the name of your survey?</label>
-                            <input type="text" name="Name" id="Name" ng-model="Survey.Title" required/>
+                            <input type="text" name="Name" id="Name" ng-model="Survey.Title" maxlength="140" required/>
                             <button class="btn btn-success" ng-click="startCreate()"
                                     ng-disabled="newSurveyForm.Name.$invalid">Go!
                             </button>
@@ -52,7 +58,7 @@
                 <div class="row">
                     <div class="panel panel-success" id="newQuestions">
                         <div class="panel-heading">Questions
-                            <button type="button" class="btn btn-success pull-right" ui-sref="success"
+                            <button type="button" class="btn btn-success pull-right"
                                     ng-click="SaveSurvey()">
                                 <span class="glyphicon glyphicon-floppy-save"></span> Save Survey
                             </button>
@@ -66,7 +72,7 @@
                                             <label for="Title">Question Title:</label>
                                             <input type="text" name="Title" id="Title"
                                                    placeholder="Type question title here..."
-                                                   ng-model="NewQuestion.Title" required/>
+                                                   ng-model="NewQuestion.Title" maxlength="100" required/>
                                         </div>
                                         <div class="col-sm-4">
                                             <label for="Type">Type:</label>
@@ -94,12 +100,12 @@
                                                 Please select question type</p>
                                         </div>
                                         <div class="col-sm-3 pull-right">
-                                            <button type="button" class="btn btn-success pull-right"
+                                            <button type="button" class="btn btn-success btn-space pull-right"
                                                     ng-click="resetQuestion()"><span
                                                     class="glyphicon glyphicon-erase"></span>Reset
                                             </button>
 
-                                            <button type="button" class="btn btn-success pull-right"
+                                            <button type="button" class="btn btn-success btn-space pull-right"
                                                     data-toggle="collapse"
                                                     data-target="#answers" aria-expanded="false"
                                                     aria-controls="answers" ng-click="showAddAnswer()"
@@ -144,7 +150,7 @@
                                     <div class="col-md-5" id="skipLogic">
                                         <div class="checkbox">
                                             <label><input type="checkbox" ng-model="skipLogic"
-                                                          ng-click="skipTool(); $event.stopPropagation()"
+                                                          ng-click="$event.stopPropagation()"
                                                           value="skip">Skip logic?</label>
                                         </div>
                                     <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip"

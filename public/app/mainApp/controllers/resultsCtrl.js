@@ -140,12 +140,15 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
 
         //Chart Stuff
 
+        var context = document.getElementById('clients').getContext('2d');
+        var clientsChart;
+
 
 
         $scope.showGraph = function (question) {
 
-            var context = document.getElementById('clients').getContext('2d');
             context.clearRect(0,0, context.canvas.width, context.canvas.height);
+           clientsChart.destroy();
             var labelArray = [];
             var dataArray = {};
 
@@ -166,6 +169,7 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                     if (q._id == id) {
                         var answers = q.Answers;
                         angular.forEach(answers, function (ans) {
+
                             labelArray.push(ans.Text);
                         });
                         var arr = labelArray;
@@ -186,27 +190,23 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                                 }
                             });
                         }
+                    }
+                }
+            });
 
-
-
-                        var clientsChart = new Chart(context,{
-                            type:'bar',
-                            data: {
-                            labels: labelArray,
-                                datasets: [dataArray]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero:true
-                                    }
-                                }]
+            clientsChart = new Chart(context,{
+                type:'bar',
+                data: {
+                    labels: labelArray,
+                    datasets: [dataArray]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
                             }
-                        }
-                    });
-
-
+                        }]
                     }
                 }
             });
@@ -295,8 +295,6 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
 
 
                 });
-
-
 
 
             var data, filename, link;
