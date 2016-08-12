@@ -140,15 +140,13 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
 
         //Chart Stuff
 
-        var context = document.getElementById('clients').getContext('2d');
-        var clientsChart;
 
 
 
         $scope.showGraph = function (question) {
 
+            var context = document.getElementById('clients').getContext('2d');
             context.clearRect(0,0, context.canvas.width, context.canvas.height);
-           clientsChart.destroy();
             var labelArray = [];
             var dataArray = {};
 
