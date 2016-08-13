@@ -47,5 +47,3 @@ http.listen(config.port, function (err) {
     }
 });
 
-//============ SECOND APP --
-

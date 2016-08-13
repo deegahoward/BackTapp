@@ -1,7 +1,7 @@
-angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'resultsService', 'ui.bootstrap'])
+angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'resultsService', 'ui.bootstrap', 'chart.js'])
 
 
-    .controller('ResultsController', function ($scope, Survey, $stateParams, Results, $state, Auth) {
+    .controller('ResultsController', function ($scope, Survey, $stateParams, Results, $state, Auth, $compile) {
 
         var vm = this;
 
@@ -16,6 +16,25 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
         $scope.compareAnswers = [];
         $scope.myQuestions = [];
         $scope.currentQuestion = {};
+
+
+        $scope.viewby = 1;
+        $scope.totalItems = "";
+        $scope.currentPage = 4;
+        $scope.itemsPerPage = $scope.viewby;
+        $scope.maxSize = 12; //Number of pager buttons to show
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.pageChanged = function() {
+        };
+
+        $scope.setItemsPerPage = function(num) {
+            $scope.itemsPerPage = num;
+            $scope.currentPage = 1; //reset to first paghe
+        };
 
         Auth.getUser()
             .then(function (data) {
@@ -40,20 +59,30 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
             $scope.thisSurveyID = survey._id;
             $scope.thisSurvey = survey;
             $scope.theQuestions = survey.Questions;
-            console.log($scope.theQuestions);
             Results.all($scope.thisSurveyID)
                 .success(function (data) {
                     vm.results = data;
                     $scope.resultSet = vm.results;
+                    $scope.totalItems = $scope.resultSet.length;
+                    console.log($scope.resultSet);
                     angular.forEach($scope.resultSet, function (result) {
-
                         $scope.myResponses = result.Responses;
                         angular.forEach($scope.myResponses, function (response) {
+
+                                i = _.findLastIndex($scope.thisSurvey.Questions, {_id: response.QuestionID});
+
+                            if(i !== -1) {
+
+                                var title = $scope.thisSurvey.Questions[i];
+                                response.Title = title.Title;
+                            }
+
                             $scope.theAnswers = response.Answers;
                             var allQAnswers = {
                                 QID: response.QuestionID,
                                 Answers: []
                             };
+
                             angular.forEach(response.Answers, function (ans) {
                                 if(ans != null) {
                                     if(ans.Text == undefined){
@@ -74,7 +103,6 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                             else {
                                 var answers = "";
 
-                                console.log(allQAnswers.Answers);
 
                                 if(allQAnswers.Answers.length <= 1){
 
@@ -107,7 +135,6 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                         });
                     });
 
-                    console.log($scope.compareAnswers);
                     $scope.currentQuestion = $scope.theQuestions[0];
                     $scope.showGraph($scope.theQuestions[0]);
 
@@ -123,16 +150,6 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
             angular.element('#thisSurvey').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
         };
 
-        $scope.clickedResult = function (result) {
-            $scope.thisResult = result;
-            angular.forEach($scope.thisResult.Responses, function (response) {
-                index = _.findLastIndex($scope.thisSurvey.Questions, {_id: response.QuestionID});
-                var title = $scope.thisSurvey.Questions[index];
-                response.Title = title.Title;
-
-            })
-
-        };
 
         $scope.arrayToString = function (string) {
             return string.join(", ");
@@ -141,14 +158,8 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
         //Chart Stuff
 
 
-
-
         $scope.showGraph = function (question) {
 
-            var context = document.getElementById('clients').getContext('2d');
-            context.clearRect(0,0, context.canvas.width, context.canvas.height);
-            var labelArray = [];
-            var dataArray = {};
 
             $scope.currentQuestion = question;
 
@@ -192,23 +203,13 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                 }
             });
 
-            clientsChart = new Chart(context,{
-                type:'bar',
-                data: {
-                    labels: labelArray,
-                    datasets: [dataArray]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero:true
-                            }
-                        }]
-                    }
-                }
-            });
+            $scope.labels = labelArray;
+            $scope.data = [dataArray.data];
+            $scope.colours = ["hotpink",
+                "hotpink",
+                "hotpink", "hotpink"]
         };
+
 
         //CSV stuff  http://halistechnology.com/2015/05/28/use-javascript-to-export-your-data-as-csv/ for the csv stuff
 
@@ -282,14 +283,12 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
 
                             var i = answers.toString().replace(',','/');
                             thisResult[response.QuestionID] = i;
-                            console.log(thisResult);
 
                         });
 
                     allResults.push(thisResult);
 
                     thisResult = {};
-                    console.log(allResults);
 
 
                 });

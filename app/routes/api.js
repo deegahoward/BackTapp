@@ -27,6 +27,7 @@ function createToken(user) {
 }
 
 module.exports = function (app, express, io) {
+
     var api = express.Router();
 
     //method to get all existing users from the database
@@ -147,7 +148,6 @@ module.exports = function (app, express, io) {
     });
 
 
-    // this was the methods used for displaying and creating stories on the home page
 
 
     api.get('/me', function (req, res) {
@@ -273,11 +273,6 @@ module.exports = function (app, express, io) {
 
         .post(function (req, res) {
 
-            console.log(req.body.SurveyID);
-            console.log(req.body.Responses);
-            console.log(req.body.TimeStart);
-            console.log(req.body.TimeFinish);
-
             var results = new Results({
 
                 SurveyID: req.body.SurveyID,
@@ -286,8 +281,6 @@ module.exports = function (app, express, io) {
                 Responses: req.body.Responses
 
             });
-
-            console.log(results);
 
             results.save(function (err) {
                 if (err) {

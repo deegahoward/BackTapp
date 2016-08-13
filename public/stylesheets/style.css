@@ -278,6 +278,24 @@ option {
 
 }
 
+.pagination {
+    display: inline;
+}
+
+.pagination ul, .pagination a {
+    text-align: center;
+}
+
+.pagination>.active>a {
+    background-color: rgba(98, 203, 203, 1);
+    border-color: rgba(98, 203, 203, 1);
+}
+
+.pagination>.focus>a {
+    background-color: rgba(98, 203, 203, 1);
+    border-color: rgba(98, 203, 203, 1);
+}
+
 .checkbox label {
 
     font-size: 15px;

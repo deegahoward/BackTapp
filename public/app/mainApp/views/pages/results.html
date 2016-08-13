@@ -41,9 +41,11 @@
                                 Download CSV
                                 </div>
                             </div>
-                        <div class="row-centered">
+                        <div class="row-centered" id="graph">
                             <h3>{{currentQuestion.Title}}</h3>
-                            <canvas id="clients" padding-left="60px"></canvas>
+                            <canvas id="bar" class="chart chart-bar"
+                                    chart-data="data" chart-labels="labels" chart-colours="colours"> chart-series="series"
+                            </canvas>
 
                         </div>
                         <div class="row-padded">
@@ -62,15 +64,16 @@
                             </div>
                         <div class="row-padded">
                             <div class="col-md-12">
-                                <ul class="results">
-                                    <button class="btn btn-success" ng-repeat="result in resultSet track by $index" ng-click="clickedResult(result)">
-                                        {{$index + 1}}
-                                    </button>
-                                </ul>
-                            </div>
-                            <div class=".col-md-8-offset-2 .col-md-8">
+
                                 <h3>View Results</h3>
-                                <table class="table">
+                                <div class="row-centered">
+
+
+                                <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage" max-size="maxSize"></pagination>
+
+                                    </div>
+
+                                <table class="table" ng-repeat="result in resultSet.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
                                     <thead>
                                     <tr>
                                         <th>Question</th>
@@ -78,17 +81,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="response in thisResult.Responses">
+                                    <tr>
+                                        <td>{{response.TimeStart}}</td>
+                                        <td>{{response.TimeFinish}}</td>
+                                    </tr>
+                                    <tr ng-repeat="response in result.Responses">
                                         <td>{{response.Title}}</td>
                                         <td><span ng-repeat="Answer in response.Answers">{{Answer.Text}}<Br></span></td>
                                     </tr>
-                                    <tr>
-                                        <td>{{thisResult.TimeStart}}</td>
-                                        <td>{{thisResult.TimeFinish}}</td>
-                                    </tr>
                                     </tbody>
                                 </table>
-
 
                             </div>
                     </div>

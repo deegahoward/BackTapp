@@ -1,6 +1,6 @@
 
 
-angular.module('MyApp', ['appRoutes', 'mainCtrl', 'authService', 'userCtrl', 'userService', 'resultsService', 'surveyService', 'ui.router', 'surveyCtrl', 'resultsCtrl', 'ui.bootstrap'])
+angular.module('MyApp', ['appRoutes', 'mainCtrl', 'authService', 'userCtrl', 'userService', 'resultsService', 'surveyService', 'ui.router', 'surveyCtrl', 'resultsCtrl', 'ui.bootstrap', 'chart.js'])
 
 .config(function($httpProvider) {
 

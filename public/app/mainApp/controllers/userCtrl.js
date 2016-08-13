@@ -3,18 +3,12 @@ angular.module('userCtrl', ['userService'])
 
 .controller('UserController', function(User, $scope) {
 
-
 	var vm = this;
-
 	
 	User.all()
 		.success(function(data) {
 			vm.users = data;
 		})
-
-
-
-
 
 })
 
