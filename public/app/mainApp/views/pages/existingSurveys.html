@@ -5,6 +5,8 @@
         <h1>Existing Surveys</h1>
         <br>
         <br>
+        <form id="existingSurveysForm" name="existingSurveysForm" novalidate>
+
         <div class="col-sm-4" id="existingSurveys">
             <div class="row">
                 <div class="panel panel-success">
@@ -108,7 +110,8 @@
                             <h4>Question Title:</h4>
                             <p ng-show="!editingQuestion">{{selectedQuestion.Title}}</p>
                             <div class="well" ng-show="editingQuestion">
-                                <textarea ng-show="editingQuestion" ng-model="selectedQuestion.Title">{{ selectedQuestion.Title }}</textarea>
+                                <textarea name="Title" id="Title" ng-show="editingQuestion" ng-model="selectedQuestion.Title">{{ selectedQuestion.Title }}</textarea>
+                                <div class="error">{{error}}</div>
                                 <span class="glyphicon glyphicon-ok" ng-show="editingQuestion" ng-click="saveQuestionTitle()"></span>
 
                             </div>
@@ -188,7 +191,7 @@
             </div>
 
         </div>
-
+</form>
     </div>
 </div>
 </div>

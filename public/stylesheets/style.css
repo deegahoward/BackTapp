@@ -280,10 +280,16 @@ option {
 
 .pagination {
     display: inline;
+    color: dimgrey;
+    border-color: dimgrey;
+
 }
 
 .pagination ul, .pagination a {
     text-align: center;
+    color: dimgrey;
+
+
 }
 
 .pagination>.active>a {
@@ -294,6 +300,13 @@ option {
 .pagination>.focus>a {
     background-color: rgba(98, 203, 203, 1);
     border-color: rgba(98, 203, 203, 1);
+}
+
+.pagination>.active>a:focus, .pagination>.active>a:hover {
+
+    background-color: rgba(98, 203, 203, 1);
+    border-color: rgba(98, 203, 203, 1);
+
 }
 
 .checkbox label {
@@ -411,7 +424,7 @@ option {
      text-align: center;
  }
 
- #newSurveyForm {
+ #newSurveyForm, #existingSurveysForm {
 
      border: none;
 

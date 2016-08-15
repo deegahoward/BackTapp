@@ -25,12 +25,12 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.startCreate = function () {
             console.log(width);
-            if(width > 700) {
+            if (width > 700) {
                 $scope.showCancel = true;
                 angular.element('#newSurvey').css('left', '-150px');
                 angular.element('#newQuestions').css({'top': '80px', 'opacity': '1', 'margin-top': '0px'});
             }
-            else{
+            else {
                 angular.element('#newQuestions').css({'opacity': '1'});
             }
 
@@ -39,9 +39,9 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.AddQuestion = function (question) {
 
 
-            angular.forEach($scope.Answers, function(answer){
+            angular.forEach($scope.Answers, function (answer) {
 
-                if($scope.NewAnswer.Text !== answer.Text && $scope.NewAnswer.Text !== undefined){
+                if ($scope.NewAnswer.Text !== answer.Text && $scope.NewAnswer.Text !== undefined) {
                     console.log("no");
                     $scope.AddAnswer($scope.NewAnswer.Text);
                 }
@@ -59,7 +59,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.Answers = [];
             $scope.addingAnswer = false;
 
-            if($scope.Questions.length > 14){
+            if ($scope.Questions.length > 14) {
 
                 $("#longSurvey").show();
 
@@ -69,64 +69,85 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             $scope.newSurveyForm.$setUntouched();
         };
 
-        $scope.showAddAnswer = function(){
+        $scope.showAddAnswer = function () {
             $scope.addingAnswer = true;
         };
 
-        $scope.resetQuestion = function(){
+        $scope.resetQuestion = function () {
 
-          $scope.NewQuestion = {};
-          $scope.NewAnswer = {};
+            $scope.NewQuestion = {};
+            $scope.NewAnswer = {};
+            $scope.other = false;
+            $scope.skipLogic = false;
+            $scope.Answers = [];
+            $scope.error = "";
+            $scope.newSurveyForm.Title.$setUntouched();
+            $scope.newSurveyForm.Type.$setUntouched();
+
 
         };
 
         $scope.AddAnswer = function (answerText) {
-            console.log($scope.skipLogic);
-            console.log($scope.skipQ);
-            answer = {};
-            if ($scope.other == true) {
-                answer.Text = "Type here...(other)";
-                answer.Other = true;
-                if ($scope.skipLogic == true) {
-                    answer.SkipLogic = {
-                        Exists: true,
-                        Questions: $scope.skipQ
-                    }
-                }
-                else {
-                    answer.SkipLogic = {
-                        Exists: false,
-                        Questions: $scope.skipQ
-                    }
-                }
 
-                console.log(answer);
+            console.log(answerText);
+            console.log($scope.other);
+
+            if (answerText == undefined && $scope.other == false) {
+
+                console.log("passed");
+
+                $scope.error = "Please enter answer text";
+
             }
+
             else {
-                answer.Text = answerText;
-                answer.Other = false;
-                if ($scope.skipLogic == true) {
-                    answer.SkipLogic = {
-                        Exists: true,
-                        Questions: $scope.skipQ
+                answer = {};
+                if ($scope.other == true) {
+                    answer.Text = "Type here...(other)";
+                    answer.Other = true;
+                    if ($scope.skipLogic == true) {
+                        answer.SkipLogic = {
+                            Exists: true,
+                            Questions: $scope.skipQ
+                        }
                     }
+                    else {
+                        answer.SkipLogic = {
+                            Exists: false,
+                            Questions: $scope.skipQ
+                        }
+                    }
+
+                    console.log(answer);
                 }
                 else {
-                    answer.SkipLogic = {
-                        Exists: false,
-                        Questions: ""
-                    }
-                }
-                console.log($scope.other);
-            }
 
-            $scope.Answers.push(answer);
-            console.log(answer);
-            console.log($scope.Answers);
-            $scope.NewAnswer = {};
-            $scope.other = false;
-            $scope.skipQ = "";
-            $scope.skipLogic = false;
+                    answer.Text = answerText;
+                    answer.Other = false;
+                    if ($scope.skipLogic == true) {
+                        answer.SkipLogic = {
+                            Exists: true,
+                            Questions: $scope.skipQ
+                        }
+                    }
+                    else {
+                        answer.SkipLogic = {
+                            Exists: false,
+                            Questions: ""
+                        }
+                    }
+                    console.log($scope.other);
+
+                }
+
+                $scope.Answers.push(answer);
+                console.log(answer);
+                console.log($scope.Answers);
+                $scope.NewAnswer = {};
+                $scope.other = false;
+                $scope.skipQ = "";
+                $scope.skipLogic = false;
+            }
         };
 
         $scope.removeAnswer = function (index) {
@@ -154,10 +175,10 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             survey.Creator = $scope.main.user.id;
             console.log(survey);
             console.log(survey.Creator);
-            Survey.create(JSON.stringify(survey), function(){
-
-                $state.go("success");
-            });
+            Survey.create(JSON.stringify(survey))
+                .then(
+                    $state.go("success")
+                );
         };
 
 
@@ -167,7 +188,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
     //=============================== EXISTING SURVEYS CONTROLLER =============================================
 
-    .controller('ExistingSurveyController', function ($scope, Survey, Auth, $stateParams, $rootScope, $location) {
+    .controller('ExistingSurveyController', function ($scope, Survey, Auth, $stateParams, $rootScope, $location, $state) {
 
 
         var vm = this;
@@ -291,20 +312,21 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
             if ($scope.other == true) {
                 answer.Text = "Type here...(other)";
                 answer.Other = true;
+            }
 
-                if ($scope.skipLogic == true) {
-                    answer.SkipLogic = {
-                        Exists: true,
-                        Questions: $scope.skipQ
-                    }
-                }
-                else {
-                    answer.SkipLogic = {
-                        Exists: false,
-                        Questions: ""
-                    }
+            if ($scope.skipLogic == true) {
+                answer.SkipLogic = {
+                    Exists: true,
+                    Questions: $scope.skipQ
                 }
             }
+            else {
+                answer.SkipLogic = {
+                    Exists: false,
+                    Questions: ""
+                }
+            }
+
 
             $scope.newAnswers.push(answer);
             console.log($scope.newAnswers);
@@ -354,12 +376,19 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         };
 
         $scope.saveQuestionTitle = function () {
-            angular.forEach($scope.clickedQuestions, function (question) {
-                if (question._id == $scope.selectedQuestion._id) {
-                    question.Title = $scope.selectedQuestion.Title;
-                }
-            });
-            $scope.editingQuestion = false;
+            if ($scope.selectedQuestion.Title == "") {
+                $scope.error = "Enter question title";
+            }
+            else {
+                $scope.error = "";
+                angular.forEach($scope.clickedQuestions, function (question) {
+                    if (question._id == $scope.selectedQuestion._id) {
+                        question.Title = $scope.selectedQuestion.Title;
+                    }
+                });
+
+                $scope.editingQuestion = false;
+            }
         };
 
         $scope.saveAnswers = function () {
@@ -440,7 +469,11 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
 
         $scope.deleteSurvey = function (survey) {
             var id = survey._id;
-            Survey.delete(id);
+            Survey.delete(id)
+                .then(
+                    $state.reload()
+                );
+
         };
 
         $scope.showDeleteAlert = function (survey) {

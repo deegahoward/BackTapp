@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="col-sm-3 pull-right">
                                             <button type="button" class="btn btn-success btn-space pull-right"
-                                                    ng-click="resetQuestion()"><span
+                                                    ng-click="resetQuestion(); newSurveyForm.Title.$setPristine(); newSurveyForm.Type.$setPristine()"><span
                                                     class="glyphicon glyphicon-erase"></span>Reset
                                             </button>
 
@@ -138,6 +138,7 @@
                                         <label for="Text">Answer:</label>
                                         <input type="text" name="Text" id="Text"
                                                placeholder="Type answer here..." ng-model="NewAnswer.Text"/>
+                                        <div class="error" ng-show="error && other == false">{{ error }}</div>
                                         <div class="checkbox">
                                             <label><input type="checkbox" ng-model="other" id="other"
                                                           ng-click="$event.stopPropagation()" value="other">Other?(textfield)</label>

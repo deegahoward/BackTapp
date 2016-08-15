@@ -22,7 +22,7 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
         $scope.totalItems = "";
         $scope.currentPage = 4;
         $scope.itemsPerPage = $scope.viewby;
-        $scope.maxSize = 12; //Number of pager buttons to show
+        $scope.maxSize = 10; //Number of pager buttons to show
 
         $scope.setPage = function (pageNo) {
             $scope.currentPage = pageNo;
