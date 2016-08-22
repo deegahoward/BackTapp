@@ -26,8 +26,7 @@
                                             <input ng-if="answer.Other" class="text form-control" type="text"
                                                    name="group_{{ question._id }}"
                                                     ng-click="clickedAnswer(answer, $index)"
-                                                   id="{{answer._id}}" name="{{ question._id }}" ng-model="question.OtherText">
-
+                                                   id="{{answer._id}}" name="{{ question._id }}" ng-model="OtherText[question._id]" placeholder="Type text here..." value="food">
 
                                             <span ng-if="answer.Other">{{ answer.Text }}</span>
 

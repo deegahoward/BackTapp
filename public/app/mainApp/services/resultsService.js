@@ -30,7 +30,6 @@ angular.module('resultsService', [])
 
         };
 
-
         return resultsFactory;
 
     });

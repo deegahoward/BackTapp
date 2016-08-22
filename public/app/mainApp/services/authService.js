@@ -37,7 +37,6 @@ angular.module('authService', [])
                 return $http.get('/api/me');
             else
                 return $q.reject({message: "User has no token"});
-
         };
 
 

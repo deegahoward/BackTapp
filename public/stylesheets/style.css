@@ -82,7 +82,7 @@ option {
 
 .preview {
     background-color: white;
-    width: 40%;
+    width: 37%;
     float: left;
 }
 
@@ -740,10 +740,7 @@ input[type=text] {
 
     }
 
-    #slide1_container {
-
-        margin-left: 18%;
-    }
+    
 
 
 
