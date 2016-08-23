@@ -29,14 +29,72 @@
                         </div>
                     </div>
                 </div>
-                <div class="row pull-left">
-                    <div class="panel panel-success pull-left" id="displayQuestions" ng-show="Questions.length > 0">
-                        <div class="panel-heading">Questions</div>
-                        <div class="panel-body">
-                            <div class="row-padded" ng-repeat="question in Questions track by $index">
+                <!-- <div class="row pull-left">
+                     <div class="panel panel-success pull-left" id="displayQuestions" ng-show="Questions.length > 0">
+                         <div class="panel-heading">Questions</div>
+                         <div class="panel-body">
+                             <div class="row-padded" ng-repeat="question in Questions track by $index">
+                                 <div class="row-padded">
+                                     <h3>{{$index + 1}}: {{ question.Title }} ({{ question.Type }})</h3>
+                                 </div>
+                                 <div class="row-padded">
+                                     <div class="col-md-10">
+                                         <li ng-repeat="Answer in question.Answers" ng-click="editingQuestion()"
+                                             ng-model="editedAnswer">
+                                             {{Answer.Text}}
+                                         </li>
+                                     </div>
+                                 <span class="glyphicon glyphicon-remove-circle pull-right"
+                                       ng-click="removeQuestion($index)">
+
+                                 </span>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>-->
+                <!--<div class="row pull-left">
+                    <div class="panel-group">
+                        <div ng-repeat="question in Questions track by $index" class="panel panel-success pull-left"
+                             ng-show="Questions.length > 0" id="displayQuestions">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#collapse1">{{$index + 1}}: {{question.Title}}</a>
+                                </h4>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse">
+                                <div class="panel-body">
                                 <div class="row-padded">
-                                    <h3>{{$index + 1}}: {{ question.Title }} ({{ question.Type }})</h3>
+                                    <div class="col-md-10">
+                                        <li ng-repeat="Answer in question.Answers" ng-click="editingQuestion()"
+                                            ng-model="editedAnswer">
+                                            {{Answer.Text}}
+                                        </li>
+                                    </div>
+                                <span class="glyphicon glyphicon-remove-circle pull-right"
+                                      ng-click="removeQuestion($index)">
+
+                                </span>
                                 </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="row pull-left" id="showAllQuestions">
+                    <div id="accordion" role="tablist" aria-multiselectable="true">
+                        <div ng-repeat="question in Questions track by $index" class="panel panel-success pull-left"
+                             ng-show="Questions.length > 0" id="displayQuestions">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#{{$index}}"
+                                       aria-expanded="true" aria-controls="{{$index}}">
+                                        {{$index + 1}}: {{question.Title}}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="{{$index}}" class="panel-collapse collapse in" role="tabpanel"
+                                 aria-labelledby="headingOne">
                                 <div class="row-padded">
                                     <div class="col-md-10">
                                         <li ng-repeat="Answer in question.Answers" ng-click="editingQuestion()"
@@ -54,6 +112,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-sm-7 pull-right">
                 <div class="row">
                     <div class="panel panel-success" id="newQuestions">

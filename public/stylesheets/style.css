@@ -457,7 +457,6 @@ h3 {
 
 #displayQuestions {
     width: 443px;
-    margin-top: 30%
 }
 
 #submitButton {
@@ -465,7 +464,11 @@ h3 {
     width: 90px;
     height: 90px;
     border-radius: 100px;
+}
 
+#showAllQuestions {
+    width: 30%;
+    padding-top: 140px;
 }
 
 #clients {
