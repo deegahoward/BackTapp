@@ -6,7 +6,7 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            <strong>Are you sure you want to add another question?</strong> Get more responses and keep it under 15!.
+            <strong>Are you sure you want to add another question?</strong> Get more responses and keep it under 15!
         </div>
 
         <form id="newSurveyForm" name="newSurveyForm" novalidate>
@@ -33,8 +33,8 @@
                     <div class="panel panel-success pull-left" id="displayQuestions" ng-show="Questions.length > 0">
                         <div class="panel-heading">Questions</div>
                         <div class="panel-body">
-                            <div class="row" ng-repeat="question in Questions track by $index">
-                                <div class="row">
+                            <div class="row-padded" ng-repeat="question in Questions track by $index">
+                                <div class="row-padded">
                                     <h3>{{$index + 1}}: {{ question.Title }} ({{ question.Type }})</h3>
                                 </div>
                                 <div class="row-padded">
@@ -190,14 +190,9 @@
             </div>
         </form>
     </div>
-
-
     <div class="col-md-3">
 
-
     </div>
-
-
 </div>
 </div>
 

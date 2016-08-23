@@ -1,6 +1,5 @@
 angular.module('surveyService', [])
 
-
     .factory('Survey', function ($http) {
 
         var surveyFactory = {};
@@ -26,8 +25,6 @@ angular.module('surveyService', [])
             return $http.get('/api/surveys/' + id);
         };
 
-        //making a post method to send survey id and delete from database
-
         surveyFactory.delete = function (id) {
             console.log(id);
 
@@ -38,6 +35,3 @@ angular.module('surveyService', [])
         return surveyFactory;
 
     });
-
-
-//will need to make api methods to communicate with mongodb and get/post data directly

@@ -8,6 +8,8 @@ angular.module('MyApp', ['appRoutes', 'mainCtrl', 'authService', 'userCtrl', 'us
 
 });
 
+//---------- creating the Mobile App and setting up client side routing -------------
+
 angular.module('MobileApp', ['mobileCtrl', 'ui.router', 'surveyService', 'resultsService'])
 
 .config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
@@ -15,31 +17,16 @@ angular.module('MobileApp', ['mobileCtrl', 'ui.router', 'surveyService', 'result
 
     $stateProvider
 
-        .state('mobile', {
-            url: '/example/mobile',
-            templateUrl: 'app/mobile/pages/mobilePage.html',
-        })
         .state('takeSurvey', {
-            url: '/example/takeSurvey/:id',
+            url: '/mobileSite/takeSurvey/:id',
             templateUrl: 'app/mobile/pages/takeSurvey.html',
 
         })
-        .state('sorry', {
-            url: '/example/sorry',
-            templateUrl: 'app/mobile/pages/sorry.html'
-
-        })
         .state('thankyou', {
-            url: '/example/thankyou',
+            url: '/mobileSite/thankyou',
             templateUrl: 'app/mobile/pages/thankyou.html'
 
-        })
-        .state('landingPage', {
-            url: '/example/landingPage',
-            templateUrl:'app/mobile/pages/landingPage.html'
         });
-
-
 
     $locationProvider.html5Mode(true);
 

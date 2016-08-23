@@ -6,7 +6,6 @@ angular.module('userService', [])
         var userFactory = {};
 
         userFactory.create = function(userData) {
-            console.log(userData);
             return $http.post('/api/signup', userData);
 
         };

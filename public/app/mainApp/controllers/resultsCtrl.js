@@ -17,24 +17,29 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
         $scope.myQuestions = [];
         $scope.currentQuestion = {};
 
+        //pagination variables
 
         $scope.viewby = 1;
         $scope.totalItems = "";
         $scope.currentPage = 4;
         $scope.itemsPerPage = $scope.viewby;
-        $scope.maxSize = 10; //Number of pager buttons to show
+        $scope.maxSize = 10;
+
+        //pagination methods
 
         $scope.setPage = function (pageNo) {
             $scope.currentPage = pageNo;
         };
 
-        $scope.pageChanged = function() {
-        };
-
         $scope.setItemsPerPage = function(num) {
             $scope.itemsPerPage = num;
-            $scope.currentPage = 1; //reset to first paghe
+            $scope.currentPage = 1;
         };
+
+
+//--------------------- methods to get/manipulate results data ------------------------
+
+        //get all Surveys for current User
 
         Auth.getUser()
             .then(function (data) {
@@ -51,8 +56,9 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                         });
                     });
                 $scope.Loaded = true;
-
             });
+
+        //get and format all Results for selected Survey
 
         $scope.getSurvey = function (survey) {
             $scope.thisSurveyID = survey._id;
@@ -63,7 +69,9 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                     vm.results = data;
                     $scope.resultSet = vm.results;
                     $scope.totalItems = $scope.resultSet.length;
-                    console.log($scope.resultSet);
+
+                    //create object for all Answers to a specific Question in the Survey
+
                     angular.forEach($scope.resultSet, function (result) {
                         $scope.myResponses = result.Responses;
                         angular.forEach($scope.myResponses, function (response) {
@@ -114,10 +122,16 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                             }
                         });
                     });
+
                     $scope.currentQuestion = $scope.theQuestions[0];
+
+                    //generate graph for first question
+
                     $scope.showGraph($scope.theQuestions[0]);
                 })
         };
+
+        //CSS Animation for results panel
 
         $scope.showResults = function () {
             angular.element('#existingSurveys').css('left', '0');
@@ -129,23 +143,20 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
             return string.join(", ");
         };
 
-        //Chart Stuff
-
+//--------------------------- Graph methods ----------------------------------
 
         $scope.showGraph = function (question) {
-
-
             $scope.currentQuestion = question;
-
             var id = question._id;
             var type = question.Type;
             var labelArray = [];
-
             var dataArray = {
                 label: '',
                 backgroundColor: 'hotpink',
                 data: []
             };
+
+            //counting Answers for each Question in the Survey
 
             angular.forEach($scope.theQuestions, function (q) {
                 if (q.Type !== "text") {
@@ -159,7 +170,6 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                         for (i = 0; i < arr.length; i++) {
                             angular.forEach($scope.compareAnswers, function (question) {
                                 if (question.QID == id) {
-                                    //if(type == "radio") {
                                         var count = 0;
                                         var answers = question.Answers;
                                         angular.forEach(answers, function (ans) {
@@ -167,7 +177,6 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                                                 count++;
                                             }
                                         });
-
                                         dataArray.data.push(count);
                                 }
                             });
@@ -176,6 +185,8 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                 }
             });
 
+            //setting variables for the graph
+
             $scope.labels = labelArray;
             $scope.data = [dataArray.data];
             $scope.colours = ["hotpink",
@@ -183,26 +194,22 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                 "hotpink", "hotpink"]
         };
 
+//----------------------------- methods to generate CSV and download
 
-        //CSV stuff  http://halistechnology.com/2015/05/28/use-javascript-to-export-your-data-as-csv/ for the csv stuff
+        //CSV methods using  http://halistechnology.com/2015/05/28/use-javascript-to-export-your-data-as-csv/
 
         function convertArrayOfObjectsToCSV(args) {
             var result, ctr, keys, columnDelimiter, lineDelimiter, data;
-
             data = args.data || null;
             if (data == null || !data.length) {
                 return null;
             }
-
             columnDelimiter = args.columnDelimiter || ',';
             lineDelimiter = args.lineDelimiter || '\n';
-
             keys = Object.keys(data[0]);
-
             result = '';
             result += keys.join(columnDelimiter);
             result += lineDelimiter;
-
             data.forEach(function (item) {
                 ctr = 0;
                 keys.forEach(function (key) {
@@ -213,22 +220,19 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                 });
                 result += lineDelimiter;
             });
-
             return result;
         }
 
-
         $scope.downloadCSV = function (args) {
-
             var allQuestions = $scope.theQuestions;
             var allResults = [];
             var thisResult = {};
 
-                angular.forEach($scope.resultSet, function(result){
+            //formatting the result sets for the CSV file
 
+                angular.forEach($scope.resultSet, function(result){
                     thisResult.TimeStart = result.TimeStart;
                     thisResult.TimeFinish = result.TimeFinish;
-
                     angular.forEach(allQuestions, function(q){
                         thisResult[q._id] = ["No Answer"];
                     });
@@ -239,18 +243,12 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                                     if(ans.Text != undefined) {
                                         answers.push(ans.Text);
                                     }
-                                    else {
-                                    }
-                                }
-                                else {
                                 }
                             });
-
                             var i = answers.toString().replace(',','/');
                             thisResult[response.QuestionID] = i;
                         });
 
-                    console.log(allResults);
                     allResults.push(thisResult);
                     thisResult = {};
                 });
@@ -260,14 +258,11 @@ angular.module('resultsCtrl', ['surveyService', 'userService', 'ui.router', 'res
                 data: allResults
             });
             if (csv == null) return;
-
             filename = args.filename || 'export.csv';
-
             if (!csv.match(/^data:text\/csv/i)) {
                 csv = 'data:text/csv;charset=utf-8,' + csv;
             }
             data = encodeURI(csv);
-
             link = document.createElement('a');
             link.setAttribute('href', data);
             link.setAttribute('download', filename);

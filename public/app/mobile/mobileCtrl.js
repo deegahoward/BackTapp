@@ -3,6 +3,8 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
 
     .controller('MobileController', function ($rootScope, $location, $scope, $state, $stateParams, Survey, $http, Results) {
 
+        //setting width variable to be used when using CSS Transitions in jQuery
+
         var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
         $scope.bigScreen = false;
@@ -16,6 +18,10 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         var timestamp1 = new Date().toLocaleString().toString();
         var timestamp2 = "";
 
+//-------------- getting specific Survey from the database -------------------
+
+        //timeout due to $stateParams delay in retrieval
+
         setTimeout(function () {
             Survey.getOne(survey.id)
                 .success(function (data) {
@@ -23,6 +29,9 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     $scope.surveyName = vm.survey.Title;
                     $scope.thisSurvey = vm.survey;
                     $scope.myQuestions = vm.survey.Questions;
+
+                    //setting container variables for slider
+
                     if(width > 600) {
                         $scope.noSlidesWidth = vm.survey.Questions.length * 500;
                     }
@@ -34,7 +43,6 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     angular.forEach($scope.myQuestions, function (question, index) {
                         if ($scope.no == index) {
                             $scope.currentQuestion = question;
-                            console.log($scope.currentQuestion);
 
                         }
                     });
@@ -48,19 +56,21 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
             $scope.currentQuestion = {};
             $scope.other = false;
 
-
         }, 200);
 
 
+//--------------------------- Automation methods ------------------------------
 
         $scope.forward = function () {
-            console.log("hit 3");
-            console.log($scope.results);
+
             if ($scope.no < $scope.noSlides - 1) {
                 $scope.notEndOfSurvey = true;
                 $scope.checkType();
                 $scope.selectedAnswer = {};
                 $scope.no++;
+
+                //sliding effect using CSS Transitions
+
                 if(width > 600) {
                     angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -500 + 'px)');
                 }
@@ -81,6 +91,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         };
 
         $scope.backward = function () {
+
             if ($scope.no == $scope.noSlides) {
                 $scope.endOfSurvey = false;
                 $scope.notEndOfSurvey = true;
@@ -91,6 +102,9 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
             }
             if ($scope.no > 0) {
                 $scope.no--;
+
+                //sliding effect using CSS Transitions
+
                 if(width > 600) {
                     angular.element('#slide1_images').css('transform', 'translateX(' + $scope.no * -500 + 'px)');
                 }
@@ -112,7 +126,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         $scope.notEndOfSurvey = "true";
 
 
-//================================ RESULTS CONTROLLER =====================================//
+//---------------------- Methods for handling the responses -----------------------
 
         $scope.selectedAnswer = {};
         $scope.response = {};
@@ -124,7 +138,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
         $scope.removedQuestions = [];
         $scope.OtherText = {};
 
-
+       //--------------- Skip Logic methods --------------------------
 
         $scope.skipQuestions = function (answer) {
             var skippedQs = answer.SkipLogic.Questions.split(',');
@@ -145,6 +159,9 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     }
                 });
             }
+
+            //updating container style when Question removed
+
             if(width > 600){
                 $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 500;
                 $scope.noSlides = $scope.thisSurvey.Questions.length;
@@ -166,17 +183,20 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                 }
             }
 
+            //updating container style when question
+
             if(width > 600){
                 $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 500;
                 $scope.noSlides = $scope.thisSurvey.Questions.length;
             }
-
             else {
 
                 $scope.noSlidesWidth = $scope.thisSurvey.Questions.length * 300;
                 $scope.noSlides = $scope.thisSurvey.Questions.length;
             }
         };
+
+        //---------------------- Methods for handling Answers -------------------------
 
         $scope.clickedAnswer = function (answer, index) {
 
@@ -203,11 +223,8 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     else {
                         $scope.results[index] = $scope.result;
                     }
-
                     $scope.forward();
-
                 }
-
             }
             else if ($scope.currentQuestion.Type == "checkbox") {
                 if (answer.Other) {
@@ -228,21 +245,22 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
             }
         };
 
+        //method to store answers for chekcbox and text input on pressing 'forward' button
+        //checking for 'other' type answers
+
         $scope.checkType = function () {
 
             var currentID = $scope.currentQuestion._id;
 
+            //checkbox handling
+
             if ($scope.currentQuestion.Type == "checkbox") {
-                    console.log("check");
                     var tempAnswer = {
                         Text: $scope.OtherText[currentID],
                         Other: true
                     };
-
-                    console.log(tempAnswer);
                     index = _.findLastIndex($scope.Answers, {Other: true});
                     if (index == -1) {
-
                         $scope.Answers.push(tempAnswer);
                     }
                     else {
@@ -255,18 +273,17 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                     };
 
                     index = _.findLastIndex($scope.results, {QuestionID: $scope.result.QuestionID});
-                    console.log($scope.results[index]);
-                    console.log($scope.result);
                     if (index == -1) {
-                        console.log("1");
                         $scope.results.push($scope.result);
                     }
                     else {
                         $scope.results[index] = $scope.result;
                     }
-
                 }
-                else if ($scope.currentQuestion.Type == "text") {
+
+            //text input handling
+
+            else if ($scope.currentQuestion.Type == "text") {
                     index = _.findLastIndex($scope.results, {QuestionID: $scope.currentQuestion._id});
                     if (index == -1) {
                         $scope.result = {
@@ -279,15 +296,16 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                         $scope.results[index].Answers = [$scope.currentQuestion.OtherText];
                     }
                 }
+
+            //radio 'other' answer handling
+
                 else {
-                    console.log($scope.OtherText);
                     if($scope.OtherText.hasOwnProperty(currentID)) {
                         $scope.result = {
                             QuestionID: $scope.currentQuestion._id,
                             Answers: [{Text: $scope.OtherText[currentID]}]
                         };
 
-                        console.log($scope.result);
                         index = _.findLastIndex($scope.results, {QuestionID: $scope.result.QuestionID});
                         if (index == -1) {
                             $scope.results.push($scope.result);
@@ -295,20 +313,16 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                         else {
                             $scope.results[index] = $scope.result;
                         }
-
                     }
                 }
-
 
                 $scope.Answers = [];
                 $scope.result = {};
                 $scope.currentQuestion.OtherText = "";
-
-            console.log($scope.results);
-
         };
 
         $scope.submitResponse = function () {
+
             timestamp2 = new Date().toLocaleString().toString();
             $scope.checkType();
             var response = {
@@ -317,6 +331,7 @@ angular.module('mobileCtrl', ['ui.router', 'surveyService', 'resultsService'])
                 TimeFinish: timestamp2.replace(/,/g, ''),
                 Responses: $scope.results
             };
+
             Results.send(response);
         };
     });

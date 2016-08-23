@@ -15,21 +15,6 @@ angular.module('resultsService', [])
             return $http.get('api/results/' + id);
         };
 
-        resultsFactory.updateCount = function(count){
-
-            var id = count._id;
-
-            return $http.put('/api/count/' + id, count);
-        };
-
-        resultsFactory.getCount = function (id) {
-
-            console.log(id);
-
-            return $http.get('/api/count/' + id);
-
-        };
-
         return resultsFactory;
 
     });

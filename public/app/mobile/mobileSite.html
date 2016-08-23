@@ -2,11 +2,9 @@
 <html ng-app="MobileApp">
 <head>
     <title ng-model="title">BackTapp</title>
-    <base href='/mobile'>
+    <base href='/example'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" type="text/css">
 
     <!-- Javascript libraries -->
     <script src="https://code.jquery.com/jquery-2.2.4.js"
@@ -14,25 +12,39 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-route.min.js"></script>
     <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
 
     <!-- Services -->
+    <script type="text/javascript" src="app/mobile/mobileService.js"></script>
+    <script type="text/javascript" src="app/mainApp/services/surveyService.js"></script>
+    <script type="text/javascript" src="app/mainApp/services/resultsService.js"></script>
 
     <!-- Controllers -->
     <script type="text/javascript" src="app/mobile/mobileCtrl.js"></script>
 
     <!-- Directives -->
+    <script type="text/javascript" src="app/app.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.1/css/star-rating.min.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/animations.css" type="text/css">
 
 </head>
 
 <body ng-controller="MobileController as mobile">
 
-<h3>{{Title}}</h3>
 
 <main class="container">
 
-    <div ui-view="home"></div>
+    <div ui-view></div>
 
 </main>
+
 </body>
 </html>

@@ -1,11 +1,12 @@
 angular.module('authService', [])
 
+//authentication methods for service from https://www.udemy.com/ realtime-meanstack/
+
+//---------------------- Main authentication methods ------------------------------
 
     .factory('Auth', function ($http, $q, AuthToken) {
 
-
         var authFactory = {};
-
 
         authFactory.login = function (username, password) {
 
@@ -38,56 +39,45 @@ angular.module('authService', [])
             else
                 return $q.reject({message: "User has no token"});
         };
-
-
         return authFactory;
-
     })
+
+
+//---------------------- Authentication Token methods ------------------------------
 
 
     .factory('AuthToken', function ($window) {
 
         var authTokenFactory = {};
-
         authTokenFactory.getToken = function () {
             return $window.localStorage.getItem('token');
         };
 
         authTokenFactory.setToken = function (token) {
-
             if (token)
                 $window.localStorage.setItem('token', token);
             else
                 $window.localStorage.removeItem('token');
-
         };
-
         return authTokenFactory;
-
     })
 
+//----------------- Authentication check between location changes -----------------------
 
     .factory('AuthInterceptor', function ($q, $location, AuthToken) {
 
         var interceptorFactory = {};
-
-
         interceptorFactory.request = function (config) {
 
             var token = AuthToken.getToken();
-
             if (token) {
-
                 config.headers['x-access-token'] = token;
-
             }
-
             return config;
-
         };
 
-
         return interceptorFactory;
+
     });
 
 
