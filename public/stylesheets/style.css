@@ -558,6 +558,12 @@ h3 {
     display: flex;
 }
 
+#editSkipLogic input[type=checkbox] {
+
+    display: block;
+
+}
+
 .row-padded {
 
     padding: 10%;
@@ -568,6 +574,10 @@ h3 {
 }
 
 #other {
+    display: block;
+}
+
+#editOther {
     display: block;
 }
 

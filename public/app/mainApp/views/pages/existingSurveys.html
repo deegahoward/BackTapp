@@ -1,4 +1,3 @@
-
 <div class="row">
 
     <div class="col-md-12">
@@ -7,191 +6,221 @@
         <br>
         <form id="existingSurveysForm" name="existingSurveysForm" novalidate>
 
-        <div class="col-sm-4" id="existingSurveys">
-            <div class="row">
-                <div class="panel panel-success">
-                    <div class="panel-heading">Your Surveys</div>
-                    <div class="panel-body">
-                        <div class="col-sm-8 col-sm-offset-1">
-                            <div ng-show="!Loaded" class="loader"></div>
-                            <div class="btn-group" ng-repeat="survey in mySurveys">
-                                <button type="button" class="btn btn-success dropdown-toggle" id="{{survey._id}}"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ survey.Title }} <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="{{survey._id}}">
-                                    <li><a href="#" ng-click="surveyClicked(survey); showSurvey();">Preview/Edit</a>
-                                    </li>
-                                    <li><a href="#" ng-click="showDeleteAlert(survey)">Delete</a></li>
-                                    <li><a href="#" ng-click="showUrlAlert(survey)">Get URL</a></li>
-                                </ul>
-                                <div class="alert alert-danger" role="alert" id="delete{{survey._id}}">
-                                    <strong>Warning!</strong> If you're sure you want to delete, <a href="#"
-                                                                                                    ng-click="deleteSurvey(survey)"
-                                                                                                    class="alert-link">click
-                                    here</a>.
-                                    <span class="glyphicon glyphicon-remove" ng-click="hideDeleteAlert(survey)"></span>
-                                </div>
-                                <div class="alert alert-success" role="alert" id="url{{survey._id}}">
-                                    <strong>URL = </strong><a ng-click="goToSurvey(survey)" class="alert-link">mobileSite/takeSurvey/{{survey._id}}</a>.
-                                    <span class="glyphicon glyphicon-remove" ng-click="hideUrlAlert(survey)"></span>
+            <div class="col-sm-4" id="existingSurveys">
+                <div class="row">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">Your Surveys</div>
+                        <div class="panel-body">
+                            <div class="col-sm-8 col-sm-offset-1">
+                                <div ng-show="!Loaded" class="loader"></div>
+                                <div class="btn-group" ng-repeat="survey in mySurveys">
+                                    <button type="button" class="btn btn-success dropdown-toggle" id="{{survey._id}}"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ survey.Title }} <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="{{survey._id}}">
+                                        <li><a href="#" ng-click="surveyClicked(survey); showSurvey();">Preview/Edit</a>
+                                        </li>
+                                        <li><a href="#" ng-click="showDeleteAlert(survey)">Delete</a></li>
+                                        <li><a href="#" ng-click="showUrlAlert(survey)">Get URL</a></li>
+                                    </ul>
+                                    <div class="alert alert-danger" role="alert" id="delete{{survey._id}}">
+                                        <strong>Warning!</strong> If you're sure you want to delete, <a href="#"
+                                                                                                        ng-click="deleteSurvey(survey)"
+                                                                                                        class="alert-link">click
+                                        here</a>.
+                                        <span class="glyphicon glyphicon-remove"
+                                              ng-click="hideDeleteAlert(survey)"></span>
+                                    </div>
+                                    <div class="alert alert-success" role="alert" id="url{{survey._id}}">
+                                        <strong>URL = </strong><a ng-click="goToSurvey(survey)" class="alert-link">mobileSite/takeSurvey/{{survey._id}}</a>.
+                                        <span class="glyphicon glyphicon-remove" ng-click="hideUrlAlert(survey)"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-9 pull-right">
-            <div class="row">
-                <div class="panel panel-info" id="thisSurvey">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <p ng-show="!editingTitle">{{clickedSurvey.Title}}&nbsp<span
-                                        class="glyphicon glyphicon-edit" ng-click="editTitle()"></span>
-                                </p>
+            <div class="col-sm-9 pull-right">
+                <div class="row">
+                    <div class="panel panel-info" id="thisSurvey">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p ng-show="!editingTitle">{{clickedSurvey.Title}}&nbsp<span
+                                            class="glyphicon glyphicon-edit" ng-click="editTitle()"></span>
+                                    </p>
                                 <textarea ng-show="editingTitle"
                                           ng-model="clickedSurvey.Title">{{clickedSurvey.Title}}</textarea>
                                 <span class="glyphicon glyphicon-ok" ng-show="editingTitle"
                                       ng-click="saveTitle()"></span>
-                            </div>
-                            <div class="col-md-3 pull-right">
-                                <span class="glyphicon glyphicon-remove pull-right" ng-click="cancelSurvey()"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                        Select a question: <span class="caret"></span>{{ question.Type }}
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li ng-repeat="question in clickedSurvey.Questions track by $index"
-                                            ng-click="questionClicked(question)" ui-sref=".Preview"><b>{{ $index + 1 }}:</b> {{ question.Title }}
-                                        </li>
-                                        <li ng-click="showAddQuestion()" class="btn btn-success"><span class="glyphicon glyphicon-plus">Add New Question</span>
-                                        </li>
-                                    </ul>
+                                </div>
+                                <div class="col-md-3 pull-right">
+                                    <span class="glyphicon glyphicon-remove pull-right"
+                                          ng-click="cancelSurvey()"></span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="btn group">
-                                    <button type="button" class="btn btn-success" ng-show="showDelete && !showAddQ"
-                                            ng-click="editQuestion()">Edit
-                                        Question
-                                    </button>
-                                    <button type="button" class="btn btn-danger" ng-click="showDeleteAlert(selectedQuestion)"
-                                            ng-show="showDelete">Delete
-                                        Question
-                                    </button>
-                                    <div class="alert alert-danger" role="alert" id="delete{{selectedQuestion._id}}">
-                                        <strong>Warning! Does this question have skip logic? </strong> If you're sure you want to delete, <a href="#"
-                                                                                                        ng-click="deleteQuestion()"
-                                                                                                        class="alert-link">click
-                                        here</a>.
-                                        <span class="glyphicon glyphicon-remove" ng-click="hideDeleteAlert(selectedQuestion)"></span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-success dropdown-toggle"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                            Select a question: <span class="caret"></span>{{ question.Type }}
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li ng-repeat="question in clickedSurvey.Questions track by $index"
+                                                ng-click="questionClicked(question)" ui-sref=".Preview"><b>{{ $index + 1
+                                                }}:</b> {{ question.Title }}
+                                            </li>
+                                            <li ng-click="showAddQuestion()" class="btn btn-success"><span
+                                                    class="glyphicon glyphicon-plus">Add New Question</span>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <button type="button" class="btn btn-success" ng-show="showAddQ"
-                                            ng-click="saveNewQuestion()">Save
-                                        Question
-                                    </button>
-                                    <button type="button" class="btn btn-success"
-                                            ng-show="showSave" ng-click="saveSurvey()"
-                                    >Save Survey
-                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="btn group">
+                                        <button type="button" class="btn btn-success" ng-show="showDelete && !showAddQ"
+                                                ng-click="editQuestion()">Edit
+                                            Question
+                                        </button>
+                                        <button type="button" class="btn btn-danger"
+                                                ng-click="showDeleteAlert(selectedQuestion)"
+                                                ng-show="showDelete">Delete
+                                            Question
+                                        </button>
+                                        <div class="alert alert-danger" role="alert"
+                                             id="delete{{selectedQuestion._id}}">
+                                            <strong>Warning! Is this question linked to skip logic? </strong> If you're
+                                            sure you want to delete, <a href="#"
+                                                                        ng-click="deleteQuestion()"
+                                                                        class="alert-link">click
+                                            here</a>.
+                                            <span class="glyphicon glyphicon-remove"
+                                                  ng-click="hideDeleteAlert(selectedQuestion)"></span>
+                                        </div>
+                                        <button type="button" class="btn btn-success" ng-show="showAddQ"
+                                                ng-click="saveNewQuestion()">Save
+                                            Question
+                                        </button>
+                                        <button type="button" class="btn btn-success"
+                                                ng-show="showSave" ng-click="saveSurvey()"
+                                        >Save Survey
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row-centered" ng-show="showDelete && !showAddQ">
-                            <h4>Question Title:</h4>
-                            <p ng-show="!editingQuestion">{{selectedQuestion.Title}}</p>
-                            <div class="well" ng-show="editingQuestion">
-                                <textarea name="Title" id="Title" ng-show="editingQuestion" ng-model="selectedQuestion.Title">{{ selectedQuestion.Title }}</textarea>
-                                <div class="error">{{error}}</div>
-                                <span class="glyphicon glyphicon-ok" ng-show="editingQuestion" ng-click="saveQuestionTitle()"></span>
+                            <div class="row-centered" ng-show="showDelete && !showAddQ">
+                                <h4>Question Title:</h4>
+                                <p ng-show="!editingQuestion">{{selectedQuestion.Title}}</p>
+                                <div class="well" ng-show="editingQuestion">
+                                    <textarea name="Title" id="Title" ng-show="editingQuestion"
+                                              ng-model="selectedQuestion.Title">{{ selectedQuestion.Title }}</textarea>
+                                    <div class="error">{{error}}</div>
+                                    <span class="glyphicon glyphicon-ok" ng-show="editingQuestion"
+                                          ng-click="saveQuestionTitle()"></span>
 
-                            </div>
-
-                        </div>
-                        <div class="row-centered" ng-show="showAddQ">
-                            <h4>Question Title:</h4>
-                            <div class="well">
-                                <textarea ng-model="newQuestion.Title">{{ newQuestion.Title }}</textarea>
-                            </div>
-                            <span class="glyphicon glyphicon-ok" ng-show="editingQuestion" ng-click="saveQuestionTitle()"></span>
-                        </div>
-                        <div class="row-centered">
-                            <div class="col-md-12" ng-show="showAddQ">
-                                <div class="col-md-6" ng-show="showAddQ">
-                                    <h4>Question Type:</h4>
-                                    <div class="select-style">
-                                    <select id="Type" ng-model="newQuestion.Type">
-                                        <option value="radio">Radio</option>
-                                        <option value="checkbox">Checkbox</option>
-                                        <option value="text">TextInput</option>
-                                    </select>
-                                        </div>
-                                    <h4>Add Answer:</h4>
-                                    <textarea placeholder="Type answer here..." ng-model="newAnswer.Text">Enter Answer here...</textarea>
-                                    <span class="glyphicon glyphicon-plus" ng-click="addNewAnswer()"></span>
+                                </div>
+                                <div ng-show="editingSkipQ">
                                     <div class="checkbox">
-                                        <label class="skip"><input type="checkbox" ng-model="other" id="other" ng-click="$event.stopPropagation()" value="other">Other?(textfield)</label>
+                                        <label class="skip"><input type="checkbox" ng-model="editOther" id="editOther"
+                                                                   ng-click="show(); $event.stopPropagation()"
+                                                                   value="other">Other?(textfield)</label>
                                     </div>
-                                        <div class="checkbox" id="skipLogic">
-                                            <label class="skip"><input type="checkbox" ng-model="skipLogic"
-                                                          ng-click="skipTool(); $event.stopPropagation()"
-                                                          value="skip">Skip logic?</label>
-                                        </div>
-                                    <div class="col-md-5" ng-show="skipLogic">
+                                    <div class="checkbox" id="editSkipLogic">
+                                        <label class="skip"><input type="checkbox" ng-model="editSkipLogic"
+                                                                   ng-click="$event.stopPropagation()"
+                                                                   value="skip">Skip logic?</label>
+                                    </div>
+                                    <div class="col-md-5 pull-right" ng-show="editSkipLogic">
                                         <label for="text">Skip Questions...(e.g 6,7,8):</label>
                                         <input type="text" name="Text"
-                                               placeholder="Type No." ng-model="skipQ"/>
+                                               placeholder="Type No." ng-model="editSkipQ"/>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <li ng-repeat="answer in newAnswers" >
-                                        {{answer.Text}}
-                                        <span class="glyphicon glyphicon-minus"
-                                                ng-click="removeAnswer($index)">
-                                            </span>
-                                        </span>
-                                    </li>
-                                </div>
                             </div>
-                            <div class="col-md-5" ng-show="editingQuestion">
-                                <h4 ng-show="editingAnswers">Answers:</h4>
-                                <div class="well" ng-show="editingAnswers">
-                                    <div ng-repeat="answer in selectedQuestion.Answers">
-                                        <textarea ng-model="answer.Text">{{answer.Text}}</textarea>
+                            <div class="row-centered" ng-show="showAddQ">
+                                <h4>Question Title:</h4>
+                                <div class="well">
+                                    <textarea ng-model="newQuestion.Title">{{ newQuestion.Title }}</textarea>
+                                </div>
+                                <span class="glyphicon glyphicon-ok" ng-show="editingQuestion"
+                                      ng-click="saveQuestionTitle()"></span>
+                            </div>
+                            <div class="row-centered">
+                                <div class="col-md-12" ng-show="showAddQ">
+                                    <div class="col-md-6" ng-show="showAddQ">
+                                        <h4>Question Type:</h4>
+                                        <div class="select-style">
+                                            <select id="Type" ng-model="newQuestion.Type">
+                                                <option value="radio">Radio</option>
+                                                <option value="checkbox">Checkbox</option>
+                                                <option value="text">TextInput</option>
+                                            </select>
+                                        </div>
+                                        <h4>Add Answer:</h4>
+                                        <textarea placeholder="Type answer here..." ng-model="newAnswer.Text">Enter Answer here...</textarea>
+                                        <span class="glyphicon glyphicon-plus" ng-click="addNewAnswer()"></span>
+                                        <div class="checkbox">
+                                            <label class="skip"><input type="checkbox" ng-model="other" id="other"
+                                                                       ng-click="$event.stopPropagation()"
+                                                                       value="other">Other?(textfield)</label>
+                                        </div>
+                                        <div class="checkbox" id="skipLogic">
+                                            <label class="skip"><input type="checkbox" ng-model="skipLogic"
+                                                                       ng-click="skipTool(); $event.stopPropagation()"
+                                                                       value="skip">Skip logic?</label>
+                                        </div>
+                                        <div class="col-md-5" ng-show="skipLogic">
+                                            <label for="text">Skip Questions...(e.g 6,7,8):</label>
+                                            <input type="text" name="Text"
+                                                   placeholder="Type No." ng-model="skipQ"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <li ng-repeat="answer in newAnswers">
+                                            {{answer.Text}}
+                                        <span class="glyphicon glyphicon-minus"
+                                              ng-click="removeAnswer($index)">
+                                            </span>
+                                            </span>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="col-md-5" ng-show="editingQuestion">
+                                    <h4 ng-show="editingAnswers">Answers:</h4>
+                                    <div class="well" ng-show="editingAnswers">
+                                        <div ng-repeat="answer in selectedQuestion.Answers">
+                                            <textarea ng-model="answer.Text">{{answer.Text}}</textarea>
                                         <span class="glyphicon glyphicon-remove"
                                               ng-click="removeOldAnswer($index)"></span>
+                                        </div>
                                     </div>
-                                </div>
                                 <span class="glyphicon glyphicon-ok pull-right" ng-show="editingAnswers"
-                                        ng-click="saveAnswers()">
+                                      ng-click="saveAnswers()">
                                 </span>
                                 <span class="glyphicon glyphicon-plus pull-left" ng-show="editingAnswers"
-                                        ng-click="addAnswer()"></span>
-                                </span>
-                            </div>
-                            <div class="col-md-6" ng-show="!showAddQ && showDelete">
-                                <div class="container">
-                                    <div ui-view>
+                                      ng-click="addAnswer()"></span>
+                                    </span>
+                                </div>
+                                <div class="col-md-6" ng-show="!showAddQ && showDelete">
+                                    <div class="container">
+                                        <div ui-view>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
 
-        </div>
-</form>
+            </div>
+        </form>
     </div>
 </div>
 </div>

@@ -136,7 +136,6 @@ module.exports = function (app, express, io) {
     api.route('/surveys')
 
         .get(function (req, res) {
-            console.log("getting surveys");
             Survey.find({creator: req.decoded.id}, function (err, surveys) {
                 if (err) {
                     res.send(err);
@@ -147,7 +146,6 @@ module.exports = function (app, express, io) {
         })
 
         .post(function (req, res) {
-            console.log("posting survey");
             var survey = new Survey({
                 creator: req.decoded.id,
                 Title: req.body.Title,

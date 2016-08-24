@@ -189,7 +189,7 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         $scope.skipLogic = false;
         $scope.skipQ = "";
         $scope.showSave = false;
-
+        $scope.editingSkipQ = false;
 
         $scope.surveyClicked = function (survey) {
             $scope.showDelete = false;
@@ -259,7 +259,33 @@ angular.module('surveyCtrl', ['surveyService', 'userService', 'ui.router', 'resu
         };
 
         $scope.addAnswer = function () {
-            var answer = {Text: ""};
+            $scope.editingSkipQ = true;
+            var answer = {
+                Text: "",
+                Other: false,
+                SkipLogic: {
+                    Exists: "",
+                    Question: ""
+                }
+            };
+
+            if($scope.editOther == true){
+                answer.Text = "Type here...(other)";
+                answer.Other = true;
+            }
+            if ($scope.skipLogic == true) {
+                answer.SkipLogic = {
+                    Exists: true,
+                    Questions: $scope.editSkipQ
+                }
+            }
+            else {
+                answer.SkipLogic = {
+                    Exists: false,
+                    Questions: ""
+                }
+            }
+
             $scope.selectedQuestion.Answers.push(answer);
         };
 
